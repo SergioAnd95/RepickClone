@@ -3,14 +3,13 @@
     margin: 0 auto;
     max-width: 1280px;
     min-width: 310px;
-    padding: 0 20px;
     position: relative;
     width: 100%;
 }
 
 .cards-container {
     font-size: 0;
-    margin: -2% -2% 0;
+    margin: -2% -1rem 0;
     position: relative;
 }
 
@@ -124,6 +123,65 @@ a:hover {
 
 .hover-overlay:hover:before, .hover-overlay-light:hover:before, .hover-overlay-extralight:hover:before, .hover-overlay-white:hover:before {
     opacity: 1;
+}
+
+.nav-level-layout {
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    display: -webkit-flex;
+    -ms-flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -ms-flex-pack: justify;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    -webkit-box-align: center;
+    align-items: center;
+    margin: 24px auto 24px;
+}
+
+.PageTabs {
+    display: block;
+    margin: 0;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    font-weight: 300;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    margin: 12px 0;
+}
+
+.filter-group {
+    display: block;
+    white-space: nowrap;
+    background-color: rgba(0,0,0,0.05);
+    border-radius: 50px;
+}
+
+.filter-link.active {
+    color: white;
+    border-radius: 50px;
+    padding: 4px 14px;
+    background-color: rgba(0,0,0,0.25);
+}
+
+.filter-link {
+    color: #999999;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 4px 10px;
+    position: relative;
+    font-weight: 500;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -webkit-transition: color 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out;
 }
 
 @media only screen and (max-width: 1200px) {

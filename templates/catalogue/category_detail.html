@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
+
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/styles4.css' %}">
+{% endblock %}
+
 {% block before-content %}
+
     <div class="categories">
         <div class="ui main container">
             <div class="ui four column stackable grid animated fadeIn">
@@ -150,6 +158,26 @@
 {% endblock %}
 
 {% block content %}
+    <div class="nav-level">
+
+
+    <div class="nav-level-layout wrapper">
+
+        <div class="PageTabs"></div>
+        <div class="page-filters">
+
+            <div class="filter-group">
+                <a class="filter-link active " href="/shop/art-&amp;-design-books/trending">Trending</a>
+                <a class="filter-link  " href="/shop/art-&amp;-design-books/popular">Most popular</a>
+                <a class="filter-link  " href="/shop/art-&amp;-design-books/most-expensive">&nbsp;$$$&nbsp;</a>
+                <a class="filter-link  " href="/shop/art-&amp;-design-books/least-expensive">&nbsp;$&nbsp;</a>
+                <a class="filter-link  is-prime" href="/shop/art-&amp;-design-books/prime">Prime</a>
+
+            </div>
+        </div>
+
+    </div>
+    </div>
     <div class="ui stackable doubling four column grid">
     {% for item in category.items.all %}
 

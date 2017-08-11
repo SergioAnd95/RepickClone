@@ -42,9 +42,12 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-    #@permalink
+    @permalink
     def get_absolute_url(self):
-        return reverse('catalogue:category_detail', None, (self.slug, ))
+        if self.type == 1:
+            return 'catalogue:category_detail', (self.slug, )
+        elif self.type == 2:
+            return 'catalogue:gift_detail', (self.slug, )
 
 
 class Brand(models.Model):
@@ -61,6 +64,10 @@ class Brand(models.Model):
 
     def __str__(self):
         return self.name
+
+    @permalink
+    def get_absolute_url(self):
+        return 'catalogue:brand_detail', (self.slug, )
 
 
 class Item(models.Model):
@@ -104,6 +111,7 @@ class Item(models.Model):
     def __str__(self):
         return self.title
 
+
     @property
     def get_site_name(self):
         if not self.site_name:
@@ -118,3 +126,11 @@ class Item(models.Model):
         d = str(self.price)
         parse = d.split('.')
         return {'digits': parse[0], 'decimal': parse[1]}
+
+
+class LikeList(models.Model):
+    pass
+
+
+class Like(models.Model):
+    pass

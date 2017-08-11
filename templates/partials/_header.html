@@ -15,10 +15,10 @@
                 <a href="{% url 'catalogue:category_list' %}">{% trans 'Категории' %}</a>
             </div>
             <div class="has-dropdown links item no-border animated fadeIn desktop" data-content="gifts">
-                <a href="#">{% trans 'Подарки' %}</a>
+                <a href="{% url 'catalogue:gift_list' %}">{% trans 'Подарки' %}</a>
             </div>
             <div class="links item no-border animated fadeIn desktop">
-                <a href="#">{% trans 'Производители' %}</a>
+                <a href="{% url 'catalogue:brand_list' %}">{% trans 'Производители' %}</a>
             </div>
             <div class="morph-dropdown-wrapper">
                 <div class="dropdown-list">
