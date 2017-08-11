@@ -18,9 +18,7 @@
     <link rel="icon" type="image/png" href="https://repick.co/images/favicon-16x16.png?v=8" sizes="16x16">
     <link rel="apple-touch-icon" sizes="120x120" href="https://repick.co/apple-touch-icon-precomposed.png">
 
-    {% block title %}
-        RepickClone
-    {% endblock %}
+    <title>{% block title %}RepickClone{% endblock %}</title>
     <!-- start OneSignal -->
 
 
@@ -34,7 +32,8 @@
         {% include 'partials/_header.html' %}
         <div class="site-content">
 
-            <style>
+            {% block before-content %}
+                <style>
                 .main-banner .stackable.grid {
                     background-image:url(https://loui.imgix.net/banners/c501b980-bd8f-400c-8e8c-419c716f4444.png);
                     background-repeat: no-repeat;
@@ -42,8 +41,6 @@
                 }
             </style>
 
-
-            {% block banner %}
                 <div class="main-banner">
                     <div class="ui main container">
 
