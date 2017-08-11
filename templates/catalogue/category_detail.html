@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="ui stackable doubling four column grid">
+    {% for item in category.items.all %}
+
+       {% include 'catalogue/preview_item.html' %}
+
+    {% endfor %}
+    </div>
+{% endblock %}

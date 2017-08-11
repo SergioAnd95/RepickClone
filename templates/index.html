@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="switch-button">
+        <span class="active"></span>
+        <button class="switch-button-case left active-case sort-on-recent">Recent</button>
+        <button class="switch-button-case right sort-on-popular">Popular</button>
+    </div>
+
+    <div class="ui stackable doubling four column grid">
+        {% for item in items %}
+            {% include 'catalogue/preview_item.html' %}
+        {% endfor %}
+
+            <span class="product-list-end"></span>
+        </div>
+{% endblock %}

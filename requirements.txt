@@ -1,0 +1,6 @@
+Django==1.11.4
+django-taggit==0.22.1
+olefile==0.44
+Pillow==4.2.1
+pytz==2017.2
+recordtype==1.1

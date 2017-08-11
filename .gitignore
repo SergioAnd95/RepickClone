@@ -101,3 +101,6 @@ ENV/
 
 # DB's files
 *.sqlite3
+
+# Media files
+media/

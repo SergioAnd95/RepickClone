@@ -1,0 +1,165 @@
+.wrapper {
+    box-sizing: border-box;
+    margin: 0 auto;
+    max-width: 1280px;
+    min-width: 310px;
+    padding: 0 20px;
+    position: relative;
+    width: 100%;
+}
+
+.cards-container {
+    font-size: 0;
+    margin: -2% -2% 0;
+    position: relative;
+}
+
+CollectionGrid-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+    height: 100%;
+    position: relative;
+    margin: 2% 2% 0;
+    box-shadow: 0px 3px 8px -4px rgba(0,0,0,0.15);
+}
+
+.CollectionGrid {
+    width: 100%;
+    overflow-y: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: horizontal;
+    flex-direction: horizontal;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    background-color: white;
+}
+
+.CollectionGrid-tile {
+    background-color: white;
+    position: relative;
+    box-sizing: border-box;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 1 25%;
+    flex: 0 1 25%;
+    display: block;
+    position: relative;
+    font-weight: 500;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    border-bottom: 1px solid #f2f2f2;
+    z-index: 1;
+}
+
+.hover-overlay-light:before {
+    background-color: rgba(0,0,0,0.1);
+}
+
+.hover-overlay:before, .hover-overlay-light:before, .hover-overlay-extralight:before, .hover-overlay-white:before {
+    content: "";
+    display: block;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    -webkit-transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+.CollectionGrid-tileImage1 {
+    background-position: center;
+    background-repeat: no-repeat;
+    display: block;
+    margin: 18% auto 30%;
+    width: 60%;
+    padding: 45% 0 0;
+    height: 0;
+    background-size: contain;
+}
+
+.CollectionGrid-tileName {
+    bottom: 8%;
+    box-sizing: border-box;
+    color: #525252;
+    opacity: .6;
+    font-size: 18px;
+    left: 0;
+    line-height: 1.2;
+    padding: 0 10px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    z-index: 2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.CollectionGrid-tile:after {
+    position: absolute;
+    height: 100%;
+    width: 1px;
+    background-color: #f2f2f2;
+    top: 0;
+    right: 0;
+    content: "";
+    -webkit-transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.hover-overlay:hover:before, .hover-overlay-light:hover:before, .hover-overlay-extralight:hover:before, .hover-overlay-white:hover:before {
+    opacity: 1;
+}
+
+@media only screen and (max-width: 1200px) {
+    .CollectionGrid-tile {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 1 25%;
+        flex: 0 1 25%
+    }
+}
+
+@media only screen and (max-width: 985px) {
+    .CollectionGrid-tile {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 1 33.33333%;
+        flex: 0 1 33.33333%
+    }
+}
+
+@media only screen and (max-width: 680px) {
+    .CollectionGrid-tile {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 1 50%;
+        flex: 0 1 50%
+    }
+}
+
+@media only screen and (max-width: 540px) {
+    .CollectionGrid-tile {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 1 50%;
+        flex: 0 1 50%
+    }
+}
+
+@media only screen and (max-width: 540px) {
+    .CollectionGrid-tileName {
+        font-size: 14px
+    }
+}

@@ -1,0 +1,124 @@
+{% load i18n %}
+
+<header class="cd-morph-dropdown">
+    <div class="ui top menu">
+        <div class="ui container">
+            <div class="item no-border animated fadeIn logo-text-container desktop">
+                <a href="{% url 'core:index' %}">
+                    <img class="ui mini image" src="" alt="For the everyday minimalist">
+                </a>
+            </div>
+            <div class="item no-border animated fadeIn search-text mobile">
+                <p>Tap to search...</p>
+            </div>
+            <div class="has-dropdown links item no-border animated fadeIn desktop" data-content="category">
+                <a href="{% url 'catalogue:category_list' %}">{% trans 'Категории' %}</a>
+            </div>
+            <div class="has-dropdown links item no-border animated fadeIn desktop" data-content="gifts">
+                <a href="#">{% trans 'Подарки' %}</a>
+            </div>
+            <div class="links item no-border animated fadeIn desktop">
+                <a href="#">{% trans 'Производители' %}</a>
+            </div>
+            <div class="morph-dropdown-wrapper">
+                <div class="dropdown-list">
+                    <ul>
+                        <li id="category" class="dropdown links">
+                            <a href="#" class="label">Categories</a>
+                            <div class="content">
+                                <ul>
+                                    <li>
+                                        <ul class="links-list">
+                                            <li><a href="https://repick.co/category/fashion">Fashion</a></li>
+                                            <li><a href="https://repick.co/category/beauty">Beauty</a></li>
+                                            <li><a href="https://repick.co/category/tech">Tech</a></li>
+                                            <li><a href="https://repick.co/category/kitchen">Kitchen</a></li>
+                                            <li><a href="https://repick.co/category/toysthings">Things / Toys</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="links-list">
+                                            <li><a href="https://repick.co/category/office">Office</a></li>
+                                            <li><a href="https://repick.co/category/home">Home</a></li>
+                                            <li><a href="https://repick.co/category/hikingcamping">Hiking / Camping</a></li>
+                                            <li><a href="https://repick.co/category/garden">Garden</a></li>
+                                            <li><a href="https://repick.co/category/food">Food</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="content-info">
+                                <p>We constanly updating and adding more products to our categories.</p>
+                            </div>
+                        </li>
+                        <li id="gifts" class="dropdown links">
+                            <a href="#" class="label">Gifts</a>
+                            <div class="content">
+                                <ul>
+                                    <li>
+                                        <h2>Occasions</h2>
+                                        <ul class="links-list">
+                                            <li><a href="https://repick.co/gifts/christmas">Christmas</a></li>
+                                            <li><a href="https://repick.co/gifts/fathers">Father's Day</a></li>
+                                            <li><a href="https://repick.co/gifts/mothers">Mother's Day</a></li>
+                                            <li><a href="https://repick.co/gifts/valentines">Valentine's Day</a></li>
+                                            <li><a href="https://repick.co/gifts/newyear">New Year</a></li>
+                                            <li><a href="https://repick.co/gifts/wedding">Wedding</a></li>
+                                            <li><a href="https://repick.co/gifts/thankyou">Thank You</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="gifts">
+                                        <h2>Gifts</h2>
+                                        <ul class="links-list">
+                                            <li><a href="https://repick.co/gifts/her">For Her</a></li>
+                                            <li><a href="https://repick.co/gifts/him">For Him</a></li>
+                                            <li><a href="https://repick.co/gifts/kids">For Kids</a></li>
+                                            <li><a href="https://repick.co/gifts/price/0-20">0 - 20$</a></li>
+                                            <li><a href="https://repick.co/gifts/price/20-50">20$ - 50$</a></li>
+                                            <li><a href="https://repick.co/gifts/price/50-100">50$ - 100$</a></li>
+                                            <li><a href="https://repick.co/gifts/price/100-500">100$ - 500$</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li id="about" class="dropdown links"> <!-- MOBILE ONLIE-->
+                            <a href="https://repick.co/" class="label">About</a>
+                            <div class="content">
+                                <ul>
+                                    <li>
+                                        <h2>About</h2>
+                                        <ul class="links-list">
+                                            <li><a class="about" href="https://repick.co/">Contact</a></li>
+                                            <li><a target="_blank" href="https://blog.repick.co/">Blog</a></li>
+                                            <li><a class="tos" href="https://repick.co/">Terms</a></li>
+                                            <li><a class="privacy" href="https://repick.co/">Privacy</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="gifts">
+                                        <h2>Gifts</h2>
+                                        <ul class="links-list">
+                                            <li><a href="https://facebook.com/repickco" target="_blank">Facebook</a></li>
+                                            <li><a href="https://twitter.com/RepickCo" target="_blank">Twitter</a></li>
+                                            <li><a href="https://pinterest.com/repickco" target="_blank">Pinterest</a></li>
+                                            <li><a href="https://instagram.com/repickco" target="_blank">Instagram</a></li>
+                                            <li><a class="editorial" href="https://repick.co/">Editorial</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="bg-layer" aria-hidden="true"></div>
+                </div> <!-- dropdown-list -->
+            </div> <!-- morph-dropdown-wrapper -->
+            <div class="right menu">
+                <div class="item no-border animated fadeIn search-text desktop">
+                    <img class="ui image" src="#" alt="Find minimalist products now">
+                    <p>Press any key to search</p>
+                </div>
+                <a href="https://repick.co/#0" class="item  animated fadeIn nav-trigger"><span aria-hidden="true"></span></a>
+            </div>
+        </div>
+    </div>
+</header>

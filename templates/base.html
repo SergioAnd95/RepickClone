@@ -1,0 +1,297 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    {% block styles %}
+        <link rel="stylesheet" type="text/css" class="__meteor-css__" href="{% static 'css/styles1.css' %}">
+        <link rel="stylesheet" type="text/css" class="__meteor-css__" href="{% static 'css/styles2.css' %}">
+        <link rel="stylesheet" type="text/css" class="__meteor-css__" href="{% static 'css/styles3.css' %}">
+    {% endblock %}
+
+
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable = no">
+    <meta name="fragment" content="!"> <!-- For prerender.io -->
+    <link rel="icon" type="image/png" href="https://repick.co/images/favicon-32x32.png?v=1" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://repick.co/images/favicon-16x16.png?v=8" sizes="16x16">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://repick.co/apple-touch-icon-precomposed.png">
+
+    <!-- start OneSignal -->
+
+
+</head>
+
+
+<body>
+
+<div id="__blaze-root">
+    <div class="site">
+        {% include 'partials/_header.html' %}
+        <div class="site-content">
+
+            <style>
+                .main-banner .stackable.grid {
+                    background-image:url(https://loui.imgix.net/banners/c501b980-bd8f-400c-8e8c-419c716f4444.png);
+                    background-repeat: no-repeat;
+                    background-position: right top;
+                }
+            </style>
+
+
+            {% block banner %}
+                <div class="main-banner">
+                    <div class="ui main container">
+
+                        <div class="ui two column stackable grid animated fadeIn">
+                            <div class="column home-text tablet computer only">
+                                <h1>Home Appliances to make your life a lot easier</h1>
+                                <h4>Here are the list of Home interior appliances that your must buy today to make your life a lot easier and comfortable</h4>
+                                <a href="https://repick.co/articles/9-home-appliances-to-make-your-life-a-lot-easier" class="ui button">
+                                    Shop Now
+                                </a>
+                            </div>
+                            <div class="column center aligned animated fadeIn tablet computer only">
+                            </div>
+                            <div class="column center aligned animated fadeIn mobile only">
+                            </div>
+                            <div class="column home-text mobile only">
+                                <h1>Home Appliances to make your life a lot easier</h1>
+                                <h4>Here are the list of Home interior appliances that your must buy today to make your life a lot easier and comfortable</h4>
+                                <a href="https://repick.co/articles/9-home-appliances-to-make-your-life-a-lot-easier" class="ui button">
+                                    Shop Now
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            {% endblock %}
+
+            <div class="{% block content_cls %}ui main container product-grid{% endblock %}">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+
+            <button class="ui icon button footer-button">
+        About
+    </button>
+        <footer class="dynamic-footer">
+            <div class="ui footer">
+        <img class="ui image x-footer animated fadeIn" src="./Repick.co - Premium goods, curated daily._files/x_gray.svg" alt="Close">
+        <div class="ui main container">
+            <div class="ui two column stackable grid">
+                <div class="eight wide column">
+                    <div class="footer-links">
+                        <div class="footer-logo desktop only">
+                            <img class="ui image" src="./Repick.co - Premium goods, curated daily._files/repick64.png" alt="For the everyday minimalist">
+                        </div>
+                        <a class="about" href="https://repick.co/">Contact</a>
+                        <a target="_blank" href="https://blog.repick.co/">Blog</a>
+                        <a class="tos" href="https://repick.co/">Terms</a>
+                        <a class="privacy" href="https://repick.co/">Privacy</a>
+
+                    </div>
+                    <p class="selling-text">Curated well-designed products <br> from all over internet.</p>
+                </div>
+                <div class="eight wide column">
+                    <div class="small icons">
+                        <a href="https://facebook.com/repickco" target="_blank"><span class="ui circular image facebook-share"><i class="facebook icon"></i></span></a>
+                        <a href="https://twitter.com/RepickCo" target="_blank"><span class="ui circular image twitter-share"><i class="twitter icon"></i></span></a>
+                        <a href="https://pinterest.com/repickco" target="_blank"><span class="ui circular image pinterest-share"><i class="pinterest icon"></i></span></a>
+                        <a href="https://instagram.com/repickco" target="_blank"><span class="ui circular image instagram-share"><i class="instagram icon"></i></span></a>
+                    </div>
+                </div>
+                <div class="ui divider"></div>
+                <div class="eight wide column">
+                    <p class="rights-reserved">©2016 Repick.co. All rights reserved.</p>
+                </div>
+                <!--<div class="eight wide column">
+                submit product button here later
+                </div>-->
+            </div>
+        </div>
+    </div>
+        </footer>
+    </div>
+    <div class="search-overlay">
+        <div class="search-box">
+            <img class="ui close-search image x-search animated fadeIn" src="./Repick.co - Premium goods, curated daily._files/x_black.svg" alt="Close">
+            <h4>Search anytime by typing. Hit ESC to exit.</h4>
+            <input type="text" class="search-query search-suggest">
+            <input type="text" class="search-query search-value">
+        </div>
+        <div class="search-results-container">
+            <div class="ui main container product-grid">
+
+                <div class="ui four column stackable grid">
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="login-overlay">
+        <img class="ui image x-login animated fadeIn" src="./Repick.co - Premium goods, curated daily._files/x_gray.svg" alt="Close">
+        <div class="login-dialog animated fadeIn">
+            <div class="login-logo">
+                <img class="ui circular image" src="./Repick.co - Premium goods, curated daily._files/repick64.png" alt="For the everyday minimalist">
+                <p>repick</p>
+            </div>
+            <h4>Signup now to create your own wishlist.</h4>
+            <div id="facebookLogin" class="column wide">
+                <p>Sign in with Facebook <i class="facebook large icon"></i></p>
+            </div>
+            <div id="twitterLogin" class="column wide">
+                <p>Sign in with Twitter &nbsp;&nbsp;&nbsp;&nbsp;<i class="twitter large icon"></i></p>
+            </div>
+            <p class="small-text">We'll never post to Twitter or Facebook without your permission.</p>
+        </div>
+    </div>
+    <div class="ui product large modal">
+        <div class="ui two columns stackable grid">
+
+            <div class="column left-content">
+                <img class="ui image product-image" src="./Repick.co - Premium goods, curated daily._files/saved_resource(1)"><br>
+                <div class="small icons social-media-share">
+        <span class="ui mini circular image facebook-share"><i class="facebook icon"></i></span>
+        <span class="ui mini circular image twitter-share"><i class="twitter icon"></i></span>
+        <span class="ui mini circular image pinterest-share"><i class="pinterest icon"></i></span>
+        <a href="mailto:?Subject=%20on%20Repick.co&amp;body=https://repick.co/products/" target="_top"><span class="ui mini circular image mail-share"><i class="mail icon"></i></span></a>
+    </div>
+            </div>
+            <div class="column right-content">
+                <img class="ui image x-product-modal animated fadeIn" src="./Repick.co - Premium goods, curated daily._files/x_gray.svg" alt="Close">
+                <p class="title-text"></p>
+                <p class="brand-text">By  </p>
+                <div class="editors-note">
+
+                        <span class="teaser"></span>
+                        <span class="complete"> </span>
+
+                    </p>
+                </div>
+                <div class="buttons-wrapper">
+
+                        <a class="ui huge blue button price-button" rel="nofollow" target="_blank">
+                            <span class="button-price"><span class="dollar-sign">$</span><span class="decimals"></span></span><span class="button-buy-on-amazon">BUY ON  </span>
+                        </a>
+
+                    <a class="ui huge white button want-button">
+                        <div class="love-this-wrapper-standalone">
+                            <i class="heart icon large love-this-icon animated fadeIn"></i>
+                        </div>
+                        <span>SAVE</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <h3 class="center aligned related-text">RELATED PRODUCTS</h3>
+        <div class="related-products">
+
+    </div>
+    <!--<div class="ui range-wrapper">
+        <div class="ui range products-scroll"></div>
+    </div>-->
+    <div class="ui stackable two column grid">
+
+    </div>
+
+    <div class="ui one column grid join-us">
+        <div class="center aligned column">
+            <p>CREATE YOUR OWN AWESOME <br>WISHLIST</p>
+            <a class="ui blue button login-button">JOIN US NOW</a> <br>
+        </div>
+    </div>
+
+    </div>
+
+
+
+
+    <div class="slide-in-wrapper">
+        <div class="ui top menu slide-in-menu">
+            <div class="ui container">
+                <div class="item no-border animated fadeIn history-back">
+                    <img class="ui image" src="./Repick.co - Premium goods, curated daily._files/back.svg">
+                </div>
+            </div>
+        </div>
+        <div class="ui product-standalone">
+
+
+
+                    <div class="ui two columns stackable grid">
+                        <div class="column left-content center aligned">
+                               <img class="ui centered image" src="./Repick.co - Premium goods, curated daily._files/saved_resource(2)"><br>
+                            <div class="desktop">
+                                <div class="small icons social-media-share">
+        <span class="ui mini circular image facebook-share"><i class="facebook icon"></i></span>
+        <span class="ui mini circular image twitter-share"><i class="twitter icon"></i></span>
+        <span class="ui mini circular image pinterest-share"><i class="pinterest icon"></i></span>
+        <a href="mailto:?Subject=%20on%20Repick.co&amp;body=https://repick.co/products/" target="_top"><span class="ui mini circular image mail-share"><i class="mail icon"></i></span></a>
+    </div>
+                            </div>
+                        </div>
+                        <div class="column right-content">
+                            <p class="title-text"></p>
+                            <p class="brand-text">By </p>
+
+                                <a class="ui huge blue button price-button" rel="nofollow" target="_blank">
+                                    <span class="button-price"><span class="dollar-sign">$</span><span class="decimals"></span></span><span class="button-buy-on-amazon">BUY ON  </span>
+                                </a>
+
+                            <br>
+                            <a class="ui huge white button want-button">
+                                <div class="love-this-wrapper-standalone">
+                                    <i class="heart icon large love-this-icon animated fadeIn"></i>
+                                </div>
+                                <span>SAVE</span>
+                            </a>
+                            <div class="editors-note">
+
+                                <p class="description-text">
+                                    <span class="teaser"></span>
+                                    <span class="complete"> </span>
+
+                                </p>
+                            </div>
+                            <div class="mobile">
+                                <div class="small icons social-media-share">
+        <span class="ui mini circular image facebook-share"><i class="facebook icon"></i></span>
+        <span class="ui mini circular image twitter-share"><i class="twitter icon"></i></span>
+        <span class="ui mini circular image pinterest-share"><i class="pinterest icon"></i></span>
+        <a href="mailto:?Subject=%20on%20Repick.co&amp;body=https://repick.co/products/" target="_top"><span class="ui mini circular image mail-share"><i class="mail icon"></i></span></a>
+    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <h3 class="center aligned related-text">RELATED PRODUCTS</h3>
+
+                    <div class="related-products">
+
+    </div>
+    <!--<div class="ui range-wrapper">
+        <div class="ui range products-scroll"></div>
+    </div>-->
+    <div class="ui stackable two column grid">
+
+    </div>
+
+
+    <div class="ui one column grid join-us">
+        <div class="center aligned column">
+            <p>CREATE YOUR OWN AWESOME <br>WISHLIST</p>
+            <a class="ui blue button login-button">JOIN US NOW</a> <br>
+        </div>
+    </div>
+
+
+
+    </div>
+    </div></div></body></html>

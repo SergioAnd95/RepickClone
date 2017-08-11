@@ -1,0 +1,47 @@
+ <div class="column desktop only">
+            <a class="product-grid-link" href="https://repick.co/products/1027/brown-welcome-doormat">
+                <div class="amazon-product">
+                    <div class="ui image animated fadeIn">
+                        <img src="{{ item.main_image.url }}" alt="{{ item.title }}">
+                    </div>
+                    <div class="overlay">
+                        <div class="love-this-wrapper">
+                            <span class="love-this-count">1</span>
+                            <i class="heart icon large love-this-icon animated fadeIn"></i>
+                        </div>
+
+                        <p class="hover-title animated fadeIn">{{ item.title }}</p>
+                        <div class="buy-on-provider-link animated fadeIn">
+                            <p class="buy-on-provider-text">
+                                Buy on <span class="buy-on-provider">{{ item.get_site_name }}</span> <i class="external icon" title="Buy on {{ item.get_site_name }}"></i>
+                            </p>
+                        </div>
+                    </div>
+                    <p class="price-label animated fadeIn">
+                        <i class="checkmark icon" title="Amazon prime"></i> <span class="dollar-sign">$</span>{{ item.get_parse_price.digits }}<span class="decimals">{{ item.get_parse_price.decimal }}</span>
+                    </p>
+                </div>
+            </a>
+        </div>
+        <div class="column mobile tablet only">
+            <a class="product-grid-link" href="https://repick.co/products/1027/brown-welcome-doormat">
+                <div class="amazon-product">
+                    <div class="love-this-wrapper">
+                        <span class="love-this-count">1</span>
+                        <i class="heart icon large love-this-icon animated fadeIn"></i>
+                    </div>
+
+                    <div class="ui image animated fadeIn">
+                        <img src="./Repick.co - Premium goods, curated daily._files/495fc332-79e8-4a2f-a148-e1e87b5c9008.png" alt=" Brown Welcome Doormat">
+                    </div>
+                    <div class="buy-on-provider-link animated fadeIn">
+                        <p class="buy-on-provider-text">
+                            Buy on <span class="buy-on-provider">Amazon</span> <i class="external icon" title="Buy on amazon"></i>
+                        </p>
+                    </div>
+                    <p class="price-label animated fadeIn">
+                        <i class="checkmark icon" title="Amazon prime"></i> <span class="dollar-sign">$</span>37<span class="decimals">36</span>
+                    </p>
+                </div>
+            </a>
+        </div>
