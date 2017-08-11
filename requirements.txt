@@ -7,3 +7,4 @@ Pillow==4.2.1
 psycopg2==2.7.3
 pytz==2017.2
 recordtype==1.1
+whitenoise==3.3.0
