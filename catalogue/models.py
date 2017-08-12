@@ -1,13 +1,17 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.db.models import permalink
-from django.urls import reverse
+from django.db.models import permalink, F, Count
 
 from taggit.managers import TaggableManager
 
 
 from urllib.parse import urlparse
 # Create your models here.
+
+
+class ItemManager(models.Manager):
+    def get_queryset(self):
+        return super(ItemManager, self).get_queryset().annotate(total_likes=F('additional_likes')+Count('likes'))
 
 
 class Category(models.Model):
@@ -103,6 +107,10 @@ class Item(models.Model):
     tags = TaggableManager()
     enable = models.BooleanField(_('Есть в наличии'), default=True)
 
+    additional_likes = models.IntegerField(_('Дополнительнык лайки'), default=0)
+
+    objects = ItemManager()
+
     class Meta:
         verbose_name = _('Продукт')
         verbose_name_plural = _('Продукты')
@@ -129,8 +137,17 @@ class Item(models.Model):
 
 
 class LikeList(models.Model):
-    pass
+    when_created = models.DateTimeField(_('Дата создания'), auto_now_add=True)
 
 
 class Like(models.Model):
-    pass
+    like_list = models.ForeignKey(
+        LikeList,
+        verbose_name=_('Список понравившегось'),
+        related_name='likes'
+    )
+    item = models.ForeignKey(
+        Item,
+        verbose_name=_('Товар'),
+        related_name='likes'
+    )
