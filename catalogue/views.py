@@ -1,6 +1,8 @@
 from django.views.generic import ListView, DetailView
 
 from .models import Item, Category, Brand
+
+from taggit.models import Tag
 # Create your views here.
 
 
@@ -8,6 +10,11 @@ class BaseDetailView(DetailView):
     model = Category
     template_name = 'catalogue/category_detail.html'
     context_object_name = 'category'
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['category_tags'] = Tag.objects.filter(item__categories__in=[self.object]).distinct()
+        return ctx
 
 
 class CategoryDetailView(BaseDetailView):
@@ -25,6 +32,11 @@ class GiftDetailView(BaseDetailView):
 
 class BrandDetailView(BaseDetailView):
     model = Brand
+
+    def get_context_data(self, **kwargs):
+        ctx = super(BaseDetailView, self).get_context_data(**kwargs)
+        ctx['category_tags'] = Tag.objects.filter(item__brand__in=[self.object]).distinct()
+        return ctx
 
 
 class BaseCategoryListView(ListView):
