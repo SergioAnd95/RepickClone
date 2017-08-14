@@ -221,3 +221,10 @@ a:hover {
         font-size: 14px
     }
 }
+
+.tag-filter{display:inline-block;}
+.tag-filter input[type="checkbox"]{display:none;}
+
+.filter-group select{
+    display: none;
+}

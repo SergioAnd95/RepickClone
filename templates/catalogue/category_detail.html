@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load staticfiles %}
+{% load widget_tweaks %}
 
 {% block styles %}
     {{ block.super }}
@@ -10,23 +11,25 @@
 {% block before-content %}
 
     <div class="categories">
+    <form action="." method="GET" id="#filter-form" style="display: none">
+        {% csrf_token %}
+        {{ filter_form }}
+    </form>
+
         <div class="ui main container">
             <div class="ui four column stackable grid animated fadeIn">
                 <div class="three wide column">
                     <h1>{{ category.name }}</h1>
                 </div>
-                <div class="thirteen wide column types">
 
-                    <span class="all-type type active">All</span>
-                    {% for tag in category_tags %}
-                            <span class="type">{{ tag.name }}</span>
-                    {% endfor %}
-                            <span class="more-type">more..</span>
+                <div class="thirteen wide column types">
+                        <div class="tags-filters" style="display: inline-block">
+                            <span class="all-type type active">All</span>
+                        </div>
+                    <span class="more-type">more..</span>
                 </div>
             </div>
-            <div class="column center aligned animated fadeIn">
-            </div>
-
+            <div class="column center aligned animated fadeIn"></div>
         </div>
     </div>
 {% endblock %}
@@ -41,22 +44,102 @@
         <div class="page-filters">
 
             <div class="filter-group">
-                <a class="filter-link active " href="/shop/art-&amp;-design-books/trending">Trending</a>
-                <a class="filter-link  " href="/shop/art-&amp;-design-books/popular">Most popular</a>
-                <a class="filter-link  " href="/shop/art-&amp;-design-books/most-expensive">&nbsp;$$$&nbsp;</a>
-                <a class="filter-link  " href="/shop/art-&amp;-design-books/least-expensive">&nbsp;$&nbsp;</a>
-                <a class="filter-link  is-prime" href="/shop/art-&amp;-design-books/prime">Prime</a>
+                {{ filter_form.order_by }}
 
             </div>
         </div>
 
     </div>
     </div>
-    <div class="ui stackable doubling four column grid">
-    {% for item in category.items.all %}
+    <div class="ui stackable doubling four column grid" id="items">
+    {% for item in items %}
 
        {% include 'catalogue/preview_item.html' %}
 
     {% endfor %}
     </div>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script type="text/javascript">
+        // TODO: Rebase js
+        $(document).ready(function () {
+            $.fn.toggleCheckbox = function () {
+                console.log(this);
+
+                this.attr('checked', !this.attr('checked'));
+                console.log(this.attr('checked'));
+            };
+            
+            function generateFromSelect(select_el) {
+                var html_s = '';
+
+                $options = $(select_el).find('option');
+                $options.each(function () {
+                    var clss = $(this)[0].hasAttribute("selected") ? 'filter-link active' : 'filter-link';
+                    html_s += '<a class="'+clss+'" href="#" value="'+$(this).attr('value')+'">'+$(this).text()+"</a>";
+                });
+
+                return html_s
+            }
+
+            function generateTagFromCheckbox(checkbox_container) {
+                $checkboxes = $(checkbox_container).find('input[type="checkbox"]');
+                var html_s = "";
+                $checkboxes.each(function () {
+                    var clss = $(this)[0].hasAttribute("checked") ? 'type active' : 'type';
+                    html_s += '<span class="'+clss+'" for="'+$(this).attr('id')+'"'+'>'+$(this).parent().text()+'</span>';
+                });
+                return html_s
+            }
+
+
+            $('.tags-filters').on("click", function (e) {
+
+                $parent = $(this);
+                console.log(e.target);
+
+                $span = $(e.target);
+                $span.toggleClass('active');
+
+                var checkbox = document.getElementById($span.attr('for'));
+
+                checkbox.checked = !checkbox.checked;
+
+                $('#filter-form').submit();
+            });
+
+            $('.filter-group').append(generateFromSelect('form select'));
+            $('.tags-filters').append(generateTagFromCheckbox('#id_tags'));
+
+            $(".filter-group").on("click", function (e) {
+                e.preventDefault();
+                $(this).find('.active').removeClass('active');
+                $el = $(e.target);
+
+                var val = $el.attr('value');
+                $("form select").val(val);
+                $el.addClass('active');
+                $('#filter-form').submit();
+            });
+            
+            $("#filter-form").on('submit', function (e) {
+                e.preventDefault();
+                var url = $(this).attr('url');
+                var method = $(this).attr('method');
+                var data = $(this).serialize();
+                console.log(data);
+                $.ajax({
+                    url: url,
+                    method: method,
+                    data: data,
+                    success: function (data) {
+                        $("#items").html(data);
+                    }
+                })
+            });
+
+        })
+    </script>
+
 {% endblock %}

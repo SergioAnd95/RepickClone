@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # third-party apps
     'taggit',
+    'widget_tweaks',
 
     # own apps
     'core',

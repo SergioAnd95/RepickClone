@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db.models import permalink, F, Count
 
 from taggit.managers import TaggableManager
-
+from taggit.models import Tag
 
 from urllib.parse import urlparse
 # Create your models here.
@@ -53,6 +53,11 @@ class Category(models.Model):
         elif self.type == 2:
             return 'catalogue:gift_detail', (self.slug, )
 
+    @property
+    def get_tags(self):
+        tags = Tag.objects.filter(item__categories__in=[self]).distinct()
+        return tags
+
 
 class Brand(models.Model):
     """
@@ -72,6 +77,11 @@ class Brand(models.Model):
     @permalink
     def get_absolute_url(self):
         return 'catalogue:brand_detail', (self.slug, )
+
+    @property
+    def get_tags(self):
+        tags = Tag.objects.filter(item__brand = self).distinct()
+        return tags
 
 
 class Item(models.Model):
