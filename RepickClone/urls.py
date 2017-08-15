@@ -22,7 +22,8 @@ from django.views.generic import TemplateView
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('core.urls', namespace='core')),
-    url(r'^catalogue/', include('catalogue.urls', namespace='catalogue'))
+    url(r'^catalogue/', include('catalogue.urls', namespace='catalogue')),
+    url(r'^likelist/', include('likelist.urls', namespace='likelist'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

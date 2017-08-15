@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load thumbnail %}
+{% load likelist_tags %}
 {% load i18n %}
 
 {% block before-content %}
@@ -35,11 +36,11 @@
                 </a>
 
                 <br>
-                <a class="ui huge white button want-button">
+                <a class="ui huge white button want-button" id="like-button" href="{% url 'likelist:toggle_like' item.slug %}">
                     <div class="love-this-wrapper-standalone">
-                        <i class="heart icon large love-this-icon animated fadeIn"></i>
+                        <i class="heart icon large love-this-icon animated fadeIn{% if item|likelist_exist:request.likelist %} active{% endif %}"></i>
                     </div>
-                    <span>SAVE</span>
+                    <span>LIKE</span>
                 </a>
                 <div class="editors-note">
 
@@ -89,12 +90,34 @@
 
         </div>
 
-        <div class="ui one column grid join-us">
-            <div class="center aligned column">
-                <p>CREATE YOUR OWN AWESOME <br>WISHLIST</p>
-                <a class="ui blue button login-button">JOIN US NOW</a> <br>
-            </div>
-        </div>
-
     </div>
+{% endblock %}
+
+{% block extra_scripts %}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#like-button").on('click', function (e) {
+                e.preventDefault();
+                console.log('like-button');
+                $btn = $(this);
+                var url = $(this).attr('href');
+                $.ajax({
+                    url: url,
+                    contentType: 'application/json',
+                    success: function (data) {
+                        console.log(data);
+                        $icon = $btn.find('.icon');
+                        console.log($icon);
+                        if('added' in data) {
+                            $icon.addClass('active');
+                        }
+                        else if('removed' in data){
+                            $icon.removeClass('active');
+                        }
+                    }
+                })
+            })
+        })
+    </script>
 {% endblock %}
