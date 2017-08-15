@@ -8,4 +8,6 @@ Pillow==4.2.1
 psycopg2==2.7.3
 pytz==2017.2
 recordtype==1.1
+redis==2.10.5
+sorl-thumbnail==12.4a1
 whitenoise==3.3.0
