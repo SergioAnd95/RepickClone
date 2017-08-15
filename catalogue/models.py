@@ -145,19 +145,6 @@ class Item(models.Model):
         parse = d.split('.')
         return {'digits': parse[0], 'decimal': parse[1]}
 
-
-class LikeList(models.Model):
-    when_created = models.DateTimeField(_('Дата создания'), auto_now_add=True)
-
-
-class Like(models.Model):
-    like_list = models.ForeignKey(
-        LikeList,
-        verbose_name=_('Список понравившегось'),
-        related_name='likes'
-    )
-    item = models.ForeignKey(
-        Item,
-        verbose_name=_('Товар'),
-        related_name='likes'
-    )
+    @permalink
+    def get_absolute_url(self):
+        return 'catalogue:product_detail', (self.slug, )

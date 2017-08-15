@@ -10,4 +10,6 @@ urlpatterns = [
 
     url(r'^brand/$', views.BrandListView.as_view(), name='brand_list'),
     url(r'^brand/(?P<slug>[-\w]+)/$', views.BrandDetailView.as_view(), name='brand_detail'),
+
+    url(r'^item/(?P<slug>[-\w]+)/$', views.ItemDetailView.as_view(), name='product_detail'),
 ]

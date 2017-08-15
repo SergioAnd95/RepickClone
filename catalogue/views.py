@@ -87,3 +87,14 @@ class GiftListView(BaseCategoryListView):
 
 class BrandListView(BaseCategoryListView):
     model = Brand
+
+
+class ItemDetailView(DetailView):
+    model = Item
+    template_name = 'catalogue/item_detail.html'
+    context_object_name = 'item'
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['related_items'] = Item.objects.all()[:15]
+        return ctx

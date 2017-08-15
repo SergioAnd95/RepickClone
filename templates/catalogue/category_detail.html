@@ -11,7 +11,7 @@
 {% block before-content %}
 
     <div class="categories">
-    <form action="." method="GET" id="#filter-form" style="display: none">
+    <form action="." method="GET" id="filter-form" style="display: none">
         {% csrf_token %}
         {{ filter_form }}
     </form>
@@ -63,6 +63,7 @@
 {% block extra_scripts %}
     <script type="text/javascript">
         // TODO: Rebase js
+        // TODO: Add detail product view
         $(document).ready(function () {
             $.fn.toggleCheckbox = function () {
                 console.log(this);
@@ -128,7 +129,7 @@
                 var url = $(this).attr('url');
                 var method = $(this).attr('method');
                 var data = $(this).serialize();
-                console.log(data);
+
                 $.ajax({
                     url: url,
                     method: method,

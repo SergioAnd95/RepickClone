@@ -42,10 +42,12 @@ INSTALLED_APPS = [
     # third-party apps
     'taggit',
     'widget_tweaks',
+    'sorl.thumbnail',
 
     # own apps
     'core',
     'catalogue',
+    'likelist',
 ]
 
 MIDDLEWARE = [
@@ -56,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'likelist.middleware.LikeListMiddleware',
 ]
 
 ROOT_URLCONF = 'RepickClone.urls'
@@ -82,6 +85,7 @@ WSGI_APPLICATION = 'RepickClone.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+
 
 DATABASES = {
     'default': {
