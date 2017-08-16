@@ -11,11 +11,6 @@
 {% block before-content %}
 
     <div class="categories">
-    <form action="." method="GET" id="filter-form" style="display: none">
-        {% csrf_token %}
-        {{ filter_form }}
-    </form>
-
         <div class="ui main container">
             <div class="ui four column stackable grid animated fadeIn">
                 <div class="three wide column">
@@ -23,9 +18,17 @@
                 </div>
 
                 <div class="thirteen wide column types">
-                        <div class="tags-filters" style="display: inline-block">
+                        <form class="tags-filters filter-form" style="display: inline-block">
+                            {% csrf_token %}
                             <span class="all-type type active">All</span>
-                        </div>
+                            {% for option in filter_form.tags %}
+                            <label class="type">
+                                {{ option.tag }}
+                                <span>{{ option.choice_label }}</span>
+                            </label>
+                        {% endfor %}
+                        </form>
+
                     <span class="more-type">more..</span>
                 </div>
             </div>
@@ -35,6 +38,7 @@
 {% endblock %}
 
 {% block content %}
+
     <div class="nav-level">
 
 
@@ -43,10 +47,15 @@
         <div class="PageTabs"></div>
         <div class="page-filters">
 
-            <div class="filter-group">
-                {{ filter_form.order_by }}
+            <form class="filter-group filter-form">
+                {% for option in filter_form.order_by %}
+                    <label class="filter-link">
+                        {{ option.tag }}
+                        <span>{{ option.choice_label }}</span>
+                    </label>
+                {% endfor %}
 
-            </div>
+            </form>
         </div>
 
     </div>
@@ -62,83 +71,31 @@
 
 {% block extra_scripts %}
     <script type="text/javascript">
-        // TODO: Rebase js
-        // TODO: Add detail product view
+
         $(document).ready(function () {
-            $.fn.toggleCheckbox = function () {
-                console.log(this);
 
-                this.attr('checked', !this.attr('checked'));
-                console.log(this.attr('checked'));
-            };
-            
-            function generateFromSelect(select_el) {
-                var html_s = '';
-
-                $options = $(select_el).find('option');
-                $options.each(function () {
-                    var clss = $(this)[0].hasAttribute("selected") ? 'filter-link active' : 'filter-link';
-                    html_s += '<a class="'+clss+'" href="#" value="'+$(this).attr('value')+'">'+$(this).text()+"</a>";
-                });
-
-                return html_s
-            }
-
-            function generateTagFromCheckbox(checkbox_container) {
-                $checkboxes = $(checkbox_container).find('input[type="checkbox"]');
-                var html_s = "";
-                $checkboxes.each(function () {
-                    var clss = $(this)[0].hasAttribute("checked") ? 'type active' : 'type';
-                    html_s += '<span class="'+clss+'" for="'+$(this).attr('id')+'"'+'>'+$(this).parent().text()+'</span>';
-                });
-                return html_s
-            }
-
-
-            $('.tags-filters').on("click", function (e) {
-
-                $parent = $(this);
-                console.log(e.target);
-
-                $span = $(e.target);
-                $span.toggleClass('active');
-
-                var checkbox = document.getElementById($span.attr('for'));
-
-                checkbox.checked = !checkbox.checked;
-
-                $('#filter-form').submit();
-            });
-
-            $('.filter-group').append(generateFromSelect('form select'));
-            $('.tags-filters').append(generateTagFromCheckbox('#id_tags'));
-
-            $(".filter-group").on("click", function (e) {
-                e.preventDefault();
-                $(this).find('.active').removeClass('active');
-                $el = $(e.target);
-
-                var val = $el.attr('value');
-                $("form select").val(val);
-                $el.addClass('active');
-                $('#filter-form').submit();
-            });
-            
-            $("#filter-form").on('submit', function (e) {
-                e.preventDefault();
-                var url = $(this).attr('url');
-                var method = $(this).attr('method');
-                var data = $(this).serialize();
-
-                $.ajax({
-                    url: url,
-                    method: method,
+            function submitFilterForm() {
+                data = $(".filter-form").serialize();
+                 $.ajax({
                     data: data,
                     success: function (data) {
                         $("#items").html(data);
                     }
                 })
+            }
+
+
+            $('.tags-filters input[type="checkbox"]').on("change", function (e) {
+
+                submitFilterForm();
             });
+
+            $(".filter-group input").on("change", function (e) {
+                submitFilterForm()
+            });
+
+
+
 
         })
     </script>

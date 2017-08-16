@@ -166,7 +166,6 @@ a:hover {
 .filter-link.active {
     color: white;
     border-radius: 50px;
-    padding: 4px 14px;
     background-color: rgba(0,0,0,0.25);
 }
 
@@ -175,7 +174,6 @@ a:hover {
     display: inline-block;
     cursor: pointer;
     font-size: 16px;
-    padding: 4px 10px;
     position: relative;
     font-weight: 500;
     -moz-osx-font-smoothing: grayscale;
@@ -227,4 +225,36 @@ a:hover {
 
 .filter-group select{
     display: none;
+}
+
+.type input{
+    display: none;
+}
+
+.type input:checked + span{
+    color: #486cff;
+}
+
+.type:hover input:checked + span{
+    color: #486cff;
+}
+
+.filter-link span{
+    padding: 4px 14px
+}
+
+.filter-link input{
+    display: none;
+}
+
+.filter-link span{
+    display: inline-block;
+    width: 100%;
+}
+
+.filter-link input:checked + span{
+    color: white;
+    border-radius: 50px;
+    padding: 4px 14px;
+    background-color: rgba(0,0,0,0.25);
 }

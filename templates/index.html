@@ -3,6 +3,9 @@
 {% block content %}
     <div class="switch-button">
         <span class="active"></span>
+        <form method="get" action="." style="display: none;">
+            {{ filter_form }}
+        </form>
         <button class="switch-button-case left active-case sort-on-recent">Recent</button>
         <button class="switch-button-case right sort-on-popular">Popular</button>
     </div>
@@ -14,4 +17,12 @@
 
             <span class="product-list-end"></span>
         </div>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+    })
+    </script>
 {% endblock %}
