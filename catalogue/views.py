@@ -19,7 +19,12 @@ class BaseDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        filter_form = ItemFilterForm(self.request.GET, category=self.object, initial={'order_by': ItemFilterForm.OrderingVars.TRENDING})
+
+        filter_form = ItemFilterForm(
+            self.request.GET,
+            tags_qs=self.object.get_tags,
+            items_qs=self.object.items.all()
+        )
 
         if filter_form.is_valid():
             items_list = filter_form.filter_data()
