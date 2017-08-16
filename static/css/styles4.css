@@ -258,3 +258,7 @@ a:hover {
     padding: 4px 14px;
     background-color: rgba(0,0,0,0.25);
 }
+
+.switch-button input{
+    display: none;
+}

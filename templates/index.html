@@ -2,15 +2,20 @@
 
 {% block content %}
     <div class="switch-button">
-        <span class="active"></span>
-        <form method="get" action="." style="display: none;">
-            {{ filter_form }}
+        <form method="get" action="." id="filter-form">
+            {{ filter_form.errors }}
+            {% for option in filter_form.order_by %}
+                <label>
+                    {{ option.tag }}
+                    <span class="switch-button-case right sort-on-popular">{{ option.choice_label|capfirst }}</span>
+                </label>
+            {% endfor %}
+
         </form>
-        <button class="switch-button-case left active-case sort-on-recent">Recent</button>
-        <button class="switch-button-case right sort-on-popular">Popular</button>
+
     </div>
 
-    <div class="ui stackable doubling four column grid">
+    <div class="ui stackable doubling four column grid" id="items">
         {% for item in items %}
             {% include 'catalogue/preview_item.html' %}
         {% endfor %}
@@ -22,7 +27,22 @@
 {% block extra_scripts %}
     <script type="text/javascript">
     $(document).ready(function () {
+        $("#filter-form input[type='radio']").on('change', function () {
+            $form = $(this).parents('form');
 
-    })
+            var url = $form.attr('action');
+            var method = $form.attr('method');
+            var data = $form.serialize();
+            $.ajax({
+                url: url,
+                method: method,
+                data: data,
+                success: function (data){
+
+                    $("#items").html(data);
+                }
+            })
+        });
+    });
     </script>
 {% endblock %}
