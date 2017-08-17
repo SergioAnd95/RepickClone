@@ -121,6 +121,8 @@ class Item(models.Model):
 
     objects = ItemManager()
 
+    related_items = models.ManyToManyField('Item', through='RelatedItems', blank=True)
+
     class Meta:
         verbose_name = _('Продукт')
         verbose_name_plural = _('Продукты')
@@ -148,3 +150,25 @@ class Item(models.Model):
     @permalink
     def get_absolute_url(self):
         return 'catalogue:product_detail', (self.slug, )
+
+
+class RelatedItems(models.Model):
+    primary = models.ForeignKey(
+        'Item',
+        on_delete=models.CASCADE,
+        related_name='primary_recommendations',
+        verbose_name=_("Primary product"))
+    recommendation = models.ForeignKey(
+        'Item',
+        on_delete=models.CASCADE,
+        verbose_name=_("Рекомендуемые продукты"))
+    ranking = models.PositiveSmallIntegerField(
+        _('Ranking'), default=0,
+        help_text=_('Determines order of the products. A product with a higher'
+                    ' value will appear before one with a lower ranking.'))
+
+    class Meta:
+        ordering = ['primary', '-ranking']
+        unique_together = ('primary', 'recommendation')
+        verbose_name = _('Product related')
+        verbose_name_plural = _('Product related')

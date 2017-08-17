@@ -53,11 +53,6 @@ class ItemFilterForm(forms.Form):
 
         return items
 
-
-a = forms.RadioSelect
-class SwitchButtonSelect(forms.RadioSelect):
-    template_name = ''
-
 # TODO: create widgets
 
 class MainPageItemFilter(forms.Form):
