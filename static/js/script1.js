@@ -22,7 +22,7 @@ $(document).ready(function(){
         parent.animateCss('fadeOut', function () {
             parent.removeClass('visible transition');
         });
-        $("body").removeClass('dimmed').fadeIn;
+        $("body").removeClass('dimmed');
 
     });
     $('.product-grid-link').on('click', function (e) {
