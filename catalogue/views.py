@@ -103,3 +103,8 @@ class ItemDetailView(DetailView):
         ctx = super().get_context_data(**kwargs)
         ctx['related_items'] = Item.objects.all()[:15]
         return ctx
+
+    def get_template_names(self):
+        if self.request.is_ajax():
+            self.template_name = 'catalogue/modal_item_content.html'
+        return super().get_template_names()

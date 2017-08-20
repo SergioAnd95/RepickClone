@@ -9,6 +9,7 @@
         <link rel="stylesheet" type="text/css" class="__meteor-css__" href="{% static 'css/styles1.min.css' %}">
         <link rel="stylesheet" type="text/css" class="__meteor-css__" href="{% static 'css/styles2.min.css' %}">
         <link rel="stylesheet" type="text/css" class="__meteor-css__" href="{% static 'css/styles3.min.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     {% endblock %}
 
 
@@ -25,7 +26,7 @@
 </head>
 
 
-<body>
+<body class="dimmable scrolling">
 
 <div id="__blaze-root">
     <div class="site">
@@ -134,23 +135,7 @@
             </div>
         </div>
     </div>
-    <div class="login-overlay">
-        <img class="ui image x-login animated fadeIn" src="./Repick.co - Premium goods, curated daily._files/x_gray.svg" alt="Close">
-        <div class="login-dialog animated fadeIn">
-            <div class="login-logo">
-                <img class="ui circular image" src="./Repick.co - Premium goods, curated daily._files/repick64.png" alt="For the everyday minimalist">
-                <p>repick</p>
-            </div>
-            <h4>Signup now to create your own wishlist.</h4>
-            <div id="facebookLogin" class="column wide">
-                <p>Sign in with Facebook <i class="facebook large icon"></i></p>
-            </div>
-            <div id="twitterLogin" class="column wide">
-                <p>Sign in with Twitter &nbsp;&nbsp;&nbsp;&nbsp;<i class="twitter large icon"></i></p>
-            </div>
-            <p class="small-text">We'll never post to Twitter or Facebook without your permission.</p>
-        </div>
-    </div>
+
     <div class="ui product large modal">
         <div class="ui two columns stackable grid">
 
@@ -291,9 +276,24 @@
     </div>
 </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+{% block outside_content %}
+    <div class="ui dimmer modals page" id="modal-window" style="display: none;">
+
+        <div class="ui product large modal transition visible active scrolling" style="display: block !important;">
+            <div class="close"><img class="ui image x-product-modal animated fadeIn" src="{% static 'images/x_gray.svg' %}" alt="Close"></div>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+{% endblock %}
+    {% block scripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+        <script src="{% static 'js/script1.min.js' %}"></script>
+    {% endblock %}
+
     {% block extra_scripts %}
 
     {% endblock %}
+
 </body>
 </html>

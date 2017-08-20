@@ -1,4 +1,4 @@
-.ui.form .fields.error .field .checkbox:not(.toggle):not(.slider) label, .ui.form .field.error .checkbox:not(.toggle):not(.slider) label, .ui.form .fields.error .field .checkbox:not(.toggle):not(.slider) .box, .ui.form .field.error .checkbox:not(.toggle):not(.slider) .box {
+ƒ.ui.form .fields.error .field .checkbox:not(.toggle):not(.slider) label, .ui.form .field.error .checkbox:not(.toggle):not(.slider) label, .ui.form .fields.error .field .checkbox:not(.toggle):not(.slider) .box, .ui.form .field.error .checkbox:not(.toggle):not(.slider) .box {
     color: #9f3a38;
 }
 .ui.form .fields.error .field .checkbox:not(.toggle):not(.slider) label:before, .ui.form .field.error .checkbox:not(.toggle):not(.slider) label:before, .ui.form .fields.error .field .checkbox:not(.toggle):not(.slider) .box:before, .ui.form .field.error .checkbox:not(.toggle):not(.slider) .box:before {
@@ -7552,9 +7552,19 @@ to {
     position: fixed;
 }
 .modals.dimmer .ui.scrolling.modal {
-    position: static !important;
+    position: absolute !important;
     margin: 3.5rem auto !important;
+    top: 0;
+    left: 0;
+    right: 0;
 }
+
+.modals.dimmer .ui.scrolling.modal .close{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
 .scrolling.undetached.dimmable.dimmed {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
