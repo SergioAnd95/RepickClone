@@ -28,15 +28,15 @@ $(document).ready(function(){
 
 
     $('#modal-content').on('click', function (e) {
-        e.preventDefault();
+        $modal = $(this);
+        var target = e.target;
 
-
-        if(e.target.id == 'like-button' || $(e.target).parents('#like-button')){
+        if(target.id == 'like-button' || $(target).parents('#like-button').length > 0){
             e.preventDefault();
-            if(e.target.id == 'like-button'){
-                $btn = $(e.target);
+            if(target.id == 'like-button'){
+                $btn = $(target);
             } else {
-                $btn = $(e.target).parents('#like-button');
+                $btn = $(target).parents('#like-button');
             }
 
             var url = $btn.attr('href');
@@ -62,6 +62,31 @@ $(document).ready(function(){
 
                 }
             })
+        } else if(target.className.substr('big-related-product') > 0 || $(target).parent().hasClass('big-related-product')){
+            e.preventDefault();
+            if(target.className.substr('big-related-product') > 0){
+                $item = $(target);
+            } else {
+                $item = $(target).parent();
+                console.log($item);
+            }
+            var url = $item.attr('href');
+
+            $.ajax({
+                url: url,
+                success: function (data) {
+                $modal.html(data);
+            },
+            error: function(textStatus){
+                console.log(textStatus);
+                    if(textStatus.status == 404 ){
+                        alert('Данный товар не найден');
+                    } else if(textStatus.status == 500){
+                        alert('Извините за временные неудобства, попробуйте позже')
+                    }
+                }
+            });
+
         }
     });
 

@@ -14,7 +14,7 @@
                         <span class="ui mini circular image facebook-share"><i class="facebook icon"></i></span>
                         <span class="ui mini circular image twitter-share"><i class="twitter icon"></i></span>
                         <span class="ui mini circular image pinterest-share"><i class="pinterest icon"></i></span>
-                        <a href="mailto:?Subject= Brown Welcome Doormat%20on%20Repick.co&amp;body=https://repick.co/products/1027" target="_top"><span class="ui mini circular image mail-share"><i class="mail icon"></i></span></a>
+                        <a href="mailto:?Subject= {{ item.title }}%20on%{{ item.get_absolute_url }}" target="_top"><span class="ui mini circular image mail-share"><i class="mail icon"></i></span></a>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
 
                 <div class="related-products">
                     {% for rel_item in items.related_items.all|slice:'4:' %}
-                        <div class="related-product" data-id="{{ rel_item.get_absolute_url }}">
+                        <div class="related-product" href="{{ rel_item.get_absolute_url }}">
                             {% thumbnail rel_item.main_image "200x200" crop="center" as img %}
                                 <img class="ui centered image" src="{{ img.url }}" alt="{{ rel_item.title }}">
                             {% endthumbnail %}
@@ -68,7 +68,7 @@
 
         <div class="ui stackable two column grid">
             {% for rel_item in item.related_items.all|slice:':4' %}
-            <div class="column big-related-product" data-id="{{ rel_item.slug }}">
+            <div class="column big-related-product" href="{{ rel_item.get_absolute_url }}">
                 {% thumbnail rel_item.main_image '265x265' crop='center' as img %}
                     <img class="ui centered image" src="{{ img.url }}" alt="{{ rel_item.title }}">
                 {% endthumbnail %}
