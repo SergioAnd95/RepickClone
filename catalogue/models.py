@@ -151,6 +151,10 @@ class Item(models.Model):
     def get_absolute_url(self):
         return 'catalogue:product_detail', (self.slug, )
 
+    @property
+    def get_total_likes(self):
+        return self.additional_likes + self.likes.count()
+
 
 class RelatedItems(models.Model):
     primary = models.ForeignKey(

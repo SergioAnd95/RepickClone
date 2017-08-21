@@ -27,7 +27,7 @@
                 </a>
 
                 <br>
-                <a class="ui huge white button want-button" id="like-button" href="{% url 'likelist:toggle_like' item.slug %}">
+                <a class="ui huge white button want-button" id="like-button" href="{% url 'likelist:toggle_like' item.slug %}" data-id="{{ item.slug }}">
                     <div class="love-this-wrapper-standalone">
                         <i class="heart icon large love-this-icon animated fadeIn{% if item|likelist_exist:request.likelist %} active{% endif %}"></i>
                     </div>

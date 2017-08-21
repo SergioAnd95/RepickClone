@@ -18,17 +18,14 @@
                 </div>
 
                 <div class="thirteen wide column types">
-                        <form class="tags-filters filter-form" style="display: inline-block">
-                            {% csrf_token %}
-                            <span class="all-type type active">All</span>
-                            {% for option in filter_form.tags %}
-                            <label class="type">
-                                {{ option.tag }}
-                                <span>{{ option.choice_label }}</span>
-                            </label>
-                        {% endfor %}
-                        </form>
-
+                    <form class="tags-filters filter-form" style="display: inline-block">
+                        {% csrf_token %}
+                        <span class="all-type type active">All</span>
+                        {% for option in filter_form.tags %}<label class="type">
+                            {{ option.tag }}
+                            <span>{{ option.choice_label }}</span>
+                        </label>{% endfor %}
+                    </form>
                     <span class="more-type">more..</span>
                 </div>
             </div>
