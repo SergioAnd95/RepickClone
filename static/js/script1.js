@@ -62,9 +62,9 @@ $(document).ready(function(){
 
                 }
             })
-        } else if(target.className.substr('big-related-product') > 0 || $(target).parent().hasClass('big-related-product')){
+        } else if((target.className.substr('big-related-product') > 0 || $(target).parent().hasClass('big-related-product')) || (target.className.substr('related-product') > 0 || $(target).parent().hasClass('related-product'))){
             e.preventDefault();
-            if(target.className.substr('big-related-product') > 0){
+            if(target.className.substr('big-related-product') > 0 || target.className.substr('related-product')){
                 $item = $(target);
             } else {
                 $item = $(target).parent();
