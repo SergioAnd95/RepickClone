@@ -22,8 +22,14 @@
                 <p class="title-text">{{ item.title }}</p>
                 <p class="brand-text">{{ item.brand.name }}</p>
 
-                <a class="ui huge blue button price-button" rel="nofollow" target="_blank" href="{{ item.link }}">
+                {% if not modal %}
+
+                <a class="ui huge {% if item.enable %}blue{% else %}gray{% endif %} button price-button" rel="nofollow" target="_blank" href="{{ item.link }}">
+                    {% if item.enable %}
                     <span class="button-price"><span class="dollar-sign">$</span>{{ item.get_parse_price.digits }}<span class="decimals">{{ item.get_parse_price.decimal }}</span></span><span class="button-buy-on-amazon">{% trans 'ПОКУПАЙТЕ НА' %} {{ item.get_site_name }}</span>
+                    {% else %}
+                        <span class="button-buy-on-amazon">{% trans 'Out of stock' %}</span>
+                    {% endif %}
                 </a>
 
                 <br>
@@ -33,12 +39,33 @@
                     </div>
                     <span>LIKE</span>
                 </a>
+                {% endif %}
                 <div class="editors-note">
 
                     <p class="description-text">
                         {{ item.description }}
                     </p>
                 </div>
+                {% if modal %}
+                    <div class="buttons-wrapper">
+
+                        <a class="ui huge {% if item.enable %}blue{% else %}gray{% endif %} button price-button" rel="nofollow" target="_blank" href="{{ item.link }}">
+                            {% if item.enable %}
+                                <span class="button-price"><span class="dollar-sign">$</span>{{ item.get_parse_price.digits }}<span class="decimals">{{ item.get_parse_price.decimal }}</span></span><span class="button-buy-on-amazon">{% trans 'ПОКУПАЙТЕ НА' %} {{ item.get_site_name }}</span>
+                            {% else %}
+                                <span class="button-buy-on-amazon">{% trans 'Out of stock' %}</span>
+                            {% endif %}
+                        </a>
+                        <a class="ui huge white button want-button" id="like-button" href="{% url 'likelist:toggle_like' item.slug %}" data-id="{{ item.slug }}">
+                            <div class="love-this-wrapper-standalone">
+                                <i class="heart icon large love-this-icon animated fadeIn{% if item|likelist_exist:request.likelist %} active{% endif %}"></i>
+                            </div>
+                            <span>LIKE</span>
+                        </a>
+
+
+                    </div>
+                {% endif %}
                 <div class="mobile">
                     <div class="small icons social-media-share">
                         <span class="ui mini circular image facebook-share"><i class="facebook icon"></i></span>

@@ -21,12 +21,14 @@
                     <form class="tags-filters filter-form" style="display: inline-block">
                         {% csrf_token %}
                         <span class="all-type type active">All</span>
-                        {% for option in filter_form.tags %}<label class="type">
-                            {{ option.tag }}
-                            <span>{{ option.choice_label }}</span>
-                        </label>{% endfor %}
+                        {% for option in filter_form.tags %}
+                            <label class="type">
+                                {{ option.tag }}
+                                <span>{{ option.choice_label }}</span>
+                            </label>
+                        {% endfor %}
+                         <span class="more-type">more..</span>
                     </form>
-                    <span class="more-type">more..</span>
                 </div>
             </div>
             <div class="column center aligned animated fadeIn"></div>
