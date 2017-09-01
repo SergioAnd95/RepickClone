@@ -3,6 +3,7 @@
 {% load staticfiles %}
 {% load widget_tweaks %}
 
+
 {% block styles %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'css/styles4.css' %}">
@@ -60,26 +61,37 @@
     </div>
     </div>
     <div class="ui stackable doubling four column grid" id="items">
-    {% for item in items %}
+        {% include page_template %}
 
-       {% include 'catalogue/preview_item.html' %}
-
-    {% endfor %}
     </div>
 {% endblock %}
 
 {% block extra_scripts %}
+    <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
+    <script>
+        $.endlessPaginate({
+            paginateOnScroll: true,
+            paginateOnScrollMargin: 200
+        });
+    </script>
     <script type="text/javascript">
 
         $(document).ready(function () {
 
             function submitFilterForm() {
+                $loader.show();
                 data = $(".filter-form").serialize();
-                 $.ajax({
+                $.ajax({
                     data: data,
                     success: function (data) {
+
                         $("#items").html(data);
-                    }
+                        $loader.hide()
+                    },
+                     error: function () {
+                         alert('Извините за доставленные не удобства, попробуйте позже');
+                         $loader.hide();
+                     }
                 })
             }
 
@@ -91,7 +103,6 @@
             $(".filter-group input").on("change", function (e) {
                 submitFilterForm()
             });
-
 
         })
     </script>

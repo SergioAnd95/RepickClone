@@ -1,0 +1,3 @@
+{{ object.title }}
+{{ object.decription }}
+{{ object.brand.name }}

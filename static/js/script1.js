@@ -16,6 +16,7 @@ $.fn.extend({
 });
 
 $(document).ready(function(){
+    $loader = $("#loader");
     $("#modal-window .close").on('click', function () {
 
         var parent = $(this).parent().parent();
@@ -23,11 +24,27 @@ $(document).ready(function(){
             parent.removeClass('visible transition');
         });
         $("body").removeClass('dimmed');
+        $("#modal-window-content").hide();
+        $("#modal-loader").hide();
 
     });
 
+    $(".search-form").on('submit', function (e) {
+        e.preventDefault();
+        var data = $(this).serialize();
+        var url = $(this).attr('action');
+        console.log(url, data);
+        $loader.show();
+        $("#__blaze-root .site-content").load(url+'?'+data+' .site-content', function () {
+            $("#loader").hide();
+            work_with_item();
+        });
+    });
 
-    $('#modal-content').on('click', function (e) {
+
+    function work_with_item() {
+        $('#modal-content, .product-standalone').on('click', function (e) {
+
         $modal = $(this);
         var target = e.target;
 
@@ -64,7 +81,7 @@ $(document).ready(function(){
             })
         } else if((target.className.substr('big-related-product') > 0 || $(target).parent().hasClass('big-related-product')) || (target.className.substr('related-product') > 0 || $(target).parent().hasClass('related-product'))){
             e.preventDefault();
-            if(target.className.substr('big-related-product') > 0 || target.className.substr('related-product')){
+            if(target.className.substr('big-related-product') > 0 || target.className.substr('related-product') > 0){
                 $item = $(target);
             } else {
                 $item = $(target).parent();
@@ -76,9 +93,9 @@ $(document).ready(function(){
                 url: url,
                 success: function (data) {
                 $modal.html(data);
-            },
-            error: function(textStatus){
-                console.log(textStatus);
+                },
+                error: function(textStatus){
+                    console.log(textStatus);
                     if(textStatus.status == 404 ){
                         alert('Данный товар не найден');
                     } else if(textStatus.status == 500){
@@ -91,20 +108,23 @@ $(document).ready(function(){
     });
 
     $("#items").on('click', function (e) {
-        console.log(e.target);
-        if($(e.target).parents(".product-grid-link")){
+        console.log(e.target.className);
+        if($(e.target).parents('.amazon-product').length) {
 
             e.preventDefault();
             $parent = $(e.target).parents(".product-grid-link");
             var url = $parent.attr('href');
 
+            $loader.show();
+            $("#modal-window").addClass('visible transition').animateCss('fadeIn');
             $.ajax({
                 url: url,
                 success: function (data) {
                 $("#modal-content").html(data);
-                $("#modal-window").addClass('visible transition').animateCss('fadeIn');
 
-                $("body").addClass('dimmed')
+                $loader.hide();
+                $("body").addClass('dimmed');
+                $("#modal-window-content").show();
             },
             error: function(textStatus){
                 console.log(textStatus);
@@ -113,8 +133,33 @@ $(document).ready(function(){
                     } else if(textStatus.status == 500){
                         alert('Извините за временные неудобства, попробуйте позже')
                     }
+                    var parent = $(this).parent().parent();
+                    parent.animateCss('fadeOut', function () {
+                        parent.removeClass('visible transition');
+                    });
+                    $("body").removeClass('dimmed');
+                    $loader.hide();
                 }
+
             })
         }
+    });
+    }
+
+    $("#loadmore").on('click', function () {}
+    );
+
+    work_with_item();
+
+    $(".search-form input").focus(function(e){
+        $parent = $(this).parent()
+        $parent.addClass("width_100p");
+    });
+
+    $(".search-form input").focusout(function () {
+        $parent = $(this).parent();
+        $parent.removeClass("width_100p");
     })
+
+
 });

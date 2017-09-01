@@ -1,6 +1,6 @@
  <div class="column desktop only">
      <a class="product-grid-link" href="{{ item.get_absolute_url }}" data-id="{{ item.slug }}">
-         <div class="amazon-product">
+         <div class="amazon-product item-prev">
              <div class="ui image animated fadeIn">
                  <img src="{{ item.main_image.url }}" alt="{{ item.title }}">
              </div>
@@ -25,7 +25,7 @@
 
  <div class="column mobile tablet only">
      <a class="product-grid-link" href="{{ item.get_absolute_url }}" data-id="{{ item.slug }}">
-         <div class="amazon-product">
+         <div class="amazon-product item-prev">
              <div class="love-this-wrapper">
                  <span class="love-this-count">{{ item.total_likes }}</span>
                  <i class="heart icon large love-this-icon animated fadeIn"></i>

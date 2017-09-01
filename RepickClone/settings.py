@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'taggit',
     'widget_tweaks',
     'sorl.thumbnail',
+    'haystack',
+    'el_pagination',
 
     # own apps
     'core',
@@ -146,6 +148,21 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
+# Haystack settings
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack_elasticsearch.elasticsearch5.Elasticsearch5SearchEngine',
+        'URL': 'localhost:9200',
+        'INDEX_NAME': 'haystack',
+        'INCLUDE_SPELLING': True,
+    },
+}
+
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+EL_PAGINATION_PER_PAGE = 18
 
 try:
     from .local_settings import *

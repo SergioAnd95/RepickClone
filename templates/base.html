@@ -30,9 +30,11 @@
 
 <div id="__blaze-root">
     <div class="site">
-        {% include 'partials/_header.html' %}
+        {% block header %}
+            {% include 'partials/_header.html' %}
+        {% endblock %}
         <div class="site-content">
-
+            <div id="site-content">
             {% block before-content %}
                 <style>
                 .main-banner .stackable.grid {
@@ -75,73 +77,22 @@
                 {% endblock %}
             </div>
         </div>
-
-            <button class="ui icon button footer-button">
-        About
-    </button>
-        <footer class="dynamic-footer">
-            <div class="ui footer">
-        <img class="ui image x-footer animated fadeIn" src="./Repick.co - Premium goods, curated daily._files/x_gray.svg" alt="Close">
-        <div class="ui main container">
-            <div class="ui two column stackable grid">
-                <div class="eight wide column">
-                    <div class="footer-links">
-                        <div class="footer-logo desktop only">
-                            <img class="ui image" src="./Repick.co - Premium goods, curated daily._files/repick64.png" alt="For the everyday minimalist">
-                        </div>
-                        <a class="about" href="https://repick.co/">Contact</a>
-                        <a target="_blank" href="https://blog.repick.co/">Blog</a>
-                        <a class="tos" href="https://repick.co/">Terms</a>
-                        <a class="privacy" href="https://repick.co/">Privacy</a>
-
-                    </div>
-                    <p class="selling-text">Curated well-designed products <br> from all over internet.</p>
-                </div>
-                <div class="eight wide column">
-                    <div class="small icons">
-                        <a href="https://facebook.com/repickco" target="_blank"><span class="ui circular image facebook-share"><i class="facebook icon"></i></span></a>
-                        <a href="https://twitter.com/RepickCo" target="_blank"><span class="ui circular image twitter-share"><i class="twitter icon"></i></span></a>
-                        <a href="https://pinterest.com/repickco" target="_blank"><span class="ui circular image pinterest-share"><i class="pinterest icon"></i></span></a>
-                        <a href="https://instagram.com/repickco" target="_blank"><span class="ui circular image instagram-share"><i class="instagram icon"></i></span></a>
-                    </div>
-                </div>
-                <div class="ui divider"></div>
-                <div class="eight wide column">
-                    <p class="rights-reserved">©2016 Repick.co. All rights reserved.</p>
-                </div>
-                <!--<div class="eight wide column">
-                submit product button here later
-                </div>-->
-            </div>
         </div>
-    </div>
-        </footer>
-    </div>
-    <div class="search-overlay">
-        <div class="search-box">
-            <img class="ui close-search image x-search animated fadeIn" src="./Repick.co - Premium goods, curated daily._files/x_black.svg" alt="Close">
-            <h4>Search anytime by typing. Hit ESC to exit.</h4>
-            <input type="text" class="search-query search-suggest">
-            <input type="text" class="search-query search-value">
-        </div>
-        <div class="search-results-container">
-            <div class="ui main container product-grid">
 
-                <div class="ui four column stackable grid">
-
-
-
-                </div>
-            </div>
-        </div>
+        {% block footer %}
+            {% include 'partials/_footer.html' %}
+        {% endblock %}
     </div>
 
 </div>
 
 {% block outside_content %}
+    <div class="cssload-container" id="loader" style="display: none">
+	        <div class="cssload-whirlpool"></div>
+        </div>
     <div class="ui dimmer modals page" id="modal-window" style="display: none;">
 
-        <div class="ui product large modal transition visible active scrolling" style="display: block !important;">
+        <div class="ui product large modal transition visible active scrolling" id="modal-window-content">
             <div class="close"><img class="ui image x-product-modal animated fadeIn" src="{% static 'images/x_gray.svg' %}" alt="Close"></div>
             <div id="modal-content"></div>
         </div>

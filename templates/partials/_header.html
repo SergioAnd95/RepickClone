@@ -9,7 +9,14 @@
                 </a>
             </div>
             <div class="item no-border animated fadeIn search-text mobile">
-                <p>Tap to search...</p>
+                <div class="GlobalNav-desktopSearchContainer">
+                    <div class="GlobalNavSearch-container ">
+                        <form action="{% url 'haystack_search' %}" class="search-form" method="get">
+                            <input class="GlobalNavSearch js-globalSearchInput " placeholder="Search" id="desktopSearchInput" autocorrect="off" name="q">
+                            <label class="GlobalNavSearch-searchIcon" for="desktopSearchInput"></label>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="has-dropdown links item no-border animated fadeIn desktop" data-content="category">
                 <a href="{% url 'catalogue:category_list' %}">{% trans 'Категории' %}</a>
@@ -114,8 +121,17 @@
             </div> <!-- morph-dropdown-wrapper -->
             <div class="right menu">
                 <div class="item no-border animated fadeIn search-text desktop">
-                    <img class="ui image" src="#" alt="Find minimalist products now">
-                    <p>Press any key to search</p>
+
+
+                    <div class="GlobalNav-desktopSearchContainer">
+                        <div class="GlobalNavSearch-container ">
+                            <form action="{% url 'haystack_search' %}" class="search-form" method="get">
+                                <input class="GlobalNavSearch js-globalSearchInput " placeholder="Search" id="desktopSearchInput" autocorrect="off" name="q">
+                                <label class="GlobalNavSearch-searchIcon" for="desktopSearchInput"></label>
+                            </form>
+                        </div>
+                    </div>
+
                 </div>
                 <a href="https://repick.co/#0" class="item  animated fadeIn nav-trigger"><span aria-hidden="true"></span></a>
             </div>

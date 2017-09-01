@@ -1,0 +1,8 @@
+{% load el_pagination_tags %}
+{% lazy_paginate items_list %}
+    {% for item in items_list %}
+
+       {% include 'catalogue/preview_item.html' %}
+
+    {% endfor %}
+{% show_more '<div class="InfiniteScrollFooter is-showingLoadMoreButton InfiniteScrollFooter--fullWidth"><div class="LoadMoreButton FeedLoadMore" id="loadmore">Load more</div></div>' '<div class="InfiniteScrollFooter is-showingLoadMoreButton InfiniteScrollFooter--fullWidth"><div class="LoadMoreButton FeedLoadMore" id="loadmore">Loading...</div></div>' %}

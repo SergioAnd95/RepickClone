@@ -1,0 +1,33 @@
+{% extends 'catalogue/category_item_list.html' %}
+
+
+{% block before-content %}
+
+    <div class="categories">
+        <div class="ui main container">
+            <div class="ui four column stackable grid animated fadeIn">
+                <div class="three wide column">
+                    <h1>SEARCH</h1>
+                </div>
+
+                <div class="thirteen wide column types">
+                    Запрос: "{{ form.q.value }}" Найдено {{ page.paginator.count }}
+                    {{ page.object_list.count }}
+                </div>
+            </div>
+            <div class="column center aligned animated fadeIn"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    <div class="ui stackable doubling four column grid" id="items">
+    {% for result in page.object_list %}
+
+       {% include 'catalogue/preview_item.html' with item=result.object %}
+    {% empty %}
+        <p>Извините но товаров по вашему запросу не найдено</p>
+    {% endfor %}
+    </div>
+{% endblock %}
