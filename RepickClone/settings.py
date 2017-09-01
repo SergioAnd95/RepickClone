@@ -154,7 +154,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack_elasticsearch.elasticsearch5.Elasticsearch5SearchEngine',
-        'URL': 'localhost:9200',
+        'URL': os.environ.get('BONSAI_URL'),
         'INDEX_NAME': 'haystack',
         'INCLUDE_SPELLING': True,
     },
