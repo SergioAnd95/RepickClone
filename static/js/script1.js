@@ -41,9 +41,7 @@ $(document).ready(function(){
         });
     });
 
-
-    function work_with_item() {
-        $('#modal-content, .product-standalone').on('click', function (e) {
+    $('#modal-content, .product-standalone').on('click', function (e) {
 
         $modal = $(this);
         var target = e.target;
@@ -55,8 +53,8 @@ $(document).ready(function(){
             } else {
                 $btn = $(target).parents('#like-button');
             }
-
             var url = $btn.attr('href');
+            console.log(url);
             $.ajax({
                 url: url,
                 contentType: 'application/json',
@@ -107,6 +105,9 @@ $(document).ready(function(){
         }
     });
 
+    function work_with_item() {
+
+
     $("#items").on('click', function (e) {
         console.log(e.target.className);
         if($(e.target).parents('.amazon-product').length) {
@@ -152,7 +153,7 @@ $(document).ready(function(){
     work_with_item();
 
     $(".search-form input").focus(function(e){
-        $parent = $(this).parent()
+        $parent = $(this).parent();
         $parent.addClass("width_100p");
     });
 
