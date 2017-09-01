@@ -16,7 +16,7 @@
     </div>
 
     <div class="ui stackable doubling four column grid" id="items">
-        {% for item in items %}
+        {% for item in items_list %}
             {% include 'catalogue/preview_item.html' %}
         {% endfor %}
 
@@ -45,6 +45,10 @@
                     $("#loader").hide();
                     $("#items").html(data);
 
+                },
+                error: function (data) {
+                    $("#loader").hide();
+                    alert('На сервере произошла ошибка, извините за временные неудобства');
                 }
             })
         });

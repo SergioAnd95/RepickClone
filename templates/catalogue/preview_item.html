@@ -1,8 +1,12 @@
- <div class="column desktop only">
+{% load thumbnail %}
+
+<div class="column desktop only">
      <a class="product-grid-link" href="{{ item.get_absolute_url }}" data-id="{{ item.slug }}">
          <div class="amazon-product item-prev">
              <div class="ui image animated fadeIn">
-                 <img src="{{ item.main_image.url }}" alt="{{ item.title }}">
+                 {% thumbnail item.main_image '198x198' crop="center" as im %}
+                    <img src="{{ item.main_image.url }}" alt="{{ item.title }}">
+                 {% endthumbnail %}
              </div>
              <div class="overlay">
                  <div class="love-this-wrapper">
@@ -31,7 +35,9 @@
                  <i class="heart icon large love-this-icon animated fadeIn"></i>
              </div>
              <div class="ui image animated fadeIn">
-                 <img src="{{ item.main_image.url }}" alt=" {{ item.title }}">
+                 {% thumbnail item.main_image '198x198' crop="center" as im %}
+                    <img src="{{ item.main_image.url }}" alt="{{ item.title }}">
+                 {% endthumbnail %}
              </div>
              <div class="buy-on-provider-link animated fadeIn">
                  <p class="buy-on-provider-text">

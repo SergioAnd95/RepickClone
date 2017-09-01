@@ -14555,6 +14555,10 @@ input.GlobalNavSearch {
     z-index: 1000;
 }
 
+.modals .product-image{
+    width: 300px;
+    height: 300px;
+}
 
 
 @keyframes cssload-rotate {
