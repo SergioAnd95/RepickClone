@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 
 import dj_database_url
+
+from urllib.parse import urlparse
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -150,18 +152,23 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Haystack settings
+ES_URL = urlparse(os.environ.get('BONSAI_URL') or 'http://127.0.0.1:9200/')
 
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack_elasticsearch.elasticsearch5.Elasticsearch5SearchEngine',
-        'URL': os.environ.get('SEARCHBOX_SSL_URL'),
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': ES_URL.scheme + '://' + ES_URL.hostname + ':443',
         'INDEX_NAME': 'haystack',
         'INCLUDE_SPELLING': True,
         'KWARGS': {
             'use_ssl': True,
+            'verify_certs': False,
         }
     },
 }
+
+if ES_URL.username:
+    HAYSTACK_CONNECTIONS['default']['KWARGS'] = {"http_auth": ES_URL.username + ':' + ES_URL.password}
 
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
