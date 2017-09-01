@@ -157,6 +157,9 @@ HAYSTACK_CONNECTIONS = {
         'URL': os.environ.get('SEARCHBOX_SSL_URL'),
         'INDEX_NAME': 'haystack',
         'INCLUDE_SPELLING': True,
+        'KWARGS': {
+            'use_ssl': True,
+        }
     },
 }
 
