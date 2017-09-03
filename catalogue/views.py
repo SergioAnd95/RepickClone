@@ -1,7 +1,6 @@
 from django.views.generic import ListView, DetailView
 from django.shortcuts import get_object_or_404
-from django.shortcuts import render
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.urls import reverse
 
 from .models import Item, Category, Brand
 from .forms import ItemFilterForm
@@ -59,23 +58,6 @@ class BaseDetailView(AjaxListView):
                 items_qs=self.object_list
             )
 
-        """
-        if filter_form.is_valid():
-            items_list = filter_form.filter_data()
-        else:
-            items_list = self.object.items.all()
-
-        paginator = Paginator(items_list, self.paginate_by)
-        page = self.request.GET.get('page')
-
-        try:
-            items = paginator.page(page)
-        except PageNotAnInteger:
-            items = paginator.page(1)
-        except EmptyPage:
-            items = paginator.page(paginator.num_pages)
-        """
-        # ctx['paginator'] = paginator
         ctx['category'] = self.object
         ctx['filter_form'] = filter_form
         return ctx
@@ -87,18 +69,25 @@ class CategoryDetailView(BaseDetailView):
 
 
 class GiftDetailView(BaseDetailView):
-    parent_model = Category
-    parent_qs = parent_model.objects.filter(type=2)
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(type=2)
 
 
 class BrandDetailView(BaseDetailView):
     parent_model = Brand
+    parent_qs = parent_model
 
 
 class BaseCategoryListView(ListView):
     model = Category
     template_name = 'catalogue/category_list.html'
     context_object_name = 'categories'
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['links_list'] = [('Categories', reverse('catalogue:category_list')), ('Gifts', reverse('catalogue:gift_list')), ('Brands', reverse('catalogue:brand_list'))]
+        return ctx
 
 
 class CategoryListView(BaseCategoryListView):

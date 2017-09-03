@@ -9,11 +9,8 @@
 {% endblock %}
 
 {% block content %}
-    <div class="ui product-standalone">
 
         {% include 'catalogue/_item_detail.html' with img_size='400x400' %}
-
-    </div>
 {% endblock %}
 
 {% block extra_scripts %}
@@ -24,19 +21,16 @@
                 e.preventDefault();
                 console.log('like-button');
                 $btn = $(this);
-                var url = $(this).attr('href');
+                var url = $btn.attr('href');
                 $.ajax({
                     url: url,
                     contentType: 'application/json',
                     success: function (data) {
-                        console.log(data);
-                        $icon = $btn.find('.icon');
-                        console.log($icon);
                         if('added' in data) {
-                            $icon.addClass('active');
+                            $btn.addClass('is-liked');
                         }
                         else if('removed' in data){
-                            $icon.removeClass('active');
+                            $btn.removeClass('is-liked');
                         }
                     }
                 })

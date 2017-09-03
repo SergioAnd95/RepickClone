@@ -1,14 +1,17 @@
 from django.views.generic import ListView
 
+from el_pagination.views import AjaxListView
+
 from catalogue.models import Item
 from catalogue.forms import MainPageItemFilter
 
 # Create your views here.
 
 
-class MainPageListView(ListView):
+class MainPageListView(AjaxListView):
     model = Item
-    template_name = 'index.html'
+    template_name = 'index_list.html'
+    page_template = 'catalogue/item_list_page.html'
     context_object_name = 'items_list'
 
     def get_queryset(self):
@@ -22,10 +25,7 @@ class MainPageListView(ListView):
         if self.filter_form.is_valid():
             qs = self.filter_form.filter_data()
 
-        if self.request.is_ajax():
-            self.template_name='catalogue/item_list_page.html'
-
-        return qs[:18]
+        return qs
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)

@@ -6,4 +6,5 @@ from . import models
 
 @admin.register(models.LikeList)
 class LikeListModelAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('when_created', )
+    readonly_fields = ('when_created', )

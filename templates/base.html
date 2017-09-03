@@ -1,112 +1,185 @@
-{% load staticfiles %}
+{% load static %}
+<html class="wf-europa-n4-active wf-europa-n3-active wf-europa-n7-active wf-freighttextpro-i4-active wf-active">
+    <head>
+        <title>
+            Canopy.co - A Curated Shop for Amazon
+        </title>
+        <meta content="Canopy.co - A Curated Shop for Amazon" property="og:title">
+        <link rel="stylesheet" media="screen" href="{% static 'css/styles1.min.css' %}">
+        <!--[if lte IE 10]>
+        <link rel="stylesheet" media="screen" href="//s3.amazonaws.com/canopyassets/assets/ie-f8e13516f596a8097666751a2cfa68d8.css" />
+        <![endif]-->
+        <meta charset="utf-8">
+        <meta content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <meta content="yes" name="mobile-web-app-capable">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="app-id=927695605, app-argument=myURL" name="apple-itunes-app">
+        <meta content="Products Trending Now on Canopy - Canopy is Amazon, curated. Use Canopy to discover the most useful, beautiful, and well-designed products on Amazon." property="og:description">
+        <meta content="Products Trending Now on Canopy - Canopy is Amazon, curated. Use Canopy to discover the most useful, beautiful, and well-designed products on Amazon." name="description">
+        <meta content="website" property="og:type">
+        <meta content="https://canopy.co/" property="og:url">
+        <meta content="//s3-us-west-1.amazonaws.com/canopystatic/logo128.png" property="og:image">
+        <meta content="@joincanopy" name="twitter:site">
+        <meta content="@joincanopy" name="twitter:creator">
+        <meta content="summary_large_image" name="twitter:card">
+        <link href="/images/logo/logo192.png" rel="shortcut icon">
+        <link href="/images/touch-icon/apple_touch_icon192.png" rel="apple-touch-icon" sizes="196x196">
+        <link href="/images/touch-icon/apple_touch_icon192.png" rel="apple-touch-icon-precomposed" sizes="196x196">
+        <link href="https://canopy.co/explore/trending" rel="canonical">
+        <meta content="zD6ykN6-95rrey-F8JxlI4NOtaEtY9eoyDwRU7uglpE" name="google-site-verification">
+        <link href="https://chrome.google.com/webstore/detail/iplfopobbefealagfflnkkkbcfjopidl" rel="chrome-webstore-item">
+        <script src="//use.typekit.net/qph1jvg.js"></script>
+        <style type="text/css">.tk-freight-text-pro{font-family:"freight-text-pro",sans-serif;}.europa,.europa input,.europa textarea{font-family:"europa","Helvetica Neue","Helvetica",sans-serif;}</style>
+        <style type="text/css">@font-face{font-family:freight-text-pro;src:url(https://use.typekit.net/af/555f76/00000000000000000001205a/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3) format("woff2"),url(https://use.typekit.net/af/555f76/00000000000000000001205a/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3) format("woff"),url(https://use.typekit.net/af/555f76/00000000000000000001205a/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3) format("opentype");font-weight:400;font-style:italic;}@font-face{font-family:europa;src:url(https://use.typekit.net/af/678af7/0000000000000000000129a5/27/l?subset_id=2&fvd=n7&v=3) format("woff2"),url(https://use.typekit.net/af/678af7/0000000000000000000129a5/27/d?subset_id=2&fvd=n7&v=3) format("woff"),url(https://use.typekit.net/af/678af7/0000000000000000000129a5/27/a?subset_id=2&fvd=n7&v=3) format("opentype");font-weight:700;font-style:normal;}@font-face{font-family:europa;src:url(https://use.typekit.net/af/79f07d/0000000000000000000129a3/27/l?subset_id=2&fvd=n3&v=3) format("woff2"),url(https://use.typekit.net/af/79f07d/0000000000000000000129a3/27/d?subset_id=2&fvd=n3&v=3) format("woff"),url(https://use.typekit.net/af/79f07d/0000000000000000000129a3/27/a?subset_id=2&fvd=n3&v=3) format("opentype");font-weight:300;font-style:normal;}@font-face{font-family:europa;src:url(https://use.typekit.net/af/d253a1/0000000000000000000129a4/27/l?subset_id=2&fvd=n4&v=3) format("woff2"),url(https://use.typekit.net/af/d253a1/0000000000000000000129a4/27/d?subset_id=2&fvd=n4&v=3) format("woff"),url(https://use.typekit.net/af/d253a1/0000000000000000000129a4/27/a?subset_id=2&fvd=n4&v=3) format("opentype");font-weight:400;font-style:normal;}</style>
+        <script>
+            try{Typekit.load();}catch(e){}
+        </script>
 
-<!DOCTYPE html>
+    </head>
+    <body class="logged-out">
+        <div id="content">
+            {% block header %}
+                {% include 'partials/_header.html' %}
+            {% endblock %}
 
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    {% block styles %}
-        <link rel="stylesheet" type="text/css" class="__meteor-css__" href="{% static 'css/styles1.min.css' %}">
-        <link rel="stylesheet" type="text/css" class="__meteor-css__" href="{% static 'css/styles2.min.css' %}">
-        <link rel="stylesheet" type="text/css" class="__meteor-css__" href="{% static 'css/styles3.min.css' %}">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    {% endblock %}
-
-
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable = no">
-    <meta name="fragment" content="!"> <!-- For prerender.io -->
-    <link rel="icon" type="image/png" href="https://repick.co/images/favicon-32x32.png?v=1" sizes="32x32">
-    <link rel="icon" type="image/png" href="https://repick.co/images/favicon-16x16.png?v=8" sizes="16x16">
-    <link rel="apple-touch-icon" sizes="120x120" href="https://repick.co/apple-touch-icon-precomposed.png">
-
-    <title>{% block title %}RepickClone{% endblock %}</title>
-    <!-- start OneSignal -->
-
-
-</head>
-
-
-<body class="dimmable scrolling">
-
-<div id="__blaze-root">
-    <div class="site">
-        {% block header %}
-            {% include 'partials/_header.html' %}
-        {% endblock %}
-        <div class="site-content">
-            <div id="site-content">
-            {% block before-content %}
-                <style>
-                .main-banner .stackable.grid {
-                    background-image:url(https://loui.imgix.net/banners/c501b980-bd8f-400c-8e8c-419c716f4444.png);
-                    background-repeat: no-repeat;
-                    background-position: right top;
-                }
-            </style>
-
-                <div class="main-banner">
-                    <div class="ui main container">
-
-                        <div class="ui two column stackable grid animated fadeIn">
-                            <div class="column home-text tablet computer only">
-                                <h1>Home Appliances to make your life a lot easier</h1>
-                                <h4>Here are the list of Home interior appliances that your must buy today to make your life a lot easier and comfortable</h4>
-                                <a href="#" class="ui button">
-                                    Shop Now
-                                </a>
+            <div class="yield">
+                <div id="search-mode" style="display:none;">
+                    <div class="js-product-search-section">
+                        <div class="js-message search-message">
+                        </div>
+                        <div class="js-empty-state">
+                        </div>
+                        <div class="js-results-container"></div>
+                        <div class="js-spinner product-search-spinner">
+                            <div class="vertical-center-outer">
+                                <div class="vertical-center-inner">
+                                    <div class="product-loader-icon search animated spin">
+                                        <span>
+                                        Loading...
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="column center aligned animated fadeIn tablet computer only">
+                        </div>
+                    </div>
+                    <div class="js-asin-search-section cards-container amazon-search-container show-glyph-actions ready">
+                        <div class="js-message search-message search-summary search-summary-big">
+                            Found it. <span>You can Like this product or add it to a collection, right from here.</span>
+                        </div>
+                        <div class="js-empty-state">
+                            Sorry, we couldn't find a product with that link.
+                        </div>
+                        <div class="centered-results feed-list js-results-container wrapper"></div>
+                        <div class="js-spinner product-search-spinner">
+                            <div class="vertical-center-outer">
+                                <div class="vertical-center-inner">
+                                    <div class="product-loader-icon search animated spin">
+                                        <span>
+                                        Loading...
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="column center aligned animated fadeIn mobile only">
+                        </div>
+                    </div>
+                    <div class="js-canopy-search-section cards-container amazon-search-container show-glyph-actions ready">
+                        <div class="js-message search-message search-summary search-summary-big">
+                            Found it. <span>You can Like this product or add it to a collection, right from here.</span>
+                        </div>
+                        <div class="js-empty-state">
+                            Sorry, we couldn't find a product with that link.
+                        </div>
+                        <div class="centered-results feed-list js-results-container wrapper"></div>
+                        <div class="js-spinner product-search-spinner">
+                            <div class="vertical-center-outer">
+                                <div class="vertical-center-inner">
+                                    <div class="product-loader-icon search animated spin">
+                                        <span>
+                                        Loading...
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="column home-text mobile only">
-                                <h1>Home Appliances to make your life a lot easier</h1>
-                                <h4>Here are the list of Home interior appliances that your must buy today to make your life a lot easier and comfortable</h4>
-                                <a href="#" class="ui button">
-                                    Shop Now
+                        </div>
+                    </div>
+                </div>
+                <div id="browse-mode">
+                    <div class="welcome-visitor-message animated" data-message-cookie="seen_new_visitor_intro">
+                        <div class="welcome-header-box">
+                            <div class="welcome-header-layout wrapper">
+                                <h1>Canopy is Amazon, curated.</h1>
+                                <div class="close-button-base close-button-thin close-button-welcome-box js-close-welcome-message"></div>
+                            </div>
+                        </div>
+                        <div class="wrapper">
+                            <div class="link-container visitor-welcome">
+                                <a class="link-card" href="/about?source=Welcome+Bar"><span>Learn</span> about Canopy
+                                </a><a class="link-card" href="/gifts?source=Welcome+Bar"><span>Find</span> great gifts
+                                </a><a class="ajax link-card fancybox fancybox.ajax analytics--logged-out-green-bar" href="/signup?source=Welcome+Bar"><span>Join</span> to save products
                                 </a>
                             </div>
                         </div>
+                    </div>
+                    {% block before_content %}
 
+                    {% endblock %}
+
+                    <div class="MessageCallout MessageCallout--Butter animated ie">
+                        <div class="close-button-base"></div>
+                        <div class="vertical-center-outer">
+                            <div class="vertical-center-inner">
+                                <div class="callout-header">
+                                    Your browser is outdated, so some things will be broken.
+                                </div>
+                                <p>For a good experience, use a modern browser, like <a href="https://www.google.com/chrome/">Chrome</a>&nbsp;or&nbsp;<a href="http://www.mozilla.org/firefox/new/">Firefox</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% block filters_position %}
+
+                    {% endblock %}
+
+
+                    <div class="{% block content_class %}wrapper{% endblock %}">
+                        {% block content %}
+                        {% endblock %}
                     </div>
                 </div>
-            {% endblock %}
-
-            <div class="{% block content_cls %}ui main container product-grid{% endblock %}">
-                {% block content %}
-                {% endblock %}
             </div>
         </div>
+        {% include 'partials/_footer.html' %}
+        <div class="UserTooltip js-userTooltip">
+            <div class="UserTooltip-arrow js-userTooltipArrow"></div>
+            <div class="UserTooltip-body js-userTooltipBody"></div>
         </div>
-
-        {% block footer %}
-            {% include 'partials/_footer.html' %}
+        <div style="display: none;">
+            <div class="box-modal" id="exampleModal">
+                <div class="box-modal_close arcticmodal-close">закрыть</div>
+                Пример модального окна
+            </div>
+        </div>
+        {% block main_scripts %}
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+            <script src="{% static 'js/script1.min.js' %}" type="text/javascript"></script>
+            <!--[if IE]>
+            <script src="//s3.amazonaws.com/canopyassets/assets/ie-c7f5baf52cb8c9cb45fbc83409f27395.js"></script>
+            <![endif]-->
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+                var ga_id = "UA-41745711-1";
+                ga('create', ga_id, 'auto');
+                ga('send', 'pageview');
+            </script>
         {% endblock %}
-    </div>
+        {% block extra_scripts %}
 
-</div>
+        {% endblock %}
 
-{% block outside_content %}
-    <div class="cssload-container" id="loader" style="display: none">
-	        <div class="cssload-whirlpool"></div>
-        </div>
-    <div class="ui dimmer modals page" id="modal-window" style="display: none;">
 
-        <div class="ui product large modal transition visible active scrolling" id="modal-window-content">
-            <div class="close"><img class="ui image x-product-modal animated fadeIn" src="{% static 'images/x_gray.svg' %}" alt="Close"></div>
-            <div id="modal-content"></div>
-        </div>
-    </div>
 
-{% endblock %}
-    {% block scripts %}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
-        <script src="{% static 'js/script1.min.js' %}"></script>
-    {% endblock %}
-
-    {% block extra_scripts %}
-
-    {% endblock %}
-
-</body>
+    </body>
 </html>

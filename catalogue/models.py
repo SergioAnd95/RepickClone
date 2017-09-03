@@ -80,7 +80,7 @@ class Brand(models.Model):
 
     @property
     def get_tags(self):
-        tags = Tag.objects.filter(item__brand = self).distinct()
+        tags = Tag.objects.filter(item__brand=self).distinct()
         return tags
 
 
@@ -157,6 +157,7 @@ class Item(models.Model):
 
 
 class RelatedItems(models.Model):
+    """Related items for primary item"""
     primary = models.ForeignKey(
         'Item',
         on_delete=models.CASCADE,

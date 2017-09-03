@@ -2,105 +2,85 @@
 {% load likelist_tags %}
 {% load i18n %}
 
-<div class="ui two columns stackable grid">
-            <div class="column left-content center aligned">
-                {% thumbnail item.main_image img_size crop="center" as im %}
-                    <img class="ui product-image" src="{{ im.url }}" alt="{{ item.title }}"><br>
-                {% empty %}
-                    <p>No image</p>
-                {% endthumbnail %}
-                <div class="desktop">
-                    <div class="small icons social-media-share">
-                        <span class="ui mini circular image facebook-share"><i class="facebook icon"></i></span>
-                        <span class="ui mini circular image twitter-share"><i class="twitter icon"></i></span>
-                        <span class="ui mini circular image pinterest-share"><i class="pinterest icon"></i></span>
-                        <a href="mailto:?Subject= {{ item.title }}%20on%{{ item.get_absolute_url }}" target="_top"><span class="ui mini circular image mail-share"><i class="mail icon"></i></span></a>
-                    </div>
+
+<div class="product-detail-page js-detail-page" data-asin="3899554507" data-product-id="159" data-product-name="{{ item.title }}" data-user-likes-this="false" itemscope="" itemtype="http://schema.org/Product">
+    <meta itemprop="brand">
+    <meta content="https://res.cloudinary.com/hcu8jcnmr/image/upload/c_lpad,w_600,h_600/is4qxt4oso2oacfzr7yo.jpg" itemprop="image">
+    <meta content="{{ request.path }}" itemprop="url">
+    <div class="product-header">
+        <div class="details-image-container">
+            <div data-react-class="ProductDetailsActions">
+                <div class="ProductDetails-actionsContainer">
+                    <span class="CardAction--showText CardAction CardAction--like {% if item|likelist_exist:request.likelist %}is-liked{% endif %}" id="like-button" href="{% url 'likelist:toggle_like' item.slug %}">
+                        <span class="glyph-action glyph-hidden-unless-active"></span>
+                        <span class="CardActionText">Like</span>
+                    </span>
                 </div>
             </div>
-            <div class="column right-content">
-                <p class="title-text">{{ item.title }}</p>
-                <p class="brand-text">{{ item.brand.name }}</p>
 
-                {% if not modal %}
+            <div class="product-image" style="{% thumbnail item.main_image '600x600' crop="center" as img %} background-image:url('{{ img.url }}');{% endthumbnail %} ">
+                <span>
+                    {{ item.title }}
+                </span>
+            </div>
 
-                <a class="ui huge {% if item.enable %}blue{% else %}gray{% endif %} button price-button" rel="nofollow" target="_blank" href="{{ item.link }}">
-                    {% if item.enable %}
-                    <span class="button-price"><span class="dollar-sign">$</span>{{ item.get_parse_price.digits }}<span class="decimals">{{ item.get_parse_price.decimal }}</span></span><span class="button-buy-on-amazon">{% trans 'ПОКУПАЙТЕ НА' %} {{ item.get_site_name }}</span>
-                    {% else %}
-                        <span class="button-buy-on-amazon">{% trans 'Out of stock' %}</span>
-                    {% endif %}
-                </a>
-
-                <br>
-                <a class="ui huge white button want-button" id="like-button" href="{% url 'likelist:toggle_like' item.slug %}" data-id="{{ item.slug }}">
-                    <div class="love-this-wrapper-standalone">
-                        <i class="heart icon large love-this-icon animated fadeIn{% if item|likelist_exist:request.likelist %} active{% endif %}"></i>
-                    </div>
-                    <span>LIKE</span>
-                </a>
-                {% endif %}
-                <div class="editors-note">
-
-                    <p class="description-text">
-                        {{ item.description }}
-                    </p>
-                </div>
-                {% if modal %}
-                    <div class="buttons-wrapper">
-
-                        <a class="ui huge {% if item.enable %}blue{% else %}gray{% endif %} button price-button" rel="nofollow" target="_blank" href="{{ item.link }}">
-                            {% if item.enable %}
-                                <span class="button-price"><span class="dollar-sign">$</span>{{ item.get_parse_price.digits }}<span class="decimals">{{ item.get_parse_price.decimal }}</span></span><span class="button-buy-on-amazon">{% trans 'ПОКУПАЙТЕ НА' %} {{ item.get_site_name }}</span>
-                            {% else %}
-                                <span class="button-buy-on-amazon">{% trans 'Out of stock' %}</span>
-                            {% endif %}
-                        </a>
-                        <a class="ui huge white button want-button" id="like-button" href="{% url 'likelist:toggle_like' item.slug %}" data-id="{{ item.slug }}">
-                            <div class="love-this-wrapper-standalone">
-                                <i class="heart icon large love-this-icon animated fadeIn{% if item|likelist_exist:request.likelist %} active{% endif %}"></i>
-                            </div>
-                            <span>LIKE</span>
-                        </a>
-
-
-                    </div>
-                {% endif %}
-                <div class="mobile">
-                    <div class="small icons social-media-share">
-                        <span class="ui mini circular image facebook-share"><i class="facebook icon"></i></span>
-                        <span class="ui mini circular image twitter-share"><i class="twitter icon"></i></span>
-                        <span class="ui mini circular image pinterest-share"><i class="pinterest icon"></i></span>
-                        <a href="mailto:?Subject= Brown Welcome Doormat%20on%20Repick.co&amp;body=https://repick.co/products/1027" target="_top"><span class="ui mini circular image mail-share"><i class="mail icon"></i></span></a>
-                    </div>
-                </div>
+            <div class="preload">
+                {% thumbnail item.main_image '600x600' crop="center" as img %}
+                    <img alt="{{ item.title }}" src="{{ img.url }}">
+                {% endthumbnail %}
             </div>
         </div>
-        {% if item.related_items.all  %}
-        <h3 class="center aligned related-text">RELATED PRODUCTS</h3>
 
-            {% if item.related_products|length > 4 %}
+        <div class="product-info">
 
-                <div class="related-products">
-                    {% for rel_item in items.related_items.all|slice:'4:' %}
-                        <div class="related-product" href="{{ rel_item.get_absolute_url }}">
-                            {% thumbnail rel_item.main_image "200x200" crop="center" as img %}
-                                <img class="ui centered image" src="{{ img.url }}" alt="{{ rel_item.title }}">
-                            {% endthumbnail %}
+            <div class="vertical-center-outer">
+
+                <div class="vertical-center-inner">
+                    <div class="centered-section border-box">
+                        <h1 class="ProductInfo-title" itemprop="name">
+                            <a target="_blank" rel="nofollow" data-analytics-source="Details Page" class="ProductInfo-titleLink" href="{{ item.link }}">{{ item.title }}</a>
+
+                        </h1>
+                        <div class="goto-amazon-container" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+                            <meta content="$640" itemprop="price">
+                            <meta content="InStock" href="http://schema.org/InStock" itemprop="availability">
+                            <a target="_blank" rel="nofollow" class="go-to-amazon product-page button goto analytics-track-to-amazon" href="{{ item.link }}">${{ item.get_parse_price.digits }} on {{ item.get_site_name }}</a>
+
                         </div>
-                    {% endfor %}
+                    </div>
                 </div>
-            {% endif %}
-
-
-        <div class="ui stackable two column grid">
-            {% for rel_item in item.related_items.all|slice:':4' %}
-            <div class="column big-related-product" href="{{ rel_item.get_absolute_url }}">
-                {% thumbnail rel_item.main_image '265x265' crop='center' as img %}
-                    <img class="ui centered image" src="{{ img.url }}" alt="{{ rel_item.title }}">
-                {% endthumbnail %}
             </div>
-            {% endfor %}
-
+            <div class="social-actions-alignment">
+                <div class="social-actions-container">
+                    <div class="social-networks">
+                        <a class="js-share-button-tracking js-share-button share-button facebook" target="_blank" data-product="{&quot;id&quot;:159,&quot;name&quot;:&quot;Los Logos 6 [Hardcover]&quot;}" data-sharedvia="facebook" href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=https%3A%2F%2Fcanopy.co%2Fproducts%2F159&amp;p[images][0]=https%3A%2F%2Fres.cloudinary.com%2Fhcu8jcnmr%2Fimage%2Fupload%2Fc_lpad%2Cw_600%2Ch_600%2Fis4qxt4oso2oacfzr7yo.jpg&amp;p[title]=Los+Logos+6+%5BHardcover%5D%2C+via+Canopy.co&amp;p[summary]=Find+beautiful+things+on+Canopy.co"></a>
+                        <a class="js-share-button-tracking js-share-button share-button twitter" target="_blank" data-product="{&quot;id&quot;:159,&quot;name&quot;:&quot;Los Logos 6 [Hardcover]&quot;}" data-sharedvia="twitter" href="http://twitter.com/home?status=Found+on+Canopy%3A+Los+Logos+6+%5BHardcover%5D+https%3A%2F%2Fcanopy.co%2Fp%2F159"></a>
+                        <a class="js-share-button-tracking share-button pinterest" target="_blank" data-product="{&quot;id&quot;:159,&quot;name&quot;:&quot;Los Logos 6 [Hardcover]&quot;}" data-sharedvia="pinterest" href="//www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fcanopy.co%2Fproducts%2F159&amp;media=https%3A%2F%2Fres.cloudinary.com%2Fhcu8jcnmr%2Fimage%2Fupload%2Fc_lpad%2Cw_600%2Ch_600%2Fis4qxt4oso2oacfzr7yo.jpg&amp;description=Los+Logos+6+%5BHardcover%5D"></a>
+                        <a class="js-share-button-tracking share-button email" data-product="{&quot;id&quot;:159,&quot;name&quot;:&quot;Los Logos 6 [Hardcover]&quot;}" data-sharedvia="email" href="mailto:?subject=Los Logos 6 [Hardcover] found on Canopy&amp;body=I thought you might like this: https://canopy.co/p/159"></a>
+                    </div>
+                </div>
+            </div>
         </div>
-        {% endif %}
+    </div>
+    {% if item.related_items.all %}
+    <div class="product-secondary-container">
+        <div class="DetailsSection-container">
+            <div class="DetailsSection-header">Related</div>
+
+            <div class="ProductPivot">
+                <div class="ProductPivot-productsContainer">
+                    {% for rel_item in item.related_items.all %}
+                    <a class="ProductPivot-product fancybox fancybox-wide fancybox.ajax hover-overlay-light page-pivot" data-pivot-name="Art &amp; Design Books" data-pivot-type="category" data-product-id="681" data-product-name="Things Come Apart: A Teardown Manual for Modern Living, Hardcover" href="{{ rel_item.get_absolute_url }}">
+                        <div class="product-image" style="{% thumbnail item.main_image '160x160' crop="center" as img %}background-image: url('{{ img.url }}'); background-image: -webkit-image-set(url('{{ img.url }}') 1x, url('{{ img.url }}') 2x ){% endthumbnail %}">
+                            <span>{{ rel_item.title }}</span>
+                        </div>
+                    </a>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+        <div class="Details-divider"></div>
+    </div>
+    {% endif %}
+</div>

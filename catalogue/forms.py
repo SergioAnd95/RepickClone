@@ -1,10 +1,10 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Item
+from haystack.forms import SearchForm
 
 
-class ItemFilterForm(forms.Form):
+class ItemFilterForm(SearchForm):
     class OrderingVars:
         TRENDING = '-when_created'
         POPULAR = '-total_likes'
@@ -14,8 +14,8 @@ class ItemFilterForm(forms.Form):
         ORDERING_CHOICES = (
             (TRENDING, _('Новые')),
             (POPULAR, _('Популярные')),
-            (EXPENSIVE, _('Дорогие')),
-            (CHEAP, _('Дешевые'))
+            (EXPENSIVE, _('$$$')),
+            (CHEAP, _('$'))
         )
 
     order_by = forms.ChoiceField(
@@ -41,9 +41,10 @@ class ItemFilterForm(forms.Form):
             )
 
     def filter_data(self):
-        items = self.items_qs
 
+        items = self.items_qs
         tags = self.cleaned_data.get('tags')
+
         if tags:
             items = items.filter(tags__id__in=tags).distinct()
 
@@ -57,10 +58,12 @@ class ItemFilterForm(forms.Form):
 
 class MainPageItemFilter(forms.Form):
     class OrderingChoices:
-        RECENT = '-when_created'
+        TRENDING = '-when_created'
+        NEW = '-when_created'
         POPULAR = '-total_likes'
         ORDERING_CHOICES = (
-            (RECENT, 'recent'),
+            (TRENDING, 'trending'),
+            (NEW, 'new'),
             (POPULAR, 'popular')
         )
 
@@ -68,7 +71,7 @@ class MainPageItemFilter(forms.Form):
         widget=forms.RadioSelect,
         choices=OrderingChoices.ORDERING_CHOICES,
         required=False,
-        initial=OrderingChoices.RECENT
+        initial=OrderingChoices.TRENDING
     )
 
     def __init__(self, *args, **kwargs):

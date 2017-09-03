@@ -1,52 +1,47 @@
 {% load thumbnail %}
+{% load likelist_tags %}
 
-<div class="column desktop only">
-     <a class="product-grid-link" href="{{ item.get_absolute_url }}" data-id="{{ item.slug }}">
-         <div class="amazon-product item-prev">
-             <div class="ui image animated fadeIn">
-                 {% thumbnail item.main_image '198x198' crop="center" as im %}
-                    <img src="{{ item.main_image.url }}" alt="{{ item.title }}">
-                 {% endthumbnail %}
-             </div>
-             <div class="overlay">
-                 <div class="love-this-wrapper">
-                     <span class="love-this-count">{{ item.total_likes }}</span>
-                     <i class="heart icon large love-this-icon animated fadeIn"></i>
-                 </div>
-                 <p class="hover-title animated fadeIn">{{ item.title }}</p>
-                 <div class="buy-on-provider-link animated fadeIn">
-                     <p class="buy-on-provider-text">
-                         Buy on <span class="buy-on-provider">{{ item.get_site_name }}</span> <i class="external icon" title="Buy on {{ item.get_site_name }}"></i>
-                     </p>
-                 </div>
-             </div>
-             <p class="price-label animated fadeIn">
-                 <i class="checkmark icon" title="Amazon prime"></i> <span class="dollar-sign">$</span>{{ item.get_parse_price.digits }}<span class="decimals">{{ item.get_parse_price.decimal }}</span>
-             </p>
-         </div>
-     </a>
- </div>
-
- <div class="column mobile tablet only">
-     <a class="product-grid-link" href="{{ item.get_absolute_url }}" data-id="{{ item.slug }}">
-         <div class="amazon-product item-prev">
-             <div class="love-this-wrapper">
-                 <span class="love-this-count">{{ item.total_likes }}</span>
-                 <i class="heart icon large love-this-icon animated fadeIn"></i>
-             </div>
-             <div class="ui image animated fadeIn">
-                 {% thumbnail item.main_image '198x198' crop="center" as im %}
-                    <img src="{{ item.main_image.url }}" alt="{{ item.title }}">
-                 {% endthumbnail %}
-             </div>
-             <div class="buy-on-provider-link animated fadeIn">
-                 <p class="buy-on-provider-text">
-                     Buy on <span class="buy-on-provider">{{ item.get_site_name }}</span> <i class="external icon" title="Buy on {{ item.get_site_name }}"></i>
-                 </p>
-             </div>
-             <p class="price-label animated fadeIn">
-                 <i class="checkmark icon" title="Amazon prime"></i> <span class="dollar-sign">$</span>{{ item.get_parse_price.digits }}<span class="decimals">{{ item.get_parse_price.decimal }}</span>
-             </p>
-         </div>
-     </a>
- </div>
+<div class="feed-card product-card {{ item_cls }}">
+    <div class="card-header">
+        <div class="buy-button-container"><a href="{{ item.link }}" data-source="Product Card" target="_blank" rel="nofollow" class="analytics-track-to-amazon card-buy-button no-prime">
+            <span class="price">${{ item.get_parse_price.digits }}</span></a>
+        </div>
+    </div>
+    <a href="{{ item.get_absolute_url }}" class="product-card-body fancybox fancybox-wide fancybox.ajax product-link-tracking" data-product-id="21860" data-product-name="Kaweco AL Sport ballpen blue" data-source="Product Card">
+        <div class="card-body">
+            <div class="product-card-image">
+                {% thumbnail item.main_image '600x600' crop="center" as img %}
+                    <img src="{{ img.url }}" alt="{{ item.title }}">
+                {% endthumbnail %}
+            </div>
+            <div class="product-card-details">
+                <div class="product-details-name"><span class="text-underline">{{ item.title }}</span></div>
+                <div class="product-details-brand">
+                    <span>
+                        <span>by </span>{{ item.brand.name }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </a>
+    <div class="card-footer">
+        <div class="feed-card-footer">
+            <div class="footer-left-side trending-content">
+                <svg class="trending-footer-icon" width="18" height="27" viewBox="0 0 18 24">
+                    <image id="Layer_0" data-name="Layer 0" width="18" height="24" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAbCAMAAABGHy+tAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAANlBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC3dmhyAAAAEXRSTlMABBkfCh0XAhEGCAwTEBsVDrAU5nQAAAABYktHRACIBR1IAAAACXBIWXMAAAsSAAALEgHS3X78AAAAfElEQVQoz2WQWxKEIAwElTEbFV/3P61oqHIym88uugkMg874BwqETIZfAj4D5kyWAmBlUq2RmaWtARSVYKNIwCQSh0JKoT0IKOT9VOWHRRwLrxDMmNV+AT3Qj2D7h/pip6t3af2geOx18t9tIkWIpQgl6Q0l6QllqY1IbW5HkwOuMaCNHQAAAABJRU5ErkJggg=="></image>
+                </svg>
+                <span>Trending</span><!-- react-text: 29 --> <!-- /react-text -->
+            </div>
+            <div class="user-actions">
+                <div class="like-action">
+                    <div class="like-action-inner">
+                        <a class="like-action-link" href="{% url 'likelist:toggle_like' item.slug %}">
+                            <i class="like-action-icon {% if item|likelist_exist:request.likelist %}icon-heart-red{% else %}icon-heart{% endif %}"></i>
+                            <div class="like-action-number">{{ item.total_likes }}</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

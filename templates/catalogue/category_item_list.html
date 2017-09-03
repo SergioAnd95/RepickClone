@@ -4,74 +4,70 @@
 {% load widget_tweaks %}
 
 
-{% block styles %}
-    {{ block.super }}
-    <link rel="stylesheet" href="{% static 'css/styles4.css' %}">
-{% endblock %}
-
-{% block before-content %}
-
-    <div class="categories">
-        <div class="ui main container">
-            <div class="ui four column stackable grid animated fadeIn">
-                <div class="three wide column">
-                    <h1>{{ category.name }}</h1>
-                </div>
-
-                <div class="thirteen wide column types">
-                    <form class="tags-filters filter-form" style="display: inline-block">
-                        {% csrf_token %}
-                        <span class="all-type type active">All</span>
-                        {% for option in filter_form.tags %}
-                            <label class="type">
-                                {{ option.tag }}
-                                <span>{{ option.choice_label }}</span>
-                            </label>
-                        {% endfor %}
-                         <span class="more-type">more..</span>
-                    </form>
+{% block before_content %}
+    <div class="PageHeader--shop js-headerShareCanvas">
+        <div class="wrapper">
+            <div class="HeaderShare js-closeHeaderShare">
+                <div class="HeaderShare-centeringContainer">
+                    <div class="HeaderShare-shareButtons">
+                        <a class="js-headerShareButton HeaderShare-Button facebook" target="_blank" data-share-object-type="null" data-share-method="facebook" href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=https%3A%2F%2Fcanopy.co%2Fshop%2Fart-%26-design-books&amp;p[images][0]=https%3A%2F%2Fres.cloudinary.com%2Fhcu8jcnmr%2Fimage%2Fupload%2Fh_882%2Cw_2004%2Fc_lpad%2Cg_west%2Cw_500%2Ch_630%2Cl_hezl8cabfgokh7u6qn4g%2Cx_126%2Cy_0%2Fc_lpad%2Cg_center%2Cw_500%2Ch_630%2Cl_qrwnronydq5l5xtazrbk%2Cx_0%2Cy_0%2Fc_lpad%2Cg_east%2Cw_500%2Ch_630%2Cl_ooi0v7a1rv9ykrrfnrbr%2Cx_126%2Cy_0%2F1px_white.jpg&amp;p[title]=Shop Art &amp; Design Books on Canopy&amp;p[summary]="></a><a class="js-headerShareButton HeaderShare-Button twitter" target="_blank" data-share-object-type="null" data-share-method="twitter" href="http://twitter.com/home?status=Shop+Art+%26+Design+Books+on+%40JoinCanopy%3A+https%3A%2F%2Fcanopy.co%2Fshop%2Fart-%26-design-books"></a><a class="js-headerShareButton HeaderShare-Button pinterest" target="_blank" data-share-object-type="null" data-share-method="pinterest" href="//www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fcanopy.co%2Fshop%2Fart-%26-design-books&amp;media=https://res.cloudinary.com/hcu8jcnmr/image/upload/h_882,w_2004/c_lpad,g_west,w_500,h_630,l_hezl8cabfgokh7u6qn4g,x_126,y_0/c_lpad,g_center,w_500,h_630,l_qrwnronydq5l5xtazrbk,x_0,y_0/c_lpad,g_east,w_500,h_630,l_ooi0v7a1rv9ykrrfnrbr,x_126,y_0/1px_white.jpg&amp;description=Art+%26+Design+Books+on+Canopy"></a><a class="js-headerShareButton HeaderShare-Button email" data-share-object-type="null" data-share-method="email" href="mailto:?body=Check%20out%20%E2%80%9CShop%3A%20Art%20%26%20Design%20Books%E2%80%9D%20on%20Canopy%3A%0D%0A%0D%0Ahttps%3A%2F%2Fcanopy.co%2Fshop%2Fart-%26-design-books&amp;subject=Shop%20Art%20%26%20Design%20Books%20on%20Canopy"></a>
+                    </div>
+                    <div class="HeaderShare-closeButtonContainer">
+                        <div class="js-closeButtonAnimateTarget" style="opacity: 0">
+                            <div class="close-button-base close-button-thin js-closeHeaderShareButton"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="column center aligned animated fadeIn"></div>
+
+            <div class="PageHeader-content">
+                <div class="PageHeader-categoryName">{{ category.name }}
+                </div>
+                <div class="PageHeader-actionsContainer"><div data-react-class="ShareButton" class="shareButton"><div data-reactroot="" class="PillButton--stroked js-triggerHeaderShare">Share</div></div><div data-react-class="FollowButton" data-react-props="{&quot;following&quot;:false,&quot;name&quot;:&quot;Art \u0026 Design Books&quot;,&quot;path&quot;:&quot;/ajax/follow_entity/Category/11&quot;,&quot;source&quot;:&quot;Category Page&quot;,&quot;type&quot;:&quot;Category&quot;}"><div data-reactroot="" class="PillButton--follow  ">Follow</div></div>
+                </div>
+                <div class="PageHeader-navigationContainer"><a class="PillButton--text u-backArrow" href="#">All Categories</a>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
 
-{% block content %}
-
+{% block filters_position %}
     <div class="nav-level">
-
-
-    <div class="nav-level-layout wrapper">
-
-        <div class="PageTabs"></div>
-        <div class="page-filters">
-
-            <form class="filter-group filter-form">
-                {% for option in filter_form.order_by %}
-                    <label class="filter-link">
-                        {{ option.tag }}
-                        <span>{{ option.choice_label }}</span>
-                    </label>
-                {% endfor %}
-
-            </form>
+        <div class="nav-level-layout wrapper">
+            <div class="PageTabs"></div>
+            <div class="page-filters">
+                <form class="filter-group" id="filter-form">
+                    {% for option in filter_form.order_by %}
+                        <label class="filter-link">
+                            {{ option.tag }}
+                            <span>{{ option.choice_label }}</span>
+                        </label>
+                    {% endfor %}
+                </form>
+            </div>
         </div>
-
-    </div>
-    </div>
-    <div class="ui stackable doubling four column grid" id="items">
-        {% include page_template %}
-
     </div>
 {% endblock %}
+
+
+{% block content_class %}
+    {{ block.super }} feed-list
+{% endblock %}
+{% block content %}
+    <div id="items">
+        {% include page_template %}
+    </div>
+
+{% endblock %}
+
 
 {% block extra_scripts %}
     <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
     <script>
         $.endlessPaginate({
             paginateOnScroll: true,
-            paginateOnScrollMargin: 200
+            paginateOnScrollMargin: 300
         });
     </script>
     <script type="text/javascript">
@@ -79,27 +75,18 @@
         $(document).ready(function () {
 
             function submitFilterForm() {
-                $loader.show();
-                data = $(".filter-form").serialize();
+                data = $("#filter-form").serialize();
                 $.ajax({
                     data: data,
                     success: function (data) {
 
                         $("#items").html(data);
-                        $loader.hide()
                     },
                      error: function () {
                          alert('Извините за доставленные не удобства, попробуйте позже');
-                         $loader.hide();
                      }
                 })
             }
-
-            $('.tags-filters input[type="checkbox"]').on("change", function (e) {
-
-                submitFilterForm();
-            });
-
             $(".filter-group input").on("change", function (e) {
                 submitFilterForm()
             });

@@ -1,8 +1,25 @@
 {% load el_pagination_tags %}
-{% lazy_paginate items_list %}
-    {% for item in items_list %}
 
-       {% include 'catalogue/preview_item.html' %}
+
+{% lazy_paginate items_list %}
+{% get_pages %}
+
+    {% for item in items_list %}
+        {% cycle '' ' second-feed-card' ' third-feed-card' as col silent%}
+        {% cycle '' ' second-col-feed-card' as num silent%}
+        {% if forloop.counter <= 3 or pages.current.is_first %}
+            {% include 'catalogue/preview_item.html' with item_cls="top-card"|add:col|add:num %}
+        {% else %}
+            {% include 'catalogue/preview_item.html' with item_cls=col|add:num %}
+        {% endif %}
 
     {% endfor %}
+
 {% show_more '<div class="InfiniteScrollFooter is-showingLoadMoreButton InfiniteScrollFooter--fullWidth"><div class="LoadMoreButton FeedLoadMore" id="loadmore">Load more</div></div>' '<div class="InfiniteScrollFooter is-showingLoadMoreButton InfiniteScrollFooter--fullWidth"><div class="LoadMoreButton FeedLoadMore" id="loadmore">Loading...</div></div>' %}
+
+
+{% if pages.current.is_last %}
+    <div class="InfiniteScrollFooter">
+        <div class="InfiniteScrollFooter-signature"></div>
+    </div>
+{% endif %}

@@ -144,6 +144,33 @@ $(document).ready(function(){
 
             })
         }
+
+        if($(e.target).parents('.like-action-link').length || e.target.className === 'like-action-link'){
+            e.preventDefault();
+            if(e.target.className === 'like-action-link'){
+                $btn = $(e.target);
+            }
+            else{
+                $btn = $(e.target).parents('.like-action-link');
+            }
+
+            var url = $btn.attr('href');
+            $ico = $btn.find('.like-action-icon');
+            $like_count = $btn.find('.like-action-number');
+            $.ajax({
+                url: url,
+                contentType: 'application/json',
+                success: function (data) {
+                    if('added' in data) {
+                        $ico.removeClass('icon-heart').addClass('icon-heart-red');
+                    }
+                    else if('removed' in data){
+                        $ico.removeClass('icon-heart-red').addClass('icon-heart');
+                    }
+                    $like_count.text(data['likes_count'])
+                }
+            })
+        }
     });
     }
 

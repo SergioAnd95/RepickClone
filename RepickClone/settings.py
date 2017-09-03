@@ -148,7 +148,7 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 # Media files
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
 
 
 # Haystack settings
@@ -172,7 +172,7 @@ if ES_URL.username:
 
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
-EL_PAGINATION_PER_PAGE = 18
+EL_PAGINATION_PER_PAGE = 24
 
 try:
     from .local_settings import *

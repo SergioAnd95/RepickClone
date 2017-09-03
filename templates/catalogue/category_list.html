@@ -1,40 +1,41 @@
 {% extends 'base.html' %}
 
 {% load staticfiles %}
+{% load thumbnail %}
 
-{% block before-content %}
 
+
+{% block filters_position %}
+    <div class="nav-level">
+        <div class="nav-level-layout wrapper">
+            <div class="PageTabs">
+                {% for name, link in links_list %}
+                    <a class="page-section-tab{% if request.path == link %} active{% endif %}" href="{{ link }}">{{ name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
-{% block styles %}
-{{ block.super }}
-    <link rel="stylesheet" href="{% static 'css/styles4.css' %}">
-{% endblock %}
 
 {% block content%}
-
-    <div class="wrapper">
-        <div class="cards-container ready">
-            <div class="CollectionGrid-container">
-                <div class="CollectionGrid">
-                    {% for category in categories %}
-                    <a class="CollectionGrid-tile hover-overlay-light" href="{{ category.get_absolute_url }}">
-                        <div class="CollectionGrid-tileImage" style="background-image: url(https://res.cloudinary.com/hcu8jcnmr/image/upload/v1465317720/mcmcyymdgr3vaetajcgd.png); visibility:hidden;"></div>
-                        <div class="CollectionGrid-tileImage1 align-center" style="background-image: url({{ category.main_image.url }})"></div>
+    <div class="cards-container ready">
+        <div class="CollectionGrid-container">
+            <div class="CollectionGrid">
+                {% for category in categories %}
+                    <a class="CollectionGrid-tile hover-overlay-light" href="{{ category.get_absolute_url }}"><div class="CollectionGrid-tileImage" style="background-image: url(https://res.cloudinary.com/hcu8jcnmr/image/upload/v1465317720/mcmcyymdgr3vaetajcgd.png); visibility:hidden;"></div>
+                        {% thumbnail category.main_image '300x300' crop="center" as img %}
+                            <div class="CollectionGrid-tileImage1 align-center" style="background-image: url({{ img.url }})"></div>
+                        {% endthumbnail %}
                         <div class="CollectionGrid-tileName js-dotdotdot" style="word-wrap: break-word; white-space: normal;">
                             {{ category.name }}
                         </div>
                     </a>
-                    {% endfor %}
-
-                </div>
+                {% endfor %}
             </div>
         </div>
-        <div class="InfiniteScrollFooter">
-            <div class="InfiniteScrollFooter-signature"></div>
-
-        </div>
-
     </div>
-
+    <div class="InfiniteScrollFooter">
+        <div class="InfiniteScrollFooter-signature"></div>
+    </div>
 {% endblock %}
