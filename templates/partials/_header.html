@@ -34,8 +34,10 @@
             <div data-reactroot="" class="GlobalNav-userSection">
                 <div class="GlobalNav-desktopSearchContainer">
                     <div class="GlobalNavSearch-container ">
-                        <input class="GlobalNavSearch js-globalSearchInput " placeholder="Search" id="desktopSearchInput" autocorrect="off">
-                        <label class="GlobalNavSearch-searchIcon" for="desktopSearchInput"></label>
+                        <form class="search-form" action="{% url 'haystack_search' %}" method="get">
+                            <input class="GlobalNavSearch js-globalSearchInput " name="q" placeholder="Search" id="desktopSearchInput" autocorrect="off">
+                            <label class="GlobalNavSearch-searchIcon" for="desktopSearchInput"></label>
+                        </form>
                     </div>
                 </div>
                 <div class="NavAction NavAction--showSearch"></div>

@@ -1,6 +1,7 @@
 from django.views.generic import ListView, DetailView
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
+from django.utils.translation import ugettext_lazy as _
 
 from .models import Item, Category, Brand
 from .forms import ItemFilterForm
@@ -20,6 +21,7 @@ class BaseDetailView(AjaxListView):
     template_name = 'catalogue/category_item_list.html'
     page_template = 'catalogue/item_list_page.html'
     context_object_name = 'items_list'
+    back_link = []
 
     def get(self, request, *args, **kwargs):
         self.object = get_object_or_404(self.parent_model, slug=kwargs['slug'])
@@ -60,23 +62,27 @@ class BaseDetailView(AjaxListView):
 
         ctx['category'] = self.object
         ctx['filter_form'] = filter_form
+        ctx['back_link'] = (self.back_link[0], reverse(self.back_link[1]))
         return ctx
 
 
 class CategoryDetailView(BaseDetailView):
     parent_model = Category
     parent_qs = parent_model.objects.filter(type=1)
+    back_link = (_('All Categories'), 'catalogue:category_list')
 
 
 class GiftDetailView(BaseDetailView):
-    def get_queryset(self):
-        qs = super().get_queryset()
-        return qs.filter(type=2)
+    back_link = (_('All Gifts'), 'catalogue:gift_list')
+    parent_model = Category
+    parent_qs = parent_model.objects.filter(type=2)
+
 
 
 class BrandDetailView(BaseDetailView):
     parent_model = Brand
     parent_qs = parent_model
+    back_link = (_('All Brands'), 'catalogue:brand_list')
 
 
 class BaseCategoryListView(ListView):

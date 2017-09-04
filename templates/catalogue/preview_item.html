@@ -1,13 +1,13 @@
 {% load thumbnail %}
 {% load likelist_tags %}
 
-<div class="feed-card product-card {{ item_cls }}">
+<div class="feed-card product-card {{ item_cls }}" data-product-id="{{ item.id }}">
     <div class="card-header">
         <div class="buy-button-container"><a href="{{ item.link }}" data-source="Product Card" target="_blank" rel="nofollow" class="analytics-track-to-amazon card-buy-button no-prime">
             <span class="price">${{ item.get_parse_price.digits }}</span></a>
         </div>
     </div>
-    <a href="{{ item.get_absolute_url }}" class="product-card-body fancybox fancybox-wide fancybox.ajax product-link-tracking" data-product-id="21860" data-product-name="Kaweco AL Sport ballpen blue" data-source="Product Card">
+    <a href="{{ item.get_absolute_url }}" class="product-card-body fancybox fancybox-wide fancybox.ajax product-link-tracking" data-product-name="{{ item.title }}" data-source="Product Card">
         <div class="card-body">
             <div class="product-card-image">
                 {% thumbnail item.main_image '600x600' crop="center" as img %}
@@ -30,7 +30,7 @@
                 <svg class="trending-footer-icon" width="18" height="27" viewBox="0 0 18 24">
                     <image id="Layer_0" data-name="Layer 0" width="18" height="24" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAbCAMAAABGHy+tAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAANlBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC3dmhyAAAAEXRSTlMABBkfCh0XAhEGCAwTEBsVDrAU5nQAAAABYktHRACIBR1IAAAACXBIWXMAAAsSAAALEgHS3X78AAAAfElEQVQoz2WQWxKEIAwElTEbFV/3P61oqHIym88uugkMg874BwqETIZfAj4D5kyWAmBlUq2RmaWtARSVYKNIwCQSh0JKoT0IKOT9VOWHRRwLrxDMmNV+AT3Qj2D7h/pip6t3af2geOx18t9tIkWIpQgl6Q0l6QllqY1IbW5HkwOuMaCNHQAAAABJRU5ErkJggg=="></image>
                 </svg>
-                <span>Trending</span><!-- react-text: 29 --> <!-- /react-text -->
+                <span>Trending</span>
             </div>
             <div class="user-actions">
                 <div class="like-action">

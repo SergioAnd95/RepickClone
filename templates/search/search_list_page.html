@@ -8,9 +8,9 @@
         {% cycle '' ' second-feed-card' ' third-feed-card' as col silent%}
         {% cycle '' ' second-col-feed-card' as num silent%}
         {% if forloop.counter <= 3 or pages.current.is_first and forloop.counter <= 3 %}
-            {% include 'catalogue/preview_item.html' with item_cls="top-card"|add:col|add:num %}
+            {% include 'catalogue/preview_item.html' with item_cls="top-card"|add:col|add:num item=item.object %}
         {% else %}
-            {% include 'catalogue/preview_item.html' with item_cls=col|add:num  %}
+            {% include 'catalogue/preview_item.html' with item_cls=col|add:num item=item.object  %}
         {% endif %}
 
     {% endfor %}

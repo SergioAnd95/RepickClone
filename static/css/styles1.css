@@ -2092,7 +2092,8 @@ input[data-remote-validate] {
 }
 
 .PageHeader--search {
-    margin-bottom: 48px
+    margin-bottom: 48px;
+    height: 187px;
 }
 
 .PageHeader--grow {

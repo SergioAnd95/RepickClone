@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block before_content %}{% endblock %}
+
+{% block search-container %}
+    <div class="PageHeader--search">
+        <div class="wrapper PageHeader-wrapper">
+            <div class="PageHeader-contentContainer">
+                <div class="PageHeader-content">
+                    <div class="search-summary">
+                        We found
+                            <a href="#product-results">{{ items_list|length }} products</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="product-results">
+        <div class="DetailsSection-header">
+            Products
+        </div>
+        <div data-react-class="FeedList">
+            <div class="wrapper feed-list">
+                <div class="">
+                    {% include page_template %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if request.is_ajax %}
+    <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
+    <script>
+        $.endlessPaginate({
+            paginateOnScroll: true,
+            paginateOnScrollMargin: 300
+        });
+    </script>
+    {% endif %}
+{% endblock %}

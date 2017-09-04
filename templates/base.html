@@ -45,11 +45,6 @@
             <div class="yield">
                 <div id="search-mode" style="display:none;">
                     <div class="js-product-search-section">
-                        <div class="js-message search-message">
-                        </div>
-                        <div class="js-empty-state">
-                        </div>
-                        <div class="js-results-container"></div>
                         <div class="js-spinner product-search-spinner">
                             <div class="vertical-center-outer">
                                 <div class="vertical-center-inner">
@@ -61,44 +56,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="js-asin-search-section cards-container amazon-search-container show-glyph-actions ready">
-                        <div class="js-message search-message search-summary search-summary-big">
-                            Found it. <span>You can Like this product or add it to a collection, right from here.</span>
-                        </div>
-                        <div class="js-empty-state">
-                            Sorry, we couldn't find a product with that link.
-                        </div>
-                        <div class="centered-results feed-list js-results-container wrapper"></div>
-                        <div class="js-spinner product-search-spinner">
-                            <div class="vertical-center-outer">
-                                <div class="vertical-center-inner">
-                                    <div class="product-loader-icon search animated spin">
-                                        <span>
-                                        Loading...
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="js-canopy-search-section cards-container amazon-search-container show-glyph-actions ready">
-                        <div class="js-message search-message search-summary search-summary-big">
-                            Found it. <span>You can Like this product or add it to a collection, right from here.</span>
-                        </div>
-                        <div class="js-empty-state">
-                            Sorry, we couldn't find a product with that link.
-                        </div>
-                        <div class="centered-results feed-list js-results-container wrapper"></div>
-                        <div class="js-spinner product-search-spinner">
-                            <div class="vertical-center-outer">
-                                <div class="vertical-center-inner">
-                                    <div class="product-loader-icon search animated spin">
-                                        <span>
-                                        Loading...
-                                        </span>
-                                    </div>
-                                </div>
+                        <div class="js-results-container">
+                            <div id="search-results">
+                                {% block search-container %}
+                                {% endblock %}
                             </div>
                         </div>
                     </div>
@@ -113,10 +74,8 @@
                         </div>
                         <div class="wrapper">
                             <div class="link-container visitor-welcome">
-                                <a class="link-card" href="/about?source=Welcome+Bar"><span>Learn</span> about Canopy
-                                </a><a class="link-card" href="/gifts?source=Welcome+Bar"><span>Find</span> great gifts
-                                </a><a class="ajax link-card fancybox fancybox.ajax analytics--logged-out-green-bar" href="/signup?source=Welcome+Bar"><span>Join</span> to save products
-                                </a>
+                                <a class="link-card" href="/about?source=Welcome+Bar"><span>Learn</span> about Canopy</a>
+                                <a class="link-card" href="/gifts?source=Welcome+Bar"><span>Find</span> great gifts</a>
                             </div>
                         </div>
                     </div>
@@ -153,12 +112,20 @@
             <div class="UserTooltip-arrow js-userTooltipArrow"></div>
             <div class="UserTooltip-body js-userTooltipBody"></div>
         </div>
-        <div style="display: none;">
-            <div class="box-modal" id="exampleModal">
-                <div class="box-modal_close arcticmodal-close">закрыть</div>
-                Пример модального окна
-            </div>
-        </div>
+
+       <div class="fancybox-overlay js-fix-scroll fancybox-overlay-fixed" id="modal-window" style="width: auto; height: auto;">
+           <div class="fancybox-wrap fancybox-desktop fancybox-type-ajax fancybox-opened" tabindex="-1" style="width: 1200px; height: auto; position: absolute; top: 0px; left: 240px; opacity: 1; overflow: visible;">
+               <div class="fancybox-skin" style="width: auto; height: auto;">
+                   <div class="fancybox-outer">
+                       <div class="fancybox-inner" style="overflow: auto; width: 1200px; height: 449px;">
+                           <div class="wrapper">
+                           </div>
+                       </div>
+                       <a title="Close" class="close-button-base close-button-position-top-right" href="javascript:;"></a>
+                   </div>
+               </div>
+           </div>
+       </div>
         {% block main_scripts %}
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
             <script src="{% static 'js/script1.min.js' %}" type="text/javascript"></script>
