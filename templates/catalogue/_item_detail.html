@@ -48,7 +48,10 @@
                             <meta content="${{ item.get_parse_price.digits }}" itemprop="price">
                             <meta content="InStock" href="http://schema.org/InStock" itemprop="availability">
                             <a target="_blank" rel="nofollow" class="go-to-amazon product-page button goto analytics-track-to-amazon" href="{{ item.link }}">${{ item.get_parse_price.digits }} on {{ item.get_site_name }}</a>
-
+                        </div>
+                        <div class="MetaData">
+                            <p class="text-type">@description:</p>
+                            <p>{{ item.description }}</p>
                         </div>
                     </div>
                 </div>
