@@ -47,7 +47,7 @@ class AjaxSearchView(AjaxListView, SearchView):
         return qs
 
     def get_context_data(self, **kwargs):
-        kwargs.update({'page_template':self.page_template})
+        kwargs.update({'page_template': self.page_template})
         ctx = super().get_context_data(**kwargs)
         return ctx
 

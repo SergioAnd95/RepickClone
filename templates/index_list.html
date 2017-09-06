@@ -74,19 +74,15 @@
             var url = $form.attr('action');
             var method = $form.attr('method');
             var data = $form.serialize();
-            $("#loader").show();
             $.ajax({
                 url: url,
                 method: method,
                 data: data,
                 success: function (data){
-
-                    $("#loader").hide();
                     $("#items").html(data);
 
                 },
                 error: function (data) {
-                    $("#loader").hide();
                     alert('На сервере произошла ошибка, извините за временные неудобства');
                 }
             })

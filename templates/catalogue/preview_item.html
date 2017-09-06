@@ -7,7 +7,7 @@
             <span class="price">${{ item.get_parse_price.digits }}</span></a>
         </div>
     </div>
-    <a href="{{ item.get_absolute_url }}" class="product-card-body fancybox fancybox-wide fancybox.ajax product-link-tracking" data-product-name="{{ item.title }}" data-source="Product Card">
+    <a data-src="{{ item.get_absolute_url }}" data-type="ajax" href="javascript:;" class="product-card-body fancybox fancybox-wide fancybox.ajax product-link-tracking" data-product-name="{{ item.title }}" data-source="Product Card">
         <div class="card-body">
             <div class="product-card-image">
                 {% thumbnail item.main_image '600x600' crop="center" as img %}

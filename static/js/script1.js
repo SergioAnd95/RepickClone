@@ -16,44 +16,6 @@ $.fn.extend({
 });
 
 $(document).ready(function(){
-    $("#modal-window").on('click', function (e) {
-        $modal = $(this);
-        if(e.target.className==='fancybox-overlay js-fix-scroll fancybox-overlay-fixed' || e.target.className==='close-button-base close-button-position-top-right' ){
-            $modal.fadeOut(function () {
-                $('html').removeClass('fancybox-margin fancybox-lock')
-            });
-        }
-
-        if($(e.target).parents('.CardAction').length || e.target.className === 'CardAction--showText CardAction CardAction--like'){
-            if($(e.target).parents('.CardAction').length){
-                $btn = $(e.target).parents('.CardAction')
-            } else {
-                $btn = $(e.target);
-            }
-
-            var url = $btn.attr('href');
-            $.ajax({
-                url: url,
-                contentType: 'application/json',
-                success: function (data) {
-                    $prev_item = $('.feed-card[data-product-id="'+$modal.attr('data-product-id')+'"]');
-                    $ico = $prev_item.find('.like-action-icon');
-                    $like_count = $prev_item.find('.like-action-number');
-
-                    if('added' in data) {
-                        $btn.addClass('is-liked');
-                        $ico.removeClass('icon-heart').addClass('icon-heart-red');
-                    }
-                    else if('removed' in data){
-                        $btn.removeClass('is-liked');
-                        $ico.removeClass('icon-heart-red').addClass('icon-heart');
-                    }
-                    $like_count.text(data['likes_count'])
-                }
-            })
-        }
-
-    });
 
     $(".search-form").on('submit', function (e) {
         e.preventDefault();
@@ -65,101 +27,101 @@ $(document).ready(function(){
         var url = $(this).attr('action');
         //$loader.show();
         $search_mode.show();
+        $container = $search_mode.find(".js-results-container");
         $("#browse-mode").hide();
-        $search_mode.find(".js-results-container").load(url+'?'+data+' #search-results', function (responseText) {
+        $container.html('');
+        $container.load(url+'?'+data+' #search-results', function (responseText) {
             work_with_item();
             console.log(responseText);
             $spinner.hide();
+            window.history.pushState("object or string", "Title", url+'?'+data);
         });
     });
 
 
     function work_with_item() {
+        var prev_item = '';
+        $(".product-card-body").fancybox({
+            margin: [0, 0],
+            animationEffect : "fade",
+            baseClass: 'fancybox-overlay js-fix-scroll fancybox-overlay-fixed',
+            btnTpl : {
+                smallBtn: '<a data-fancybox-close class="close-button-base close-button-position-top-right" title="{{CLOSE}}"></a>'
+            },
+            spinnerTpl : '<div id="fancybox-loading"><div id="fancybox-loading-spinner"></div></div>'
+            touch : {
+                vertical : false,  // Allow to drag content vertically
+                momentum : false   // Continue movement after releasing mouse/touch when panning
+            },
+            afterLoad: function (instance) {
+                prev_item = $(instance.$lastFocus[0]).parent();
+                window.history.pushState("object or string", "Title", instance.current.src);
+            },
+            afterClose: function () {
+                window.history.back();
+            },
+            clickContent : function( current, e ) {
 
-
-    $("#items, #search-results").on('click', function (e) {
-
-        e.preventDefault();
-        if($(e.target).parents('.product-card-body').length) {
-            console.log(e.target.className);
-            e.preventDefault();
-            $parent = $(e.target).parents(".product-card-body");
-            $feed = $parent.parents('.feed-card');
-            var url = $parent.attr('href');
-
-            //$loader.show();
-            //$("#modal-window").animateCss('fadeIn');
-            $modal = $("#modal-window");
-            $modal.fadeIn();
-            $.ajax({
-                url: url,
-                success: function (data) {
-                    $modal.find(".fancybox-inner .wrapper").html(data);
-                    $modal.attr('data-product-id', $feed.attr('data-product-id'));
-                    //$loader.hide();
-                    $("html").addClass('fancybox-margin fancybox-lock');
-                },
-                error: function(textStatus){
-                    console.log(textStatus);
-                    if(textStatus.status == 404 ){
-                        alert('Данный товар не найден');
-                    } else if(textStatus.status == 500){
-                        alert('Извините за временные неудобства, попробуйте позже')
+                if($(e.target).parents('.CardAction').length || $(e.target).hasClass('CardAction')){
+                    e.preventDefault();
+                    if($(e.target).parents('.CardAction').length){
+                        $btn = $(e.target).parents('.CardAction');
+                    } else {
+                        $btn = $(e.target);
                     }
-                    var parent = $(this).parent().parent();
-                    parent.animateCss('fadeOut', function () {
-                        parent.removeClass('visible transition');
-                    });
-                    $("html").removeClass('fancybox-margin fancybox-lock');
-                    //$loader.hide();
+                    var url = $btn.attr('href');
+                    $.ajax({
+                        url: url,
+                        contentType: 'application/json',
+                        success: function (data) {
+                            $ico = prev_item.find('.like-action-icon');
+                            $like_count = prev_item.find('.like-action-number');
+
+                            if('added' in data) {
+                                $btn.addClass('is-liked');
+                                $ico.removeClass('icon-heart').addClass('icon-heart-red');
+                            } else if('removed' in data){
+                                $btn.removeClass('is-liked');
+                                $ico.removeClass('icon-heart-red').addClass('icon-heart');
+                            }
+                            $like_count.text(data['likes_count'])
+                        }
+                    })
+                }
+            }
+        });
+
+        $("#items, #search-results").on('click', function (e) {
+
+            if($(e.target).parents('.like-action-link').length || e.target.className === 'like-action-link'){
+                e.preventDefault();
+                if(e.target.className === 'like-action-link'){
+                    $btn = $(e.target);
+                }
+                else{
+                    $btn = $(e.target).parents('.like-action-link');
                 }
 
-            })
-        }
-
-        if($(e.target).parents('.like-action-link').length || e.target.className === 'like-action-link'){
-            e.preventDefault();
-            if(e.target.className === 'like-action-link'){
-                $btn = $(e.target);
-            }
-            else{
-                $btn = $(e.target).parents('.like-action-link');
-            }
-
-            var url = $btn.attr('href');
-            $ico = $btn.find('.like-action-icon');
-            $like_count = $btn.find('.like-action-number');
-            $.ajax({
-                url: url,
-                contentType: 'application/json',
-                success: function (data) {
-                    if('added' in data) {
-                        $ico.removeClass('icon-heart').addClass('icon-heart-red');
+                var url = $btn.attr('href');
+                $ico = $btn.find('.like-action-icon');
+                $like_count = $btn.find('.like-action-number');
+                $.ajax({
+                    url: url,
+                    contentType: 'application/json',
+                    success: function (data) {
+                        if('added' in data) {
+                            $ico.removeClass('icon-heart').addClass('icon-heart-red');
+                        }
+                        else if('removed' in data){
+                            $ico.removeClass('icon-heart-red').addClass('icon-heart');
+                        }
+                        $like_count.text(data['likes_count'])
                     }
-                    else if('removed' in data){
-                        $ico.removeClass('icon-heart-red').addClass('icon-heart');
-                    }
-                    $like_count.text(data['likes_count'])
-                }
-            })
-        }
-    });
+                })
+            }
+        });
     }
-
-    $("#loadmore").on('click', function () {}
-    );
-
     work_with_item();
-
-    $(".search-form input").focus(function(e){
-        $parent = $(this).parent();
-        $parent.addClass("width_100p");
-    });
-
-    $(".search-form input").focusout(function () {
-        $parent = $(this).parent();
-        $parent.removeClass("width_100p");
-    })
 
 
 });
