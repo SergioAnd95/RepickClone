@@ -1,5 +1,6 @@
 {% load thumbnail %}
 {% load staticfiles %}
+{% load i18n %}
 
 {% if issue %}
 <div class="wrapper IssueCard-bannerContainer js-issueBannerOnExploreContainer">
@@ -10,7 +11,7 @@
                 <div class="IssueCard-titleContainer">
                     <div class="badge">
                         <span>
-                            NEW ISSUE
+                            {% trans 'NEW ISSUE' %}
                         </span>
                     </div>
                     <h1 class="IssueMeta-title js-issueTitle">
@@ -24,10 +25,11 @@
         </div>
     </a>
 </div>
+
 {% else %}
     <div class="wrapper IssueCard-bannerContainer js-issueBannerOnExploreContainer">
-        {% static '/images/default.png' as default %}
-        <a class="IssueCard hover-overlay-light IssueCard--backgroundImage u-invertTextColor" style="{% thumbnail default '1920' as img %}background-image: url({{ img.url }}); {% endthumbnail %}" href="/">
+
+        <a class="IssueCard hover-overlay-light IssueCard--backgroundImage u-invertTextColor" style="background-image: url({% static '/images/default.png' %}); " href="/">
             <div class="Scrim--textOverImage"></div>
             <div class="wrapper">
                 <div class="FlexRow">
