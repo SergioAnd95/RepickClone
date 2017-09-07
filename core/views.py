@@ -36,6 +36,7 @@ class MainPageListView(AjaxListView):
 
 
 class AjaxSearchView(AjaxListView, SearchView):
+
     page_kwarg = None
     template_name = 'search/search_list.html'
     page_template = 'search/search_list_page.html'

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load thumbnail %}
+
+{% block content_wrapper %}
+    <div class="wrapper"></div>
+    <div class="PageDescription">
+        <div class="wrapper">
+            <div class="PageDescription--centered">
+                {% blocktrans %}
+                Each week, This Is My Galaxy features beautiful products in hand-curated Issues.
+                {% endblocktrans %}
+            </div>
+        </div>
+    </div>
+
+    {% for issue in issue_list %}
+        <a class="IssueCard hover-overlay-light IssueCard--backgroundImage u-invertTextColor" style="{% thumbnail issue.main_image "1920" as img %}background-image: url({{ img.url }}){% endthumbnail %}" href="{{ issue.get_absolute_url }}"><div class="Scrim--textOverImage"></div>
+            <div class="wrapper">
+                <div class="FlexRow">
+                    <div class="IssueCard-titleContainer">
+                        <div class="IssueMeta-subtitle">
+                            {% trans 'Issue' %} {{ issue.id }}
+                        </div>
+                        <h1 class="IssueMeta-title js-issueTitle">
+                            {{ issue.title }}
+                        </h1>
+                        <div class="IssueMeta-datestamp">
+                            {{ issue.when_created | date:'F d, Y' }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+{% endblock %}

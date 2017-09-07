@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load i18n %}
 
 {% block before_content %}{% endblock %}
 
@@ -10,8 +11,8 @@
             <div class="PageHeader-contentContainer">
                 <div class="PageHeader-content">
                     <div class="search-summary">
-                        We found
-                            <a href="#product-results">{{ items_list|length }} products</a>
+                        {% trans 'We found' %}
+                            <a href="#product-results">{{ items_list|length }} {% trans 'products' %}</a>
                     </div>
                 </div>
             </div>

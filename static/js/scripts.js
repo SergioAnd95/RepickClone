@@ -38232,6 +38232,7 @@ function() {
                 7: "Portrait mode",
                 8: "Landscape mode"
             },
+
             MeteringMode: {
                 0: "Unknown",
                 1: "Average",

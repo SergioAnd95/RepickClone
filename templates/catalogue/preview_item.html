@@ -1,5 +1,6 @@
 {% load thumbnail %}
 {% load likelist_tags %}
+{% load i18n %}
 
 <div class="feed-card product-card {{ item_cls }}" data-product-id="{{ item.id }}">
     <div class="card-header">
@@ -18,7 +19,7 @@
                 <div class="product-details-name"><span class="text-underline">{{ item.title }}</span></div>
                 <div class="product-details-brand">
                     <span>
-                        <span>by </span>{{ item.brand.name }}
+                        <span>{% trans 'by' %} </span>{{ item.brand.name }}
                     </span>
                 </div>
             </div>
@@ -30,7 +31,9 @@
                 <svg class="trending-footer-icon" width="18" height="27" viewBox="0 0 18 24">
                     <image id="Layer_0" data-name="Layer 0" width="18" height="24" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAbCAMAAABGHy+tAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAANlBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC3dmhyAAAAEXRSTlMABBkfCh0XAhEGCAwTEBsVDrAU5nQAAAABYktHRACIBR1IAAAACXBIWXMAAAsSAAALEgHS3X78AAAAfElEQVQoz2WQWxKEIAwElTEbFV/3P61oqHIym88uugkMg874BwqETIZfAj4D5kyWAmBlUq2RmaWtARSVYKNIwCQSh0JKoT0IKOT9VOWHRRwLrxDMmNV+AT3Qj2D7h/pip6t3af2geOx18t9tIkWIpQgl6Q0l6QllqY1IbW5HkwOuMaCNHQAAAABJRU5ErkJggg=="></image>
                 </svg>
-                <span>Trending</span>
+                {% if item.in_trend %}
+                <span>{% trans 'Trending' %}</span>
+                {% endif %}
             </div>
             <div class="user-actions">
                 <div class="like-action">

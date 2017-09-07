@@ -12,8 +12,8 @@ class ItemFilterForm(SearchForm):
         CHEAP = 'price'
 
         ORDERING_CHOICES = (
-            (TRENDING, _('Новые')),
-            (POPULAR, _('Популярные')),
+            (TRENDING, _('New')),
+            (POPULAR, _('Popular')),
             (EXPENSIVE, _('$$$')),
             (CHEAP, _('$'))
         )
@@ -54,7 +54,6 @@ class ItemFilterForm(SearchForm):
 
         return items
 
-# TODO: create widgets
 
 class MainPageItemFilter(forms.Form):
     class OrderingChoices:
@@ -62,9 +61,9 @@ class MainPageItemFilter(forms.Form):
         NEW = '-when_created'
         POPULAR = '-total_likes'
         ORDERING_CHOICES = (
-            (TRENDING, 'trending'),
-            (NEW, 'new'),
-            (POPULAR, 'popular')
+            (TRENDING, 'Trending'),
+            (NEW, 'New'),
+            (POPULAR, 'Popular')
         )
 
     order_by = forms.ChoiceField(

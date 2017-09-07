@@ -1,0 +1,47 @@
+{% load i18n %}
+{% load thumbnail %}
+{% load likelist_tags %}
+
+<div class="magazine-row">
+
+    <div class="{{ raw.size }} magazine-cards-container {% include 'featured/_get_size.html' with count=raw.cell_counts type=raw.CellCountType %} {% if raw.display_type == 2 %}separated{% endif %}">
+        {% for cell in raw.cells.all %}
+            <div class="hover-show-glyphs light magazine-single-card-container" data-editable-field-names="" data-editable-fields="" data-editable-id="" data-editable-type="feature_entry">
+                {% if cell.content_type == 1 %}
+                   {% with item=cell.item %}
+                       <div data-react-class="ReactProductCard">
+                           <div data-reactroot="" class="ProductCard product product-card js-productCard is-imageLoaded">
+                               <div class="ProductCard-imageContainer product-img-container">
+                                   <div class="hover-container hover-show-glyphs">
+                                       <div class="ImagePlaceholder--productCircle"></div>
+                                       <img src="" style="display: none;">
+                                       <div class="ProductCard-image product-image" style="opacity: 1; {% thumbnail item.main_image '600x600' crop='center' as img %}background-image: url({{ img.url }});{% endthumbnail %}"></div>
+                                       <div class="ProductCard-actionsContainer">
+                                           <span class="CardAction CardAction--like like-action-link{% if item|likelist_exist:request.likelist %} is-liked{% endif %}" id="like-button" href="{% url 'likelist:toggle_like' item.slug %}">
+                                               <span class="glyph-action glyph-hidden-unless-active"></span>
+                                               <span class="CardActionText">Like</span>
+                                           </span>
+                                       </div>
+                                       <a data-src="{{ item.get_absolute_url }}" data-type="ajax" href="javascript:;" class="product-link hover-overlay-white fancybox fancybox-wide fancybox.ajax product-link-tracking" data-product-id="{{ item.id }}" data-product-name="{{ item.title }}" data-source="Product Card">
+                                           <div class="ProductCard-hoverDetails">
+                                               <h3 class="ProductCard-hoverTitle js-dotdotdot" style="word-wrap: break-word; white-space: normal;">{{ item.title }}</h3>
+                                               <div class="ProductCard-hoverBrand">{% trans 'by' %} <span class="ProductCard-brandName">{{ item.brand }}</span></div>
+                                           </div>
+                                       </a>
+                                   </div>
+                               </div>
+                               <div class="top-right overflow-hidden">
+                                   <a href="{{ item.link }}" data-source="Product Card" target="_blank" rel="nofollow" class="analytics-track-to-amazon card-price button is-prime">${{ item.get_parse_price.digits }}</a>
+                               </div>
+                           </div>
+                       </div>
+                   {% endwith %}
+                {% else %}
+                    <div class="magazine-card magazine-media-card" style="background-image: url({{ cell.image.url }});background-size: cover">
+
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>

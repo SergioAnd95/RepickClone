@@ -10,6 +10,7 @@ from urllib.parse import urlparse
 
 
 class ItemManager(models.Manager):
+    """ORM item manager"""
     def get_queryset(self):
         return super(ItemManager, self).get_queryset().annotate(total_likes=F('additional_likes')+Count('likes'))
 
@@ -23,25 +24,25 @@ class Category(models.Model):
         GIFT = 2
 
         CATEGORY_TYPE_CHOICES = (
-            (CATEGORY, _('Катеогрия')),
-            (GIFT, _('Подарок'))
+            (CATEGORY, _('Category')),
+            (GIFT, _('Gift'))
         )
 
     name = models.CharField(
-        _('Название'),
+        _('Name'),
         max_length=30,
         unique=True
     )
-    main_image = models.ImageField(_('Изображение'), upload_to='categories')
+    main_image = models.ImageField(_('Main image'), upload_to='categories')
     type = models.IntegerField(
         _('Тип'),
         choices=CategoryType.CATEGORY_TYPE_CHOICES
     )
-    slug = models.SlugField(_('Ссылка'), unique=True)
+    slug = models.SlugField(_('Slug'), unique=True)
 
     class Meta:
-        verbose_name = _('Категория')
-        verbose_name_plural = _('Категории')
+        verbose_name = _('Category')
+        verbose_name_plural = _('Categories')
 
     def __str__(self):
         return self.name
@@ -63,13 +64,13 @@ class Brand(models.Model):
     """
     Represent brand
     """
-    name = models.CharField(_('Название'), max_length=30)
-    main_image = models.ImageField(_('Изображение'), upload_to='brands')
-    slug = models.SlugField(_('Ссылка'), unique=True)
+    name = models.CharField(_('Name'), max_length=30)
+    main_image = models.ImageField(_('Image'), upload_to='brands')
+    slug = models.SlugField(_('Slug'), unique=True)
 
     class Meta:
-        verbose_name = _('Брэнд')
-        verbose_name_plural = _('Брэнды')
+        verbose_name = _('Brand')
+        verbose_name_plural = _('Brands')
 
     def __str__(self):
         return self.name
@@ -88,44 +89,50 @@ class Item(models.Model):
     """
     Represent Item
     """
-    main_image = models.ImageField(_('Изображение'), upload_to='items')
-    title = models.CharField(_('Название'), max_length=120)
-    price = models.DecimalField(_('Цена'), max_digits=10, decimal_places=2)
-    link = models.URLField(_('Ссылка на внешний рессурс'))
-    description = models.TextField(_('Описание'))
+    main_image = models.ImageField(_('Image'), upload_to='items')
+    title = models.CharField(_('Title'), max_length=120)
+    price = models.DecimalField(_('Price'), max_digits=10, decimal_places=2)
+    link = models.URLField(_('Link'))
+    description = models.TextField(_('Description'))
     site_name = models.CharField(
-        _('Название сайта'),
+        _('Site name'),
         max_length=30,
         blank=True,
         null=True,
-        help_text=_('из поля "Ссылка" имя сайта береться автоматически, '
-                    'не стоит заполнять это поля если имя сайта вас устраивает')
+        help_text=_('from field "Slug" site name set auto, '
+                    'don\'t fill this field if site name is good for you')
     )
     categories = models.ManyToManyField(
         Category,
-        verbose_name=_('Категории'),
+        verbose_name=_('Categories'),
         related_name='items'
     )
     brand = models.ForeignKey(
         Brand,
-        verbose_name=_('Производитель'),
+        verbose_name=_('Brand'),
         related_name='items'
     )
-    when_created = models.DateTimeField(_('Когда создан'), auto_now_add=True)
-    slug = models.SlugField(_('Ссылка на товар'), unique=True)
+    when_created = models.DateTimeField(_('When created'), auto_now_add=True)
+    slug = models.SlugField(_('Slug'), unique=True)
 
     tags = TaggableManager()
-    enable = models.BooleanField(_('Есть в наличии'), default=True)
+    enable = models.BooleanField(_('Enable'), default=True)
 
-    additional_likes = models.IntegerField(_('Дополнительнык лайки'), default=0)
+    additional_likes = models.IntegerField(_('Additional likes'), default=0)
 
     objects = ItemManager()
 
-    related_items = models.ManyToManyField('Item', through='RelatedItems', blank=True)
+    related_items = models.ManyToManyField(
+        'Item',
+        through='RelatedItems',
+        blank=True,
+        verbose_name=_('Related itemd')
+    )
+    in_trend = models.BooleanField(_('Trend'),default=True)
 
     class Meta:
-        verbose_name = _('Продукт')
-        verbose_name_plural = _('Продукты')
+        verbose_name = _('Item')
+        verbose_name_plural = _('Items')
         ordering = ('-when_created', )
 
     def __str__(self):
@@ -166,7 +173,7 @@ class RelatedItems(models.Model):
     recommendation = models.ForeignKey(
         'Item',
         on_delete=models.CASCADE,
-        verbose_name=_("Рекомендуемые продукты"))
+        verbose_name=_("Recomendation Items"))
     ranking = models.PositiveSmallIntegerField(
         _('Ranking'), default=0,
         help_text=_('Determines order of the products. A product with a higher'

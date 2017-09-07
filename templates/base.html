@@ -1,10 +1,16 @@
 {% load static %}
+{% load i18n %}
+{% load featured_tags %}
+
 <html class="wf-europa-n4-active wf-europa-n3-active wf-europa-n7-active wf-freighttextpro-i4-active wf-active">
     <head>
         <title>
-            Canopy.co - A Curated Shop for Amazon
+            {% block title %}
+                This Is My Galaxy
+            {% endblock %}
+
         </title>
-        <meta content="Canopy.co - A Curated Shop for Amazon" property="og:title">
+        <meta content="This Is My Galaxy" property="og:title">
         <link rel="stylesheet" media="screen" href="{% static 'css/styles1.min.css' %}">
         <!--[if lte IE 10]>
         <link rel="stylesheet" media="screen" href="//s3.amazonaws.com/canopyassets/assets/ie-f8e13516f596a8097666751a2cfa68d8.css" />
@@ -14,8 +20,8 @@
         <meta content="yes" name="mobile-web-app-capable">
         <meta content="yes" name="apple-mobile-web-app-capable">
         <meta content="app-id=927695605, app-argument=myURL" name="apple-itunes-app">
-        <meta content="Products Trending Now on Canopy - Canopy is Amazon, curated. Use Canopy to discover the most useful, beautiful, and well-designed products on Amazon." property="og:description">
-        <meta content="Products Trending Now on Canopy - Canopy is Amazon, curated. Use Canopy to discover the most useful, beautiful, and well-designed products on Amazon." name="description">
+        <meta content="Products Trending Now on This Is My Galaxy. Use This Is My Galaxy to discover the most useful, beautiful, and well-designed products on Amazon." property="og:description">
+        <meta content="Products Trending Now on This Is My Galaxy, curated. Use This Is My Galaxy to discover the most useful, beautiful, and well-designed products on Amazon." name="description">
         <meta content="website" property="og:type">
         <meta content="https://canopy.co/" property="og:url">
         <meta content="//s3-us-west-1.amazonaws.com/canopystatic/logo128.png" property="og:image">
@@ -52,7 +58,7 @@
                                 <div class="vertical-center-inner">
                                     <div class="product-loader-icon search animated spin">
                                         <span>
-                                        Loading...
+                                            {% trans 'Loading...' %}
                                         </span>
                                     </div>
                                 </div>
@@ -76,11 +82,12 @@
 
                     {% endblock %}
 
-
+                    {% block content_wrapper %}
                     <div class="{% block content_class %}wrapper{% endblock %}">
                         {% block content %}
                         {% endblock %}
                     </div>
+                    {% endblock %}
                 </div>
             </div>
         </div>

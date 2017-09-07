@@ -1,0 +1,43 @@
+{% load thumbnail %}
+{% load staticfiles %}
+
+{% if issue %}
+<div class="wrapper IssueCard-bannerContainer js-issueBannerOnExploreContainer">
+    <a class="IssueCard hover-overlay-light IssueCard--backgroundImage u-invertTextColor" style="{% thumbnail issue.main_image '1920' as img %}background-image: url({{ img.url }}); {% endthumbnail %}" href="{{ issue.get_absolute_url }}">
+        <div class="Scrim--textOverImage"></div>
+        <div class="wrapper">
+            <div class="FlexRow">
+                <div class="IssueCard-titleContainer">
+                    <div class="badge">
+                        <span>
+                            NEW ISSUE
+                        </span>
+                    </div>
+                    <h1 class="IssueMeta-title js-issueTitle">
+                        {{ issue.title }}
+                    </h1>
+                    <div class="IssueMeta-datestamp">
+                        {{ issue.when_created | date:'F d, Y' }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+{% else %}
+    <div class="wrapper IssueCard-bannerContainer js-issueBannerOnExploreContainer">
+        {% static '/images/default.png' as default %}
+        <a class="IssueCard hover-overlay-light IssueCard--backgroundImage u-invertTextColor" style="{% thumbnail default '1920' as img %}background-image: url({{ img.url }}); {% endthumbnail %}" href="/">
+            <div class="Scrim--textOverImage"></div>
+            <div class="wrapper">
+                <div class="FlexRow">
+                    <div class="IssueCard-titleContainer">
+                        <h1 class="IssueMeta-title js-issueTitle">
+                            This Is My Galaxy
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+{% endif %}

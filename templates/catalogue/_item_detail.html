@@ -11,7 +11,7 @@
         <div class="details-image-container">
             <div data-react-class="ProductDetailsActions">
                 <div class="ProductDetails-actionsContainer">
-                    <span class="CardAction--showText CardAction CardAction--like {% if item|likelist_exist:request.likelist %}is-liked{% endif %}" id="like-button" href="{% url 'likelist:toggle_like' item.slug %}">
+                    <span class="CardAction--showText CardAction CardAction--like like-action-link {% if item|likelist_exist:request.likelist %}is-liked{% endif %}" id="like-button" href="{% url 'likelist:toggle_like' item.slug %}">
                         <span class="glyph-action glyph-hidden-unless-active"></span>
                         <span class="CardActionText">Like</span>
                     </span>
@@ -41,7 +41,7 @@
                             <a target="_blank" rel="nofollow" data-analytics-source="Details Page" class="ProductInfo-titleLink" href="{{ item.link }}">{{ item.title }}</a>
                         </h1>
                         <div class="ProductInfo-brand">
-                            <span>by</span>
+                            <span>{% trans 'by' %}</span>
                             {{ item.brand }}
                         </div>
                         <div class="goto-amazon-container" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
@@ -50,7 +50,7 @@
                             <a target="_blank" rel="nofollow" class="go-to-amazon product-page button goto analytics-track-to-amazon" href="{{ item.link }}">${{ item.get_parse_price.digits }} on {{ item.get_site_name }}</a>
                         </div>
                         <div class="MetaData">
-                            <p class="text-type">@description:</p>
+                            <p class="text-type">@{% trans 'description' %}:</p>
                             <p>{{ item.description }}</p>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
     {% if item.related_items.all %}
     <div class="product-secondary-container">
         <div class="DetailsSection-container">
-            <div class="DetailsSection-header">Related</div>
+            <div class="DetailsSection-header">{% trans 'Related' %}</div>
 
             <div class="ProductPivot">
                 <div class="ProductPivot-productsContainer">

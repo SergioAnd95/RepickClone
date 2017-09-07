@@ -2121,7 +2121,7 @@ input[data-remote-validate] {
 .PageHeader--backgroundImage {
     background-position: center;
     background-size: cover;
-    background-repeat: no-repeat
+    background-repeat: no-repeat;
 }
 
 .PageHeader-wrapper {
@@ -5560,7 +5560,7 @@ input[type=submit].is-pending:after {
 a.button:hover,
 .button:hover,
 input[type=submit]:hover {
-    background-color: #39ac95
+    background-color:  #e25468;
 }
 
 a.button:focus,

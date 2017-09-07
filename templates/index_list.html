@@ -1,29 +1,10 @@
 {% extends 'base.html' %}
+
 {% load staticfiles %}
+{% load featured_tags %}
 
 {% block before_content %}
-    <div class="wrapper IssueCard-bannerContainer js-issueBannerOnExploreContainer">
-        <a class="IssueCard hover-overlay-light IssueCard--backgroundImage u-invertTextColor" style="background-image: url(https://res.cloudinary.com/hcu8jcnmr/image/upload/c_limit,w_1920/w3nk5usyhagavlwooolj.jpg)" href="/featured/issue/69/curated-by-pat-orourke">
-            <div class="Scrim--textOverImage"></div>
-            <div class="wrapper">
-                <div class="FlexRow">
-                    <div class="IssueCard-titleContainer">
-                        <div class="badge">
-                            <span>
-                                NEW ISSUE
-                            </span>
-                        </div>
-                        <h1 class="IssueMeta-title js-issueTitle">
-                            Curated by Pat O'Rourke
-                        </h1>
-                        <div class="IssueMeta-datestamp">
-                            July 4th, 2017
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>
+    {% latest_issue %}
 {% endblock %}
 
 {% block filters_position %}

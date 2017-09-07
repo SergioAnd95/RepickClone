@@ -41,20 +41,17 @@ $(document).ready(function(){
 
     function work_with_item() {
         var prev_item = '';
-        $(".product-card-body").fancybox({
+        $(".product-card-body, .product-link").fancybox({
             margin: [0, 0],
             animationEffect : "fade",
             baseClass: 'fancybox-overlay js-fix-scroll fancybox-overlay-fixed',
             btnTpl : {
                 smallBtn: '<a data-fancybox-close class="close-button-base close-button-position-top-right" title="{{CLOSE}}"></a>'
             },
-            spinnerTpl : '<div id="fancybox-loading"><div id="fancybox-loading-spinner"></div></div>'
-            touch : {
-                vertical : false,  // Allow to drag content vertically
-                momentum : false   // Continue movement after releasing mouse/touch when panning
-            },
+            spinnerTpl : '<div id="fancybox-loading"><div id="fancybox-loading-spinner"></div></div>',
             afterLoad: function (instance) {
                 prev_item = $(instance.$lastFocus[0]).parent();
+                console.log(instance);
                 window.history.pushState("object or string", "Title", instance.current.src);
             },
             afterClose: function () {
@@ -74,15 +71,27 @@ $(document).ready(function(){
                         url: url,
                         contentType: 'application/json',
                         success: function (data) {
-                            $ico = prev_item.find('.like-action-icon');
+                            console.log(prev_item);
+                            if(prev_item.hasClass('ProductCard')){
+                                $ico = prev_item.find('#like-button');
+                                active_class = 'is-liked';
+                                deactive_class = '';
+                            } else {
+                                active_class = 'icon-heart-red';
+                                deactive_class = 'icon-heart';
+                                $ico = prev_item.find('.like-action-icon');
+                            }
+
+                            console.log($ico);
+
                             $like_count = prev_item.find('.like-action-number');
 
                             if('added' in data) {
                                 $btn.addClass('is-liked');
-                                $ico.removeClass('icon-heart').addClass('icon-heart-red');
+                                $ico.removeClass(deactive_class).addClass(active_class);
                             } else if('removed' in data){
                                 $btn.removeClass('is-liked');
-                                $ico.removeClass('icon-heart-red').addClass('icon-heart');
+                                $ico.removeClass(active_class).addClass(deactive_class);
                             }
                             $like_count.text(data['likes_count'])
                         }
@@ -92,28 +101,45 @@ $(document).ready(function(){
         });
 
         $("#items, #search-results").on('click', function (e) {
-
+            console.log('asda');
             if($(e.target).parents('.like-action-link').length || e.target.className === 'like-action-link'){
                 e.preventDefault();
+                console.log('sadas');
+
                 if(e.target.className === 'like-action-link'){
                     $btn = $(e.target);
                 }
                 else{
                     $btn = $(e.target).parents('.like-action-link');
                 }
-
                 var url = $btn.attr('href');
-                $ico = $btn.find('.like-action-icon');
+
                 $like_count = $btn.find('.like-action-number');
+
+                var active_class = '';
+                var deactive_class = '';
+
+                if($btn.parents('.ProductCard').length){
+                    $ico = $btn;
+                    active_class = 'is-liked';
+                    deactive_class = ''
+                } else {
+                    active_class = 'icon-heart-red';
+                    deactive_class = 'icon-heart';
+                    $ico = $btn.find('.like-action-icon');
+                }
+
+                console.log($ico);
+
                 $.ajax({
                     url: url,
                     contentType: 'application/json',
                     success: function (data) {
                         if('added' in data) {
-                            $ico.removeClass('icon-heart').addClass('icon-heart-red');
+                            $ico.removeClass(deactive_class).addClass(active_class);
                         }
                         else if('removed' in data){
-                            $ico.removeClass('icon-heart-red').addClass('icon-heart');
+                            $ico.removeClass(active_class).addClass(deactive_class);
                         }
                         $like_count.text(data['likes_count'])
                     }

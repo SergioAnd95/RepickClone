@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <footer class="u-hideForInfiniteLoad" style="opacity: 1;">
     <div class="wrapper">
         <div class="footer-content-top">
@@ -22,22 +24,22 @@
 
 
             <div class=" footer-prim-links footer-row-vertical">
-                <a href="#">About</a>
-                <a href="#">Add Products</a>
-                <a href="#">Blog</a>
+                <a href="#">{% trans 'About' %}</a>
+                <a href="#">{% trans 'Add Products' %}</a>
+                <a href="#">{% trans 'Blog' %}</a>
             </div>
 
         </div>
         <div class="footer-bottom-absolute">
             <div class="footer-content-bottom">
             <div class="footer-row footer-secondary-links">
-                <a href="#">Terms</a>
-                <a href="#">Privacy</a>
-                <a href="#">Directory</a>
+                <a href="#">{% trans 'Terms' %}</a>
+                <a href="#">{% trans 'Privacy' %}</a>
+                <a href="#">{% trans 'Directory' %}</a>
             </div>
 
             <div class="footer-row footer-secondary-links text-center">
-                <p>All rights reserved. 2017</p>
+                <p>{% trans 'All rights reserved' %}. {% now 'Y' %}</p>
             </div>
             <div class="footer-row"></div>
         </div>

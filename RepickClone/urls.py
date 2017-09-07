@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('core.urls', namespace='core')),
     url(r'^catalogue/', include('catalogue.urls', namespace='catalogue')),
+    url(r'^featured/', include('featured.urls', namespace='featured')),
     url(r'^likelist/', include('likelist.urls', namespace='likelist')),
     url(r'^search/', AjaxSearchView.as_view(), name='haystack_search')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
