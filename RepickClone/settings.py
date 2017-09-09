@@ -192,6 +192,9 @@ EL_PAGINATION_PER_PAGE = 24
 
 CONSTANCE_CONFIG = {
     'CONTACT_EMAIL': ('example@email.com', _('Contact email')),
+    'PINTEREST_LINK': ('https://www.pinterest.com', _('Pinterest link')),
+    'FACEBOOK_LINK': ('https://www.facebook.com', _('Facebook link')),
+    'TWITTER_LINK': ('https://twitter.com', _('Twitter link'))
 }
 
 # Local settings

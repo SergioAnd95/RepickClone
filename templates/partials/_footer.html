@@ -1,16 +1,18 @@
 {% load i18n %}
+{% load flatpages %}
 
+{% get_flatpages '/about/' as about %}
 <footer class="u-hideForInfiniteLoad" style="opacity: 1;">
     <div class="wrapper">
         <div class="footer-content-top">
             <div class="footer-social-links footer-row-vertical">
-                 <a target="_blank" href="https://www.pinterest.com/joincanopy">
+                 <a target="_blank" href="{{ config.PINTEREST_LINK }}">
                     <i class="fa fa-pinterest" aria-hidden="true"></i>
                 </a>
-                <a target="_blank" href="https://www.facebook.com/joincanopy">
+                <a target="_blank" href="{{ config.FACEBOOK_LINK }}">
                     <i class="fa fa-facebook" aria-hidden="true"></i>
                 </a>
-                <a target="_blank" href="http://twitter.com/joincanopy">
+                <a target="_blank" href="{{ config.TWITTER_LINK }}">
                     <i class="fa fa-twitter" aria-hidden="true"></i>
                 </a>
             </div>
@@ -24,8 +26,8 @@
 
 
             <div class=" footer-prim-links footer-row-vertical">
-                <a href="#">{% trans 'About' %}</a>
-                <a href="#">{% trans 'Email' %}</a>
+                <a href="{% url 'about' %}">{% trans 'About' %}</a>
+                <a href="mailto:{{ config.CONTACT_EMAIL }}">{% trans 'Send Email' %}</a>
                 <a href="{% url 'featured:issue_list' %}">{% trans 'Blog' %}</a>
             </div>
 
@@ -33,9 +35,7 @@
         <div class="footer-bottom-absolute">
             <div class="footer-content-bottom">
             <div class="footer-row footer-secondary-links">
-                <a href="#">{% trans 'Terms' %}</a>
-                <a href="#">{% trans 'Privacy' %}</a>
-                <a href="#">{% trans 'Directory' %}</a>
+                <a href="{% url 'terms' %}">{% trans 'Terms' %}</a>
             </div>
 
             <div class="footer-row footer-secondary-links text-center">
