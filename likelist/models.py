@@ -5,11 +5,14 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class LikeList(models.Model):
-    when_created = models.DateTimeField(_('Дата создания'), auto_now_add=True)
+    when_created = models.DateTimeField(
+        _('Create date'),
+        auto_now_add=True
+    )
 
     class Meta:
-        verbose_name_plural = _('Списки понравившегось')
-        verbose_name = _('Список понравившегось')
+        verbose_name_plural = _('Like list')
+        verbose_name = _('Like lists')
 
     def add_item(self, item):
         likes = self.likes.filter(item=item)
@@ -26,12 +29,12 @@ class LikeList(models.Model):
 class Like(models.Model):
     like_list = models.ForeignKey(
         LikeList,
-        verbose_name=_('Список понравившегось'),
+        verbose_name=_('Like list'),
         related_name='likes'
     )
     item = models.ForeignKey(
         'catalogue.Item',
-        verbose_name=_('Товар'),
+        verbose_name=_('Item'),
         related_name='likes'
     )
 

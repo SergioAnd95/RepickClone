@@ -22,6 +22,10 @@ from core.views import AjaxSearchView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^pages/', include('django.contrib.flatpages.urls')),
+
+    url(r'^froala_editor/', include('froala_editor.urls')),
+
     url(r'^', include('core.urls', namespace='core')),
     url(r'^catalogue/', include('catalogue.urls', namespace='catalogue')),
     url(r'^featured/', include('featured.urls', namespace='featured')),

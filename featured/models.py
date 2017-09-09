@@ -68,7 +68,6 @@ class IssueRaw(models.Model):
             (SMALL_AND_BIG, _('Small and big'))
         )
 
-
     position = models.PositiveIntegerField(_('Position'), default=0)
     issue = models.ForeignKey(Issue, related_name='raws', verbose_name=_('Issue'))
     display_type = models.PositiveSmallIntegerField(

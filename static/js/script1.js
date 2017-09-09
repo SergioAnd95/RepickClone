@@ -38,9 +38,7 @@ $(document).ready(function(){
         });
     });
 
-
-    function work_with_item() {
-        var prev_item = '';
+    function set_fancybox(){
         $(".product-card-body, .product-link").fancybox({
             margin: [0, 0],
             animationEffect : "fade",
@@ -49,15 +47,17 @@ $(document).ready(function(){
                 smallBtn: '<a data-fancybox-close class="close-button-base close-button-position-top-right" title="{{CLOSE}}"></a>'
             },
             spinnerTpl : '<div id="fancybox-loading"><div id="fancybox-loading-spinner"></div></div>',
+            content: this,
             afterLoad: function (instance) {
-                prev_item = $(instance.$lastFocus[0]).parent();
                 console.log(instance);
                 window.history.pushState("object or string", "Title", instance.current.src);
             },
             afterClose: function () {
                 window.history.back();
             },
-            clickContent : function( current, e ) {
+            clickContent : function(current, e ) {
+
+                var prev_item= current.opts.$orig.parent();
 
                 if($(e.target).parents('.CardAction').length || $(e.target).hasClass('CardAction')){
                     e.preventDefault();
@@ -72,8 +72,8 @@ $(document).ready(function(){
                         contentType: 'application/json',
                         success: function (data) {
                             console.log(prev_item);
-                            if(prev_item.hasClass('ProductCard')){
-                                $ico = prev_item.find('#like-button');
+                            if(prev_item.parents('.ProductCard').length){
+                                $ico = prev_item.parents('.ProductCard').find('.like-action-link');
                                 active_class = 'is-liked';
                                 deactive_class = '';
                             } else {
@@ -81,9 +81,7 @@ $(document).ready(function(){
                                 deactive_class = 'icon-heart';
                                 $ico = prev_item.find('.like-action-icon');
                             }
-
                             console.log($ico);
-
                             $like_count = prev_item.find('.like-action-number');
 
                             if('added' in data) {
@@ -99,7 +97,10 @@ $(document).ready(function(){
                 }
             }
         });
+    }
 
+    function work_with_item() {
+        set_fancybox();
         $("#items, #search-results").on('click', function (e) {
             console.log('asda');
             if($(e.target).parents('.like-action-link').length || e.target.className === 'like-action-link'){
@@ -149,5 +150,8 @@ $(document).ready(function(){
     }
     work_with_item();
 
+     $("#items, #search-results").on('DOMNodeInserted DOMNodeRemoved', function (e) {
+         set_fancybox();
+     });
 
 });

@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block header %}
+    {% url 'featured:issue_list' as active_link%}
+    {% include 'partials/_header.html' %}
+{% endblock %}

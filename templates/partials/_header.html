@@ -13,15 +13,20 @@
     </div>
     <div class="GlobalNav-layout wrapper">
         <div class="GlobalNav-tabs">
-            <a class="GlobalNavTab GlobalNavTab--home active " href="/">
+
+            {% url 'core:index' as index_url %}
+            {% url 'catalogue:category_list' as shop_url %}
+            {% url 'featured:issue_list' as featured_url  %}
+
+            <a class="GlobalNavTab GlobalNavTab--home {% if active_link|default:index_url == index_url %}active{% endif %}" href="{{ index_url }}">
                 <span class="GlobalNavTab-icon"></span>
                 <span class="GlobalNavTab-text">{% trans 'Home' %}</span>
             </a>
-            <a class="GlobalNavTab GlobalNavTab--explore " href="{% url 'catalogue:category_list' %}">
+            <a class="GlobalNavTab GlobalNavTab--explore {% if active_link == shop_url %}active{% endif %}" href="{{ shop_url }}">
                 <span class="GlobalNavTab-icon"></span>
                 <span class="GlobalNavTab-text">{% trans 'Shop' %}</span>
             </a>
-            <a class="GlobalNavTab GlobalNavTab--featured " href="/featured">
+            <a class="GlobalNavTab GlobalNavTab--featured {% if active_link == featured_url %}active{% endif %}" href="{{ featured_url }}">
                 <span class="GlobalNavTab-icon"></span>
                 <span class="GlobalNavTab-text">{% trans 'Featured' %}</span>
             </a>

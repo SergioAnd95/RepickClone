@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/1.11/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
+from django.utils.translation import ugettext_lazy as _
 
 import os
 
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.flatpages',
 
     # third-party apps
     'taggit',
@@ -48,6 +50,9 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'haystack',
     'el_pagination',
+    'froala_editor',
+    'constance',
+    'constance.backends.database',
 
     # own apps
     'core',
@@ -81,6 +86,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'constance.context_processors.config',
             ],
         },
     },
@@ -181,6 +187,12 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 # El-pagination settings
 
 EL_PAGINATION_PER_PAGE = 24
+
+# Constance settings
+
+CONSTANCE_CONFIG = {
+    'CONTACT_EMAIL': ('example@email.com', _('Contact email')),
+}
 
 # Local settings
 try:
