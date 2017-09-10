@@ -178,6 +178,7 @@ HAYSTACK_CONNECTIONS = {
     },
 }
 
+
 if ES_URL.username:
     HAYSTACK_CONNECTIONS['default']['KWARGS'] = {"http_auth": ES_URL.username + ':' + ES_URL.password}
 
@@ -196,6 +197,8 @@ CONSTANCE_CONFIG = {
     'FACEBOOK_LINK': ('https://www.facebook.com', _('Facebook link')),
     'TWITTER_LINK': ('https://twitter.com', _('Twitter link'))
 }
+
+CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
 
 # Local settings
 try:
