@@ -150,8 +150,89 @@ $(document).ready(function(){
     }
     work_with_item();
 
-     $("#items, #search-results").on('DOMNodeInserted DOMNodeRemoved', function (e) {
-         set_fancybox();
-     });
+    $("#items, #search-results").on('DOMNodeInserted DOMNodeRemoved', function (e) {
+        set_fancybox();
+    });
 
+
+    var share = function () {
+        $(function () {
+            var e, t, n, r, o;
+            return r = !1, e = .9, n = function (e) {
+                if (e.keyCode !== 27) ;
+                else if ($(".PageHeader-wrapper").hasClass("is-viewingHeaderShare")) return t()
+            }, o = function (r) {
+                var o, i, a, s, l, u;
+                return console.log("click"), i = $(r.target).closest(".js-headerShareCanvas"), l = $("<div class='Scrim Scrim--headerShare'></div>"), s = $(".js-headerShareButton"), u = $(".js-triggerHeaderShare"), o = $(".js-closeButtonAnimateTarget"), a = $(".js-pageHeaderCreatorAvatar"), i.append(l), o.velocity("transition.expandIn", {
+                    delay: 200,
+                    duration: 200,
+                    display: null
+                }), u.velocity("transition.fadeOut", {
+                    duration: 200,
+                    display: null
+                }), a.velocity({
+                    translateY: -32,
+                    scale: .5,
+                    opacity: 0
+                }, {
+                    duration: 75,
+                    display: null,
+                    ease: "ease-out"
+                }), s.velocity("transition.expandIn", {
+                    delay: 150,
+                    stagger: 25,
+                    duration: 150,
+                    ease: "ease-out",
+                    display: null
+                }), l.velocity({
+                    opacity: e
+                }, {
+                    duration: 400,
+                    ease: "ease-out",
+                    begin: function () {
+                        return $("body").addClass("is-viewingHeaderShare")
+                    },
+                    complete: function () {
+                        return $("body").on("keyup", n), $("body").on("click", ".js-closeHeaderShare", t), $("body").addClass("is-restingHeaderShare")
+                    }
+                })
+            }, t = function () {
+                var e, o, i, a, s;
+                return r ? !0 : (r = !0, a = $(".Scrim--headerShare"), s = $(".js-triggerHeaderShare"), e = $(".js-closeButtonAnimateTarget"), i = $(".js-headerShareButton"), o = $(".js-pageHeaderCreatorAvatar"), e.velocity("transition.fadeOut", {
+                    duration: 200,
+                    display: null
+                }), s.velocity("transition.expandIn", {
+                    delay: 100,
+                    duration: 200
+                }), o.velocity({
+                    translateY: 0,
+                    scale: 1,
+                    opacity: 1
+                }, {
+                    delay: 150,
+                    duration: 100,
+                    display: null,
+                    ease: "ease-out"
+                }), i.velocity("transition.expandOut", {
+                    stagger: 50,
+                    duration: 300,
+                    display: null,
+                    ease: "ease-out",
+                    backwards: null,
+                    begin: function () {
+                        return $("body").removeClass("is-restingHeaderShare")
+                    },
+                    complete: function () {
+                        return $("body").removeClass("is-viewingHeaderShare"), $("body").off("click", ".js-closeHeaderShare", t), $("body").off("keyup", n), a.remove(), r = !1
+                    }
+                }), a.velocity({
+                    opacity: 0
+                }, {
+                    duration: 400,
+                    ease: "ease-out"
+                }))
+            }, $("body").on("click", ".js-triggerHeaderShare", o)
+
+        });
+    }.call(this);
 });

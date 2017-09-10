@@ -6,13 +6,15 @@ from haystack.forms import SearchForm
 
 class ItemFilterForm(SearchForm):
     class OrderingVars:
+        NEW = '-in_trend'
         TRENDING = '-when_created'
         POPULAR = '-total_likes'
         EXPENSIVE = '-price'
         CHEAP = 'price'
 
         ORDERING_CHOICES = (
-            (TRENDING, _('New')),
+            (NEW, _('New')),
+            (TRENDING, _('Trending')),
             (POPULAR, _('Popular')),
             (EXPENSIVE, _('$$$')),
             (CHEAP, _('$'))
@@ -22,7 +24,7 @@ class ItemFilterForm(SearchForm):
         widget=forms.RadioSelect(),
         choices=OrderingVars.ORDERING_CHOICES,
         required=False,
-        initial=OrderingVars.TRENDING
+        initial=OrderingVars.NEW
     )
 
     def __init__(self, *args, **kwargs):
@@ -45,9 +47,6 @@ class ItemFilterForm(SearchForm):
         items = self.items_qs
         tags = self.cleaned_data.get('tags')
 
-        if tags:
-            items = items.filter(tags__id__in=tags).distinct()
-
         order_by = self.cleaned_data.get('order_by')
         if order_by:
             items = items.order_by(order_by)
@@ -57,7 +56,7 @@ class ItemFilterForm(SearchForm):
 
 class MainPageItemFilter(forms.Form):
     class OrderingChoices:
-        TRENDING = '-when_created'
+        TRENDING = '-in_trend'
         NEW = '-when_created'
         POPULAR = '-total_likes'
         ORDERING_CHOICES = (
@@ -66,7 +65,7 @@ class MainPageItemFilter(forms.Form):
             (POPULAR, 'Popular')
         )
 
-    order_by = forms.ChoiceField(
+    order = forms.ChoiceField(
         widget=forms.RadioSelect,
         choices=OrderingChoices.ORDERING_CHOICES,
         required=False,
@@ -77,10 +76,16 @@ class MainPageItemFilter(forms.Form):
         self.items = kwargs.pop('items_qs')
         super().__init__(*args, **kwargs)
 
+    def clean_order(self):
+        if not self['order'].html_name in self.data:
+            return self.fields['order'].initial
+        return self.cleaned_data['order']
+
     def filter_data(self):
-        order_by = self.cleaned_data.get('order_by')
+        order = self.cleaned_data.get('order')
+        print(order, 'order')
         items = self.items
-        if order_by:
-            items = items.order_by(order_by)
+        if order:
+            items = items.order_by(order, '-when_created')
 
         return items

@@ -59,13 +59,13 @@
             <div class="social-actions-alignment">
                 <div class="social-actions-container">
                     <div class="social-networks">
-                        <a class="js-share-button-tracking js-share-button share-button" target="_blank" data-sharedvia="facebook" href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=https%3A%2F%2Fcanopy.co%2Fproducts%2F159&amp;p[images][0]=https%3A%2F%2Fres.cloudinary.com%2Fhcu8jcnmr%2Fimage%2Fupload%2Fc_lpad%2Cw_600%2Ch_600%2Fis4qxt4oso2oacfzr7yo.jpg&amp;p[title]=Los+Logos+6+%5BHardcover%5D%2C+via+Canopy.co&amp;p[summary]=Find+beautiful+things+on+Canopy.co">
+                        <a class="js-share-button-tracking js-share-button share-button" target="_blank" data-sharedvia="facebook" href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=http%3A%2F%2F{{ request.get_host | iriencode }}{{ item.get_absolute_url | iriencode }}&amp;p[images][0]={% thumbnail item.image '600x600' crop='center' as img %}http%3A%2F%2F{{ request.get_host|iriencode }}{{ img.url|iriencode }}{% endthumbnail %}&amp;p[title]=Los+Logos+6+%5BHardcover%5D%2C+via+Canopy.co&amp;p[summary]=Find+beautiful+things+on+Canopy.co">
                             <i class="fa fa-facebook" aria-hidden="true"></i>
                         </a>
                         <a class="js-share-button-tracking js-share-button share-button" target="_blank" data-sharedvia="twitter" href="http://twitter.com/home?status=Found+on+Canopy%3A+Los+Logos+6+%5BHardcover%5D+https%3A%2F%2Fcanopy.co%2Fp%2F159">
                             <i class="fa fa-twitter" aria-hidden="true"></i>
                         </a>
-                        <a class="js-share-button-tracking share-button" target="_blank" data-product="{&quot;id&quot;:159,&quot;name&quot;:&quot;{{ item.name }}&quot;}" data-sharedvia="pinterest" href="//www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fcanopy.co%2Fproducts%2F159&amp;media=https%3A%2F%2Fres.cloudinary.com%2Fhcu8jcnmr%2Fimage%2Fupload%2Fc_lpad%2Cw_600%2Ch_600%2Fis4qxt4oso2oacfzr7yo.jpg&amp;description=Los+Logos+6+%5BHardcover%5D">
+                        <a class="js-share-button-tracking share-button" target="_blank" data-sharedvia="pinterest" href="//www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fcanopy.co%2Fproducts%2F159&amp;media=https%3A%2F%2Fres.cloudinary.com%2Fhcu8jcnmr%2Fimage%2Fupload%2Fc_lpad%2Cw_600%2Ch_600%2Fis4qxt4oso2oacfzr7yo.jpg&amp;description=Los+Logos+6+%5BHardcover%5D">
                             <i class="fa fa-pinterest" aria-hidden="true"></i>
                         </a>
                         <a class="js-share-button-tracking share-button" data-sharedvia="email" href="mailto:?subject={{ item.name }} found on This IS My Galaxy&amp;body=I thought you might like this: {{ request.get_host }}{{ item.get_absolute_url }}">
