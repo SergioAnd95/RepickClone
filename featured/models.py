@@ -14,7 +14,7 @@ class Issue(models.Model):
     main_image = models.ImageField(_('Main image'), upload_to='issue')
 
     def __str__(self):
-        return _('Issue: %s #%d' % (self.title, self.id))
+        return 'Issue: %s #%d' % (self.title, self.id)
 
     class Meta:
         verbose_name=_('Issue')
