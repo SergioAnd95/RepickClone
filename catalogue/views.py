@@ -13,7 +13,7 @@ from el_pagination.views import AjaxListView
 # Create your views here.
 
 
-class BaseDetailView(AjaxListView):
+class BaseCategoryDetailView(AjaxListView):
 
     parent_model = Category
     parent_qs = parent_model.objects.all()
@@ -28,61 +28,26 @@ class BaseDetailView(AjaxListView):
         return super().get(request, *args, **kwargs)
 
     def get_queryset(self):
-        if 'tags' in self.request.GET or 'order_by' in self.request.GET:
-            filter_form = ItemFilterForm(
+
+        if 'order_by' in self.request.GET:
+            self.filter_form = ItemFilterForm(
                 self.request.GET,
-                tags_qs=self.object.get_tags,
                 items_qs=self.object.items.all()
             )
         else:
-            filter_form = ItemFilterForm(
-                tags_qs=self.object.get_tags,
-                items_qs=self.object.items.all()
-            )
-        if filter_form.is_valid():
-            items_list = filter_form.filter_data()
-        else:
-            items_list = self.object.items.all()
+            self.filter_form = ItemFilterForm(items_qs=self.object.items.all())
+
+        items_list = self.filter_form.filter_data()
+
         return items_list
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
 
-        if 'tags' in self.request.GET or 'order_by' in self.request.GET:
-            filter_form = ItemFilterForm(
-                self.request.GET,
-                tags_qs=self.object.get_tags,
-                items_qs=self.object_list
-            )
-        else:
-            filter_form = ItemFilterForm(
-                tags_qs=self.object.get_tags,
-                items_qs=self.object_list
-            )
-
         ctx['category'] = self.object
-        ctx['filter_form'] = filter_form
+        ctx['filter_form'] = self.filter_form
         ctx['back_link'] = (self.back_link[0], reverse(self.back_link[1]))
         return ctx
-
-
-class CategoryDetailView(BaseDetailView):
-    parent_model = Category
-    parent_qs = parent_model.objects.filter(type=1)
-    back_link = (_('All Categories'), 'catalogue:category_list')
-
-
-class GiftDetailView(BaseDetailView):
-    back_link = (_('All Gifts'), 'catalogue:gift_list')
-    parent_model = Category
-    parent_qs = parent_model.objects.filter(type=2)
-
-
-
-class BrandDetailView(BaseDetailView):
-    parent_model = Brand
-    parent_qs = parent_model
-    back_link = (_('All Brands'), 'catalogue:brand_list')
 
 
 class BaseCategoryListView(ListView):
@@ -94,6 +59,24 @@ class BaseCategoryListView(ListView):
         ctx = super().get_context_data(**kwargs)
         ctx['links_list'] = [('Categories', reverse('catalogue:category_list')), ('Gifts', reverse('catalogue:gift_list')), ('Brands', reverse('catalogue:brand_list'))]
         return ctx
+
+
+class CategoryDetailView(BaseCategoryDetailView):
+    parent_model = Category
+    parent_qs = parent_model.objects.filter(type=1)
+    back_link = (_('All Categories'), 'catalogue:category_list')
+
+
+class GiftDetailView(BaseCategoryDetailView):
+    back_link = (_('All Gifts'), 'catalogue:gift_list')
+    parent_model = Category
+    parent_qs = parent_model.objects.filter(type=2)
+
+
+class BrandDetailView(BaseCategoryDetailView):
+    parent_model = Brand
+    parent_qs = parent_model
+    back_link = (_('All Brands'), 'catalogue:brand_list')
 
 
 class CategoryListView(BaseCategoryListView):
@@ -129,15 +112,3 @@ class ItemDetailView(DetailView):
         if self.request.is_ajax():
             self.template_name = 'catalogue/modal_item_content.html'
         return super().get_template_names()
-
-"""
-class CatalogueSearchView(SearchView):
-    template_name = 'search/search.html'
-    form_class = CalibrationSearch
-    queryset = SearchQuerySet().filter(requires_calibration=True)
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset
-
-"""

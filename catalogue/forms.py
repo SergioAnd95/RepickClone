@@ -28,28 +28,22 @@ class ItemFilterForm(SearchForm):
     )
 
     def __init__(self, *args, **kwargs):
-        tags_qs = kwargs.pop('tags_qs')
+
         self.items_qs = kwargs.pop('items_qs')
         super().__init__(*args, **kwargs)
 
-        self.generate_tags_filter(tags_qs)
-
-    def generate_tags_filter(self, tags_qs):
-        self.fields['tags'] = \
-            forms.MultipleChoiceField(
-                widget=forms.CheckboxSelectMultiple(),
-                choices=[(tag.id, tag.name) for tag in tags_qs],
-                required=False
-            )
 
     def filter_data(self):
 
         items = self.items_qs
-        tags = self.cleaned_data.get('tags')
 
-        order_by = self.cleaned_data.get('order_by')
-        if order_by:
-            items = items.order_by(order_by)
+        if not self.is_valid():
+            return items.order_by(self.fields['order_by'].initial, '-when_created')
+
+        order = self.cleaned_data.get('order_by')
+
+        if order:
+            items = items.order_by(order, '-when_created')
 
         return items
 
@@ -76,16 +70,16 @@ class MainPageItemFilter(forms.Form):
         self.items = kwargs.pop('items_qs')
         super().__init__(*args, **kwargs)
 
-    def clean_order(self):
-        if not self['order'].html_name in self.data:
-            return self.fields['order'].initial
-        return self.cleaned_data['order']
-
     def filter_data(self):
-        order = self.cleaned_data.get('order')
-        print(order, 'order')
         items = self.items
+
+        if not self.is_valid():
+            return items.order_by(self.fields['order'].initial, '-when_created')
+
+        order = self.cleaned_data.get('order')
+
         if order:
             items = items.order_by(order, '-when_created')
 
         return items
+

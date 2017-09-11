@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from .models import LikeList
 
 from catalogue.models import Item
-from catalogue.views import BaseDetailView
+from catalogue.views import BaseCategoryDetailView
 # Create your views here.
 
 
@@ -26,7 +26,7 @@ def toggle_like(request, item_slug):
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
-class LikeListDetailView(BaseDetailView):
+class LikeListCategoryDetailView(BaseCategoryDetailView):
     model = LikeList
 
     def get_object(self, queryset=None):

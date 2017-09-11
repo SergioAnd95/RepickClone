@@ -22,10 +22,9 @@ class MainPageListView(AjaxListView):
         if 'order' in self.request.GET:
             self.filter_form = MainPageItemFilter(self.request.GET, items_qs=qs)
         else:
-            self.filter_form = MainPageItemFilter(items_qs=qs, initial={'order_by': MainPageItemFilter.OrderingChoices.TRENDING})
+            self.filter_form = MainPageItemFilter(items_qs=qs)
 
-        if self.filter_form.is_valid():
-            qs = self.filter_form.filter_data()
+        qs = self.filter_form.filter_data()
 
         return qs
 

@@ -13,7 +13,7 @@
             <div class="PageTabs">
                 <form method="get" action="." id="filter-form">
                     {{ filter_form.errors }}
-                    {% for option in filter_form.order_by %}
+                    {% for option in filter_form.order %}
                         <label>
                             {{ option.tag }}
                             <span class="page-section-tab">{{ option.choice_label|capfirst }}</span>

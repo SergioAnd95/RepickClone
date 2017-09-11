@@ -59,7 +59,7 @@
             <div class="social-actions-alignment">
                 <div class="social-actions-container">
                     <div class="social-networks">
-                        <a class="js-share-button-tracking js-share-button share-button" target="_blank" data-sharedvia="facebook" href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=http%3A%2F%2F{{ request.get_host | iriencode }}{{ item.get_absolute_url | iriencode }}&amp;p[images][0]={% thumbnail item.image '600x600' crop='center' as img %}http%3A%2F%2F{{ request.get_host|iriencode }}{{ img.url|iriencode }}{% endthumbnail %}&amp;p[title]=Los+Logos+6+%5BHardcover%5D%2C+via+Canopy.co&amp;p[summary]=Find+beautiful+things+on+Canopy.co">
+                        <a class="js-share-button-tracking js-share-button share-button" target="_blank" data-sharedvia="facebook" href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=http%3A%2F%2F{{ request.get_host | iriencode }}{{ item.get_absolute_url | iriencode }}&amp;p[images][0]={% thumbnail item.image '600x600' crop='center' as img %}http%3A%2F%2F{{ img.url | iriencode }}{% endthumbnail %}&amp;p[title]=Los+Logos+6+%5BHardcover%5D%2C+via+Canopy.co&amp;p[summary]=Find+beautiful+things+on+Canopy.co">
                             <i class="fa fa-facebook" aria-hidden="true"></i>
                         </a>
                         <a class="js-share-button-tracking js-share-button share-button" target="_blank" data-sharedvia="twitter" href="http://twitter.com/home?status=Found+on+Canopy%3A+Los+Logos+6+%5BHardcover%5D+https%3A%2F%2Fcanopy.co%2Fp%2F159">

@@ -1,4 +1,4 @@
 {{ object.title }}
-{{ object.decription }}
+{{ object.description }}
 {{ object.brand.name }}
 {{ object.slug }}
