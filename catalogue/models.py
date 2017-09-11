@@ -2,6 +2,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import permalink, F, Count
 
+import os
+
 from taggit.managers import TaggableManager
 from taggit.models import Tag
 
@@ -19,6 +21,15 @@ class Category(models.Model):
     """
     Represent Category
     """
+    def get_upload_path(self, filename):
+        if self.type == self.CategoryType.GIFT:
+            name = 'gift'
+        else:
+            name = 'category'
+
+        return os.path.join(
+            name, "%s_%s" % (name, self.slug), filename)
+
     class CategoryType:
         CATEGORY = 1
         GIFT = 2
@@ -28,12 +39,25 @@ class Category(models.Model):
             (GIFT, _('Gift'))
         )
 
+    logo_image = models.ImageField(
+        _('Logo image'),
+        upload_to=get_upload_path,
+        blank=True,
+        null=True
+    )
+    background_image = models.ImageField(
+        _('Background image'),
+        upload_to=get_upload_path,
+        blank=True,
+        null=True
+    )
+    description = models.TextField(_('Description'))
     name = models.CharField(
         _('Name'),
         max_length=30,
         unique=True
     )
-    main_image = models.ImageField(_('Main image'), upload_to='categories')
+    main_image = models.ImageField(_('Main image'), upload_to=get_upload_path)
     type = models.IntegerField(
         _('Тип'),
         choices=CategoryType.CATEGORY_TYPE_CHOICES
@@ -64,8 +88,32 @@ class Brand(models.Model):
     """
     Represent brand
     """
+    def get_upload_path(self, filename):
+
+        return os.path.join(
+            'brand', "%s_%s" % ('brand', self.slug), filename)
+
+    logo_image = models.ImageField(
+        _('Logo image'),
+        upload_to=get_upload_path,
+        blank=True,
+        null=True
+    )
+    background_image = models.ImageField(
+        _('Background image'),
+        upload_to=get_upload_path,
+        blank=True,
+        null=True
+    )
+    description = models.TextField(
+        _('Description'),
+        blank=True,
+        null=True
+    )
+
+    brand_link = models.URLField(blank=True, null=True)
     name = models.CharField(_('Name'), max_length=30)
-    main_image = models.ImageField(_('Image'), upload_to='brands')
+    main_image = models.ImageField(_('Image'), upload_to=get_upload_path)
     slug = models.SlugField(_('Slug'), unique=True)
 
     class Meta:
@@ -83,6 +131,14 @@ class Brand(models.Model):
     def get_tags(self):
         tags = Tag.objects.filter(item__brand=self).distinct()
         return tags
+
+    @property
+    def get_site_name(self):
+        if not self.brand_link:
+            domain = urlparse(self.brand_link).netloc.replace('www.', '')
+            return domain
+
+        return ''
 
 
 class Item(models.Model):

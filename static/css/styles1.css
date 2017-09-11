@@ -2122,6 +2122,7 @@ input[data-remote-validate] {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    height: 400px;
 }
 
 .PageHeader-wrapper {

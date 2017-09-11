@@ -2,42 +2,94 @@
 
 {% load staticfiles %}
 {% load widget_tweaks %}
+{% load thumbnail %}
 {% load i18n %}
 
 
 {% block before_content %}
-    <div class="PageHeader--shop js-headerShareCanvas">
-        <div class="wrapper">
-            <div class="HeaderShare js-closeHeaderShare">
-                <div class="HeaderShare-centeringContainer">
-                    <div class="HeaderShare-shareButtons">
-                        <a class="js-headerShareButton HeaderShare-Button facebook" target="_blank" data-share-object-type="null" data-share-method="facebook" href="#"></a>
-                        <a class="js-headerShareButton HeaderShare-Button twitter" target="_blank" data-share-object-type="null" data-share-method="twitter" href="http://twitter.com/home?status=Shop+Art+%26+Design+Books+on+%40JoinCanopy%3A+https%3A%2F%2Fcanopy.co%2Fshop%2Fart-%26-design-books"></a>
-                        <a class="js-headerShareButton HeaderShare-Button pinterest" target="_blank" data-share-object-type="null" data-share-method="pinterest" href="//www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fcanopy.co%2Fshop%2Fart-%26-design-books&amp;media=https://res.cloudinary.com/hcu8jcnmr/image/upload/h_882,w_2004/c_lpad,g_west,w_500,h_630,l_hezl8cabfgokh7u6qn4g,x_126,y_0/c_lpad,g_center,w_500,h_630,l_qrwnronydq5l5xtazrbk,x_0,y_0/c_lpad,g_east,w_500,h_630,l_ooi0v7a1rv9ykrrfnrbr,x_126,y_0/1px_white.jpg&amp;description=Art+%26+Design+Books+on+Canopy"></a>
-                        <a class="js-headerShareButton HeaderShare-Button email" data-share-object-type="null" data-share-method="email" href="mailto:?body=Check%20out%20%E2%80%9CShop%3A%20Art%20%26%20Design%20Books%E2%80%9D%20on%20Canopy%3A%0D%0A%0D%0Ahttps%3A%2F%2Fcanopy.co%2Fshop%2Fart-%26-design-books&amp;subject=Shop%20Art%20%26%20Design%20Books%20on%20Canopy"></a>
-                    </div>
-                    <div class="HeaderShare-closeButtonContainer">
-                        <div class="js-closeButtonAnimateTarget" style="opacity: 0">
-                            <div class="close-button-base close-button-thin js-closeHeaderShareButton"></div>
+    {% if category.background_image %}
+        <div class="PageHeader--backgroundImage PageHeader--grow PageHeader--shop js-headerShareCanvas u-invertTextColor" style="{% thumbnail category.background_image '1920' as img %}background-image: url({{ img.url }}){% endthumbnail %}">
+            <div class="Scrim--textOverImage"></div>
+            <div class="wrapper PageHeader-wrapper">
+                <div class="HeaderShare js-closeHeaderShare">
+                    <div class="HeaderShare-centeringContainer">
+                        <div class="HeaderShare-shareButtons">
+                            <a class="js-headerShareButton HeaderShare-Button facebook" target="_blank" data-share-object-type="null" data-share-method="facebook" href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=https%3A%2F%2Fcanopy.co%2Fbrands%2Faiaiai&amp;p[images][0]=https%3A%2F%2Fres.cloudinary.com%2Fhcu8jcnmr%2Fimage%2Fupload%2Fh_882%2Cw_2004%2Fc_lpad%2Cg_west%2Cw_500%2Ch_630%2Cl_fr50lmbu7b4wsufbazwc%2Cx_126%2Cy_0%2Fc_lpad%2Cg_center%2Cw_500%2Ch_630%2Cl_hbxb7q93swfntm75cfcc%2Cx_0%2Cy_0%2Fc_lpad%2Cg_east%2Cw_500%2Ch_630%2Cl_rhnk8ok6mrivukkyy86x%2Cx_126%2Cy_0%2F1px_white.jpg&amp;p[title]=AIAIAI is on Canopy&amp;p[summary]=%0D%0A%0D%0A%E2%80%9CAIAIAI+is+an+audio+design+company+dedicated+to+developing+high+quality+audio+products+for+everyday+use.%E2%80%9D"></a>
+                            <a class="js-headerShareButton HeaderShare-Button twitter" target="_blank" data-share-object-type="null" data-share-method="twitter" href="http://twitter.com/home?status=Check+out+amazing+products+by+AIAIAI%2C+on+%40JoinCanopy%3A+https%3A%2F%2Fcanopy.co%2Fbrands%2Faiaiai"></a>
+                            <a class="js-headerShareButton HeaderShare-Button pinterest" target="_blank" data-share-object-type="null" data-share-method="pinterest" href="//www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fcanopy.co%2Fbrands%2Faiaiai&amp;media=https://res.cloudinary.com/hcu8jcnmr/image/upload/h_882,w_2004/c_lpad,g_west,w_500,h_630,l_fr50lmbu7b4wsufbazwc,x_126,y_0/c_lpad,g_center,w_500,h_630,l_hbxb7q93swfntm75cfcc,x_0,y_0/c_lpad,g_east,w_500,h_630,l_rhnk8ok6mrivukkyy86x,x_126,y_0/1px_white.jpg&amp;description=AIAIAI%2C+on+Canopy"></a>
+                            <a class="js-headerShareButton HeaderShare-Button email" data-share-object-type="null" data-share-method="email" href="mailto:?body=Check%20out%20AIAIAI%2C%20a%20brand%20on%20Canopy%3A%0D%0A%0D%0A%E2%80%9CAIAIAI%20is%20an%20audio%20design%20company%20dedicated%20to%20developing%20high%20quality%20audio%20products%20for%20everyday%20use.%E2%80%9D%0D%0A%0D%0Ahttps%3A%2F%2Fcanopy.co%2Fbrands%2Faiaiai&amp;subject=AIAIAI%20is%20on%20Canopy"></a>
+                        </div>
+                        <div class="HeaderShare-closeButtonContainer">
+                            <div class="js-closeButtonAnimateTarget" style="opacity: 0">
+                                <div class="close-button-base close-button-thin js-closeHeaderShareButton"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="PageHeader-content">
-                <div class="PageHeader-categoryName">{{ category.name }}
-                </div>
-                <div class="PageHeader-actionsContainer">
-                    <div class="shareButton">
-                        <div class="PillButton--stroked js-triggerHeaderShare">{% trans 'Share' %}</div>
+                <div class="PageHeader-contentContainer">
+                    <div class="PageHeader-content">
+                        {% if category.logo_image %}
+                        <div class="PageHeader-brandAvatar">
+                            <div class="PageHeader-avatar" style="{% thumbnail category.logo_image '192x192' as img %}background-image: url({{ img.url }}){% endthumbnail %}"></div>
+                        </div>
+                        {% endif %}
+                        <div class="PageHeader-brandName">
+                            {{ category.name }}
+                        </div>
+                        {% if category.description %}
+                        <div class="PageHeader-description">
+                            <p>{{ category.description }}</p>
+
+                        </div>
+                        {% endif %}
+                        {% if category.brand_link %}
+                        <a target="_blank" rel="nofollow" class="PageHeader-externalLink" href="{{ category.brand_link }}">{{ category.get_site_name }}</a>
+                        {% endif %}
+                        <div class="PageHeader-actionsContainer">
+                            <div data-react-class="ShareButton"><div data-reactroot="" class="PillButton--stroked js-triggerHeaderShare">Share</div></div>
+                        </div>
+                    </div>
+                    <div class="PageHeader-navigationContainer">
+                        <a class="PillButton--text u-backArrow" href="{{ back_link.1 }}">{{ back_link.0 }}</a>
                     </div>
                 </div>
             </div>
-            <div class="PageHeader-navigationContainer">
-                <a class="PillButton--text u-backArrow" href="{{ back_link.1 }}">{{ back_link.0 }}</a>
+        </div>
+    {% else %}
+        <div class="PageHeader--shop js-headerShareCanvas">
+            <div class="wrapper">
+                <div class="HeaderShare js-closeHeaderShare">
+                    <div class="HeaderShare-centeringContainer">
+                        <div class="HeaderShare-shareButtons">
+                            <a class="js-headerShareButton HeaderShare-Button facebook" target="_blank" data-share-object-type="null" data-share-method="facebook" href="#"></a>
+                            <a class="js-headerShareButton HeaderShare-Button twitter" target="_blank" data-share-object-type="null" data-share-method="twitter" href="http://twitter.com/home?status=Shop+Art+%26+Design+Books+on+%40JoinCanopy%3A+https%3A%2F%2Fcanopy.co%2Fshop%2Fart-%26-design-books"></a>
+                            <a class="js-headerShareButton HeaderShare-Button pinterest" target="_blank" data-share-object-type="null" data-share-method="pinterest" href="//www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fcanopy.co%2Fshop%2Fart-%26-design-books&amp;media=https://res.cloudinary.com/hcu8jcnmr/image/upload/h_882,w_2004/c_lpad,g_west,w_500,h_630,l_hezl8cabfgokh7u6qn4g,x_126,y_0/c_lpad,g_center,w_500,h_630,l_qrwnronydq5l5xtazrbk,x_0,y_0/c_lpad,g_east,w_500,h_630,l_ooi0v7a1rv9ykrrfnrbr,x_126,y_0/1px_white.jpg&amp;description=Art+%26+Design+Books+on+Canopy"></a>
+                            <a class="js-headerShareButton HeaderShare-Button email" data-share-object-type="null" data-share-method="email" href="mailto:?body=Check%20out%20%E2%80%9CShop%3A%20Art%20%26%20Design%20Books%E2%80%9D%20on%20Canopy%3A%0D%0A%0D%0Ahttps%3A%2F%2Fcanopy.co%2Fshop%2Fart-%26-design-books&amp;subject=Shop%20Art%20%26%20Design%20Books%20on%20Canopy"></a>
+                        </div>
+                        <div class="HeaderShare-closeButtonContainer">
+                            <div class="js-closeButtonAnimateTarget" style="opacity: 0">
+                                <div class="close-button-base close-button-thin js-closeHeaderShareButton"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="PageHeader-content">
+                    <div class="PageHeader-categoryName">{{ category.name }}
+                    </div>
+                    <div class="PageHeader-actionsContainer">
+                        <div class="shareButton">
+                            <div class="PillButton--stroked js-triggerHeaderShare">{% trans 'Share' %}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="PageHeader-navigationContainer">
+                    <a class="PillButton--text u-backArrow" href="{{ back_link.1 }}">{{ back_link.0 }}</a>
+                </div>
             </div>
         </div>
-    </div>
+    {% endif %}
 
 {% endblock %}
 
