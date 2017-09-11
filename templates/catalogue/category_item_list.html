@@ -16,8 +16,7 @@
                     <div class="HeaderShare-centeringContainer">
                         <div class="HeaderShare-shareButtons">
                             {% thumbnail category.main_image '500x630' crop='center' as img %}
-
-                                <a class="js-headerShareButton HeaderShare-Button facebook" target="_blank" data-share-object-type="null" data-share-method="facebook" href="{% get_facebook_share host=request.get_host page=category.get_absolute_url summary=category.description title=category.name %}"></a>
+                                <a class="js-headerShareButton HeaderShare-Button facebook" target="_blank" data-share-object-type="null" data-share-method="facebook" href="https://facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}&title={{ category.name|iriencode }}"></a>
                                 <a class="js-headerShareButton HeaderShare-Button twitter" target="_blank" data-share-object-type="null" data-share-method="twitter" href="http://twitter.com/home?status=Check+out+amazing+products+by+{{ category.name }}%2C+on+%40This Is My Galaxy%3A+https%3A%2F%2Fhttp://{{ request.get_host }}{{ category.get_absolute_url }}"></a>
                                 <a class="js-headerShareButton HeaderShare-Button pinterest" target="_blank" data-share-object-type="null" data-share-method="pinterest" href="//www.pinterest.com/pin/create/button/?url=http://{{ request.get_host }}{{ category.get_absolute_url }}&amp;media=http://{% thumbnail category.main_image '500x630' crop='center' as img %}{{ request.get_host }}{{ img.url }}{% endthumbnail %}&amp;description={{ category.brand }}%2C+on+This+Is+My+Galaxy"></a>
                             {% endthumbnail %}
