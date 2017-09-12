@@ -15947,22 +15947,22 @@ article.white {
 }
 
 article.teal {
-    background-color: #96f8e3;
+    background-color: rgba(255, 97, 119, 0.78);
     padding-bottom: 120px
 }
 
 article.teal .about-title {
-    color: #427067
+    color: #fff;
 }
 
 article.teal .about-paragraph {
-    color: #39ac95;
+    color: #fff;
     -webkit-transition: color 0.2s ease-in-out;
     transition: color 0.2s ease-in-out
 }
 
 article.teal .about-paragraph a {
-    color: #39ac95;
+    color: #fff;
     background-size: 2px 2px;
     background-image: -webkit-linear-gradient(top, transparent 50%, #39ac95 50%);
     background-image: linear-gradient(to bottom, transparent 50%, #39ac95 50%);
@@ -15972,7 +15972,7 @@ article.teal .about-paragraph a {
 }
 
 article.teal .about-paragraph a:hover {
-    color: #427067;
+    color: #fff;
     background-size: 2px 2px;
     background-image: -webkit-linear-gradient(top, transparent 50%, #427067 50%);
     background-image: linear-gradient(to bottom, transparent 50%, #427067 50%);
