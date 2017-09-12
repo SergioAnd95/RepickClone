@@ -59,7 +59,7 @@
             <div class="social-actions-alignment">
                 <div class="social-actions-container">
                     <div class="social-networks">
-                        {% thumbnail item.image '600x600' crop='center' as img %}
+                        {% thumbnail item.main_image '600x600' crop='center' as img %}
                         <a class="js-share-button-tracking js-share-button share-button" target="_blank" data-sharedvia="facebook" href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]={{ request.build_absolute_uri }}&amp;p[images][0]=http://{{ request.get_host }}{{ img.url | iriencode }}&amp;p[title]={{ item.brand.name }}+{{ item.title|iriencode }}%5D%2C+via+This Is My Galaxy&amp;p[summary]=Find+beautiful+things+on+This+Is+My+Galaxy">
                             <i class="fa fa-facebook" aria-hidden="true"></i>
                         </a>
