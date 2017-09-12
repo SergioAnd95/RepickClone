@@ -8,21 +8,24 @@
             {% block title %}
                 This Is My Galaxy
             {% endblock %}
-
         </title>
-        <meta content="This Is My Galaxy" property="og:title">
+
+
         <link rel="stylesheet" media="screen" href="{% static 'css/styles1.min.css' %}">
         <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
-        <meta charset="utf-8">
-        <meta content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <meta content="yes" name="mobile-web-app-capable">
-        <meta content="yes" name="apple-mobile-web-app-capable">
-        <meta content="app-id=927695605, app-argument=myURL" name="apple-itunes-app">
-        <meta content="Products Trending Now on This Is My Galaxy. Use This Is My Galaxy to discover the most useful, beautiful, and well-designed products on Amazon." property="og:description">
-        <meta content="Products Trending Now on This Is My Galaxy, curated. Use This Is My Galaxy to discover the most useful, beautiful, and well-designed products on Amazon." name="description">
-        <meta content="website" property="og:type">
-        <meta content="{{ request.get_host }}" property="og:url">
-        <meta content="{% static 'images/favicon.png' %}" property="og:image">
+        {% block header-meta %}
+            <meta content="This Is My Galaxy" property="og:title">
+            <meta charset="utf-8">
+            <meta content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+            <meta content="yes" name="mobile-web-app-capable">
+            <meta content="yes" name="apple-mobile-web-app-capable">
+            <meta content="app-id=927695605, app-argument=myURL" name="apple-itunes-app">
+            <meta content="Products Trending Now on This Is My Galaxy. Use This Is My Galaxy to discover the most useful, beautiful, and well-designed products on Amazon." property="og:description">
+            <meta content="Products Trending Now on This Is My Galaxy, curated. Use This Is My Galaxy to discover the most useful, beautiful, and well-designed products on Amazon." name="description">
+            <meta content="website" property="og:type">
+            <meta content="{{ request.get_host }}" property="og:url">
+            <meta content="{% static 'images/favicon.png' %}" property="og:image">
+        {% endblock %}
         <link href="{% static 'images/favicon.png' %}" rel="shortcut icon">
         <link href="{% static 'images/favicon.png' %}" rel="apple-touch-icon" sizes="196x196">
         <link href="{% static 'images/favicon.png' %}" rel="apple-touch-icon-precomposed" sizes="196x196">
