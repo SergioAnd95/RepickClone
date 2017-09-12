@@ -60,16 +60,16 @@
                 <div class="social-actions-container">
                     <div class="social-networks">
                         {% thumbnail item.main_image '600x600' crop='center' as img %}
-                        <a class="js-share-button-tracking js-share-button share-button" target="_blank" data-sharedvia="facebook" href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]={{ request.build_absolute_uri }}&amp;p[images][0]=http://{{ request.get_host }}{{ img.url | iriencode }}&amp;p[title]={{ item.brand.name }}+{{ item.title|iriencode }}%5D%2C+via+This Is My Galaxy&amp;p[summary]=Find+beautiful+things+on+This+Is+My+Galaxy">
+                        <a class="js-share-button-tracking js-share-button share-button" target="_blank" data-sharedvia="facebook" href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]={{ request.build_absolute_uri }}&amp;p[images][0]={{ request.scheme }}://{{ request.get_host }}{{ img.url | iriencode }}&amp;p[title]={{ item.brand.name }}+{{ item.title|iriencode }}%5D%2C+via+This Is My Galaxy&amp;p[summary]=Find+beautiful+things+on+This+Is+My+Galaxy">
                             <i class="fa fa-facebook" aria-hidden="true"></i>
                         </a>
                         <a class="js-share-button-tracking js-share-button share-button" target="_blank" data-sharedvia="twitter" href="http://twitter.com/home?status=Found+on+Canopy%3A+{{ item.brand.name }}+{{ item.title }}%5D+{{ request.build_absolute_uri }}">
                             <i class="fa fa-twitter" aria-hidden="true"></i>
                         </a>
-                        <a class="js-share-button-tracking share-button" target="_blank" data-sharedvia="pinterest" href="//www.pinterest.com/pin/create/button/?url={{ request.build_absolute_uri|iriencode }}&amp;media=http://{{ request.get_host }}{{ img.url | iriencode }}&amp;description={{ item.brand.name }} {{ item.title }}">
+                        <a class="js-share-button-tracking share-button" target="_blank" data-sharedvia="pinterest" href="//www.pinterest.com/pin/create/button/?url={{ request.build_absolute_uri|iriencode }}&amp;media={{ request.scheme }}://{{ request.get_host }}{{ img.url | iriencode }}&amp;description={{ item.brand.name }} {{ item.title }}">
                             <i class="fa fa-pinterest" aria-hidden="true"></i>
                         </a>
-                        <a class="js-share-button-tracking share-button" data-sharedvia="email" href="mailto:?subject={{ item.brand.name }} {{ item.name }} found on This IS My Galaxy&amp;body=I thought you might like this: {{ request.get_host }}{{ item.get_absolute_url }}">
+                        <a class="js-share-button-tracking share-button" data-sharedvia="email" href="mailto:?subject={{ item.brand.name }} {{ item.name }} found on This IS My Galaxy&amp;body=I thought you might like this: {{ request.build_absolute_uri }}">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                         </a>
                         {% endthumbnail %}
