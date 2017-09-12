@@ -5,8 +5,10 @@
     <div data-react-class="GlobalNavMobileSearch">
         <div data-reactroot="" class="GlobalNav-mobileSearch wrapper">
             <div class="GlobalNavSearch-container ">
-                <input class="GlobalNavSearch js-globalSearchInput " placeholder="Search" id="mobileSearchInput" autocorrect="off">
-                <label class="GlobalNavSearch-searchIcon" for="mobileSearchInput"></label>
+                <form class="search-form" action="{% url 'haystack_search' %}" method="get">
+                    <input class="GlobalNavSearch js-globalSearchInput " placeholder="Search" id="mobileSearchInput" autocorrect="off">
+                    <label class="GlobalNavSearch-searchIcon" for="mobileSearchInput"></label>
+                </form>
             </div>
             <a class="GlobalNav-cancelMobileSearch">{% trans 'Cancel' %}</a>
         </div>

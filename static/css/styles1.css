@@ -1985,7 +1985,7 @@ input[data-remote-validate] {
 }
 
 #content {
-    min-height: 60vh;
+    min-height: calc(100% - 125px);
     overflow-x: hidden;
     width: 100%
 }

@@ -1,11 +1,14 @@
-from el_pagination.views import AjaxListView
+from django.utils.decorators import method_decorator
 
-from haystack.generic_views import SearchView
+from el_pagination.views import AjaxListView
 from el_pagination.settings import PAGE_LABEL
 from el_pagination.views import AjaxMultipleObjectTemplateResponseMixin
 
+from haystack.generic_views import SearchView
+
 from catalogue.models import Item
 from catalogue.forms import MainPageItemFilter
+
 
 # Create your views here.
 
@@ -43,7 +46,6 @@ class AjaxSearchView(AjaxListView, SearchView):
 
     def get_queryset(self):
         qs = super().get_queryset()
-        print(qs)
         return qs
 
     def get_context_data(self, **kwargs):
@@ -57,7 +59,6 @@ class AjaxSearchView(AjaxListView, SearchView):
         key = 'querystring_key'
         querystring_key = request.GET.get(key,
             request.POST.get(key, PAGE_LABEL))
-        print(querystring_key)
         if request.is_ajax() and request.GET.get(self.key):
             return [self.page_template]
         return super(

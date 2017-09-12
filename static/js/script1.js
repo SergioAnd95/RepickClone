@@ -235,4 +235,82 @@ $(document).ready(function(){
 
         });
     }.call(this);
+    
+    var mobileSearch = function() {
+        var e, t = function(e, t) {
+            return function() {
+                return e.apply(t, arguments)
+            }
+        };
+        $(function() {
+            return window.searchController = new e, searchController.searchOnLoad(), $(document.body).on("click", ".js-cancelSearchMode", function() {
+                return $(document).trigger("Search:showSearchMode", !1)
+            })
+        }), e = function() {
+            function e() {
+                this.searchDispatch = t(this.searchDispatch, this), this.$document = $(document), this.$browseMode = $("#browse-mode"), this.$searchMode = $("#search-mode"), this.pendingSearches = {}, this.inSearchMode = !1, this.previousScrollPos = null, this.initListeners()
+            }
+            return e.prototype.initListeners = function() {
+                return this.$document.on("Search:requestSearch", function(e) {
+                    return function(t, n) {
+                        return e.searchDispatch(n)
+                    }
+                }(this)), this.$document.on("Search:showSearchMode", function(e) {
+                    return function(t, n) {
+                        return e.showSearchMode(n)
+                    }
+                }(this)), this.$document.on("Search:requestMobileSearch", function(e) {
+                    return function(t, n) {
+                        return e.showMobileSearchInput(n)
+                    }
+                }(this)), window.addEventListener("popstate", function(e) {
+                    return function(t) {
+                        return t.state && t.state.query ? (e.showSearchMode(!0), e.searchDispatch(query)) : (e.showSearchMode(!1), e.$document.trigger("Search:requestClearSearchInput"), $(".js-globalSearchInput").blur())
+                    }
+                }(this))
+            }, e.prototype.searchOnLoad = function() {
+                var e, t;
+                return window.location.pathname.indexOf("/search") > -1 && (e = window.location.search.parseQueryString(), e.q) ? (t = e.q, $(document).trigger("Search:updateQuery", t), $(document).trigger("Search:requestSearch", t)) : void 0
+            }, e.prototype.showMobileSearchInput = function(e) {
+                return e ? document.body.classList.add("is-showingMobileSearchInput") : (document.body.classList.remove("is-showingMobileSearchInput"), this.clearSearchResults(), this.showSearchMode(!1), this.$document.trigger("Search:requestClearSearchInput"), $("#mobileSearchInput").focus())
+            }, e.prototype.showSearchMode = function(e) {
+                return e ? (this.previousScrollPos = this.$document.scrollTop(), this.$browseMode.hide(), this.$searchMode.show(), this.inSearchMode = !0) : (this.$browseMode.show(), this.$document.scrollTop(this.previousScrollPos), this.$searchMode.hide(), this.inSearchMode = !1)
+            }, e.prototype.clearSearchResults = function() {
+                return $("#search-container").html("")
+            }, e.prototype.search = function(e, t) {
+                var n, r, o;
+                return n = $(".js-" + e + "-search-section"), n.show(), n.find(".js-empty-state").hide(), n.find(".js-spinner").show(), n.find(".js-results-container").hide(), n.find(".js-message").hide(), r = function() {
+                    return function(e) {
+                        var t;
+                        return n.find(".js-spinner").hide(), t = $(e.trim()), 0 === t.length ? n.find(".js-empty-state").show() : (n.find(".js-empty-state").hide(), n.find(".js-results-container").html(e), n.find(".js-results-container").show(), n.find(".js-message").show(), ReactRailsUJS.mountComponents()), setUpSmoothScroll()
+                    }
+                }(this), null != (o = this.pendingSearches[e]) && o.abort(), this.pendingSearches[e] = $.ajax("/ajax/" + e + "_search", {
+                    dataType: "html",
+                    data: {
+                        query: t
+                    },
+                    success: r
+                })
+            }, e.prototype.searchDispatch = function(e) {
+                var t, n, r, o, i;
+                return $(".js-asin-search-section").hide(), $(".js-amazon-search-section").hide(), $(".js-product-search-section").hide(), $(".js-canopy-search-section").hide(), this.inSearchMode || this.clearSearchResults(), (null != e ? e.length : void 0) > 0 ? (this.clearSearchResults(), this.showSearchMode(!0)) : this.showSearchMode(!1), e = e.trim(), n = "Searched", o = {
+                    originating: !0,
+                    query: e
+                }, SegmentAnalytics.canopyTrack(n, o), i = encodeURI(e.trim()), window.history.pushState({
+                    query: e
+                }, "Search: query", "/search?q=" + i), r = e.match("/([A-Z0-9]{10})(/|\\?|$)"), t = e.match(/canopy\.co.*\/products\/([0-9]+)/), r ? this.search("asin", r[1]) : t ? this.search("canopy", t[1]) : this.search("product", e), $("body").animate({
+                    scrollTop: -$($(".search-summary")[0]).offset().top
+                }, 200)
+            }, e
+        }()
+    }.call(this);
+
+
+    $('.NavAction--showSearch').on('click', function () {
+        return $(document).trigger("Search:requestMobileSearch", !0)
+    });
+
+    $('.GlobalNav-cancelMobileSearch').on('click', function () {
+        return $(document).trigger("Search:requestMobileSearch", !1)
+    })
 });
