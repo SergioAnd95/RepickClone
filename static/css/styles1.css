@@ -3567,7 +3567,7 @@ body.sticky .GlobalNav {
     transition: background-color 0.2s ease-in-out;
     overflow: hidden;
     position: relative;
-    display: block
+    display: block;
 }
 
 #lockup:hover {
@@ -14916,6 +14916,7 @@ footer {
     -ms-flex-pack: justify;
     -webkit-box-pack: justify;
     justify-content: space-between;
+    height: 100%;
 }
 
 .footer-bottom-absolute{
@@ -15134,6 +15135,10 @@ h1.footer-tagline,
 
     .footer-content-top{
         display: block;
+    }
+
+    .footer-content-top, .footer-content-bottom{
+       height: auto;
     }
 
     .footer-row-vertical, footer-row-vertical.logo{
