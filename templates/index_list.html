@@ -49,25 +49,7 @@
     <script type="text/javascript">
 
     $(document).ready(function () {
-        $("#filter-form input[type='radio']").on('change', function () {
-            $form = $(this).parents('form');
 
-            var url = $form.attr('action');
-            var method = $form.attr('method');
-            var data = $form.serialize();
-            $.ajax({
-                url: url,
-                method: method,
-                data: data,
-                success: function (data){
-                    $("#items").html(data);
-
-                },
-                error: function (data) {
-                    alert('На сервере произошла ошибка, извините за временные неудобства');
-                }
-            })
-        });
 
     });
     </script>

@@ -312,5 +312,43 @@ $(document).ready(function(){
 
     $('.GlobalNav-cancelMobileSearch').on('click', function () {
         return $(document).trigger("Search:requestMobileSearch", !1)
-    })
+    });
+
+    $("#filter-form input[type='radio']").on('change', function () {
+            $form = $(this).parents('form');
+
+            var url = $form.attr('action');
+            var method = $form.attr('method');
+            var data = $form.serialize();
+            $items = $("#items");
+            $items.html(
+                '<div class="js-spinner product-search-spinner">\n' +
+                '    <div class="vertical-center-outer">\n' +
+                '        <div class="vertical-center-inner">\n' +
+                '            <div class="product-loader-icon search animated spin">\n' +
+                '                <span>\n' +
+                '                    Loading...\n' +
+                '                </span>\n' +
+                '            </div>\n' +
+                '        </div>\n' +
+                '    </div>\n' +
+                '</div>'
+            );
+
+            $.ajax({
+                url: url,
+                method: method,
+                data: data,
+                success: function (data){
+                    setTimeout(function () {
+                        $items.html(data);
+                    }, 300);
+
+                },
+                error: function (data) {
+                    alert('На сервере произошла ошибка, извините за временные неудобства');
+                    $items.remove('.product-search-spinner');
+                }
+            })
+        });
 });
