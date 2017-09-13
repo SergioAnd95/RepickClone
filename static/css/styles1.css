@@ -8659,7 +8659,8 @@ a.ProductPivot-product {
 }
 
 .ProductInfo-titleLink {
-    color: #525252
+    color: #525252;
+    outline:none;
 }
 
 .ProductInfo-titleLink:hover {
