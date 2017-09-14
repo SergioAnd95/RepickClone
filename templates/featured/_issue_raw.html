@@ -31,7 +31,7 @@
                                    </div>
                                </div>
                                <div class="top-right overflow-hidden">
-                                   <a href="{{ item.link }}" data-source="Product Card" target="_blank" rel="nofollow" class="analytics-track-to-amazon card-price button is-prime">${{ item.get_parse_price.digits }}</a>
+                                   <a href="{{ item.link }}" data-source="Product Card" target="_blank" rel="nofollow" class="analytics-track-to-amazon card-price button {% if item.is_prime %}is-prime{% endif %}">${{ item.get_parse_price.digits }}</a>
                                </div>
                            </div>
                        </div>

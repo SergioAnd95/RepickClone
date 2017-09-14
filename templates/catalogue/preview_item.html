@@ -4,7 +4,10 @@
 
 <div class="feed-card product-card {{ item_cls }}" data-product-id="{{ item.id }}">
     <div class="card-header">
-        <div class="buy-button-container"><a href="{{ item.link }}" data-source="Product Card" target="_blank" rel="nofollow" class="analytics-track-to-amazon card-buy-button no-prime">
+        <div class="buy-button-container"><a href="{{ item.link }}" data-source="Product Card" target="_blank" rel="nofollow" class="analytics-track-to-amazon card-buy-button {% if not item.is_prime %}no-prime{% endif %}">
+            {% if item.is_prime %}
+                <i class="icon-check price-icon"></i>
+            {% endif %}
             <span class="price">${{ item.get_parse_price.digits }}</span></a>
         </div>
     </div>
