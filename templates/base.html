@@ -19,12 +19,11 @@
             <meta content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
             <meta content="yes" name="mobile-web-app-capable">
             <meta content="yes" name="apple-mobile-web-app-capable">
-            <meta content="app-id=927695605, app-argument=myURL" name="apple-itunes-app">
             <meta content="Products Trending Now on This Is My Galaxy. Use This Is My Galaxy to discover the most useful, beautiful, and well-designed products on Amazon." property="og:description">
             <meta content="Products Trending Now on This Is My Galaxy, curated. Use This Is My Galaxy to discover the most useful, beautiful, and well-designed products on Amazon." name="description">
             <meta content="website" property="og:type">
             <meta content="{{ request.get_host }}" property="og:url">
-            <meta content="{{ request.schema }}://{{ requets.get_host }}{% static 'images/favicon.png' %}" property="og:image">
+            <meta content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/favicon.png' %}" property="og:image">
         {% endblock %}
         <link href="{% static 'images/favicon.png' %}" rel="shortcut icon">
         <link href="{% static 'images/favicon.png' %}" rel="apple-touch-icon" sizes="196x196">
