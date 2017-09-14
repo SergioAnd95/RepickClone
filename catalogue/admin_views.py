@@ -47,7 +47,6 @@ class ProcessItemFormView(FormView):
             try:
                 brand = Brand.objects.get(name=brand_name)
             except Brand.DoesNotExist:
-                print('error')
                 if brand_name in brand_errors:
                     brand_errors[brand_name]['items_names'].append(title)
                 else:
