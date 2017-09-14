@@ -6,8 +6,8 @@ from haystack.forms import SearchForm
 
 class ItemFilterForm(SearchForm):
     class OrderingVars:
-        NEW = '-in_trend'
-        TRENDING = '-when_created'
+        NEW = '-when_created'
+        TRENDING = '-in_trend'
         POPULAR = '-total_likes'
         EXPENSIVE = '-price'
         CHEAP = 'price'
