@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'froala_editor',
     'constance',
     'constance.backends.database',
+    'analytical',
 
     # own apps
     'core',

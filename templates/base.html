@@ -2,6 +2,8 @@
 {% load i18n %}
 {% load featured_tags %}
 
+{% load analytical %}
+
 <html class="wf-europa-n4-active wf-europa-n3-active wf-europa-n7-active wf-freighttextpro-i4-active wf-active">
     <head>
         <title>
@@ -36,6 +38,8 @@
         <script>
             try{Typekit.load();}catch(e){}
         </script>
+
+        {% analytical_head_top %}{% analytical_head_bottom %}
 
     </head>
     <body class="logged-out">
