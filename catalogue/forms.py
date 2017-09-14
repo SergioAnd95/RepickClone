@@ -83,3 +83,7 @@ class MainPageItemFilter(forms.Form):
 
         return items
 
+
+class ProccesItemForm(forms.Form):
+    excel_file = forms.FileField()
+

@@ -185,6 +185,7 @@ class Item(models.Model):
         verbose_name=_('Related itemd')
     )
     in_trend = models.BooleanField(_('Trend'),default=True)
+    is_prime = models.BooleanField(_('Prime'), default=False)
 
     class Meta:
         verbose_name = _('Item')
