@@ -7931,7 +7931,7 @@ a.no-price:hover {
 
 .like-action {
     float: left;
-    width: 62px
+    width: 105px
 }
 
 .like-action .like-action-inner {
@@ -8197,7 +8197,7 @@ a.no-price:hover {
         font-size: 14px
     }
     .feed-card-footer .footer-left-side {
-        width: 70%
+        width: 60%
     }
     .feed-card-footer .liked-by-footer-content .new-in-link,
     .feed-card-footer .new-in-content .new-in-link {
