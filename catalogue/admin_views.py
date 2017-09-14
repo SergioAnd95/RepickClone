@@ -1,6 +1,7 @@
 from django.views.generic import FormView
 from django.core.files import File
 from django.utils.text import slugify
+from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 
 import io
@@ -23,35 +24,66 @@ class ProcessItemFormView(FormView):
 
     def form_valid(self, form):
         file = form.cleaned_data['excel_file']
-        self.process_item(file)
+        error_ctx  = self.process_item(file)
+        if error_ctx:
+            return render(self.request, 'catalogue/admin/import_errors.html', error_ctx)
         return super().form_valid(form)
 
     def process_item(self, file):
         workbook = xlrd.open_workbook(file_contents=file.read())
         first_sheet = workbook.sheet_by_index(0)
 
-        brands_errors = []
+        brand_errors = {}
+        category_errors = {}
+        gift_errors = {}
+        item_errors = {}
+
         for row in itertools.islice(first_sheet.get_rows(), 1, None):
-
-            try:
-                brand = Brand.objects.get(name=row[0].value)
-            except Brand.DoesNotExist:
-                brands_errors.append((row[0].value, _('Brand don\'t exist')))
-                continue
-
-            categories = Category.objects.filter(
-                name__in=row[1].value.split(', '),
-                type=1
-            )
-
-            gifts = Category.objects.filter(
-                name__in=row[2].value.split(', '),
-                type=2
-            )
-
+            brand_name = row[0].value
             title = row[3].value
 
             if Item.objects.filter(title=title).exists():
+                continue
+
+            try:
+                brand = Brand.objects.get(name=brand_name)
+            except Brand.DoesNotExist:
+                if brand_name in brand_errors:
+                    brand_errors[brand_name]['items_names'].append(title)
+                else:
+                    brand_errors.update({brand_name:{'items_names': [title], 'error':_('Brand doesn\'t exist')}})
+                continue
+
+            categories_names= set(row[1].value.split(', '))
+            categories = Category.objects.filter(
+                name__in=categories_names,
+                type=1
+            )
+
+            cat_names = {i.name for i in categories}
+            a = categories_names-cat_names
+            if a:
+                for i in a:
+                    if i in category_errors:
+                        category_errors[i]['items_names'].append(title)
+                    else:
+                        category_errors.update({i: {'items_names': [title], 'error': _('Category doesn\'t exist')}})
+                continue
+
+            gifts_names = set(row[2].value.split(', '))
+
+            gifts = Category.objects.filter(
+                name__in=gifts_names,
+                type=2
+            )
+            gif_names = {i.name for i in gifts}
+            a = gifts_names - gif_names
+            if a:
+                for i in a:
+                    if i in gift_errors:
+                        gift_errors[i]['items_names'].append(title)
+                    else:
+                        gift_errors.update({i: {'items_names': [title], 'error': _('Gift doesn\'t exist')}})
                 continue
 
             item_dict = {
@@ -78,6 +110,14 @@ class ProcessItemFormView(FormView):
                 File(open(img_resp[0], 'rb'))
             )
             item.save()
+
+        if brand_errors or category_errors or gift_errors:
+            return {
+                'brand_errors':brand_errors,
+                'category_errors':category_errors,
+                'gift_errors': gift_errors,
+                'opts': Item._meta
+            }
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
