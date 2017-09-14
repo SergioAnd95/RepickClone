@@ -24,7 +24,7 @@
             <meta content="Products Trending Now on This Is My Galaxy, curated. Use This Is My Galaxy to discover the most useful, beautiful, and well-designed products on Amazon." name="description">
             <meta content="website" property="og:type">
             <meta content="{{ request.get_host }}" property="og:url">
-            <meta content="{% static 'images/favicon.png' %}" property="og:image">
+            <meta content="{{ request.schema }}://{{ requets.get_host }}{% static 'images/favicon.png' %}" property="og:image">
         {% endblock %}
         <link href="{% static 'images/favicon.png' %}" rel="shortcut icon">
         <link href="{% static 'images/favicon.png' %}" rel="apple-touch-icon" sizes="196x196">
