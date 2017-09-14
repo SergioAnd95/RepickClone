@@ -20,6 +20,7 @@
 
 {% block content %}
     {% if brand_errors %}
+        {{ brand_errors }}
         <p>{% blocktrans %}Brand erros:{% endblocktrans %}</p>
         <ul>
         {% for brand, error in brand_errors.items %}
@@ -54,9 +55,9 @@
     {% endif %}
 
     {% if gift_errors %}
-        <p>{% blocktrans %}Brand erros:{% endblocktrans %}</p>
+        <p>{% blocktrans %}Gift erros:{% endblocktrans %}</p>
         <ul>
-        {% for gift, error in category_errors.items %}
+        {% for gift, error in gift_errors.items %}
             <li>
                 <p>{{ gift }} - {{ error.error }}</p>
                 <p>{% blocktrans %}Items doesn't created:{% endblocktrans %}</p>

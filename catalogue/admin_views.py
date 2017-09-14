@@ -36,7 +36,6 @@ class ProcessItemFormView(FormView):
         brand_errors = {}
         category_errors = {}
         gift_errors = {}
-        item_errors = {}
 
         for row in itertools.islice(first_sheet.get_rows(), 1, None):
             brand_name = row[0].value
@@ -48,6 +47,7 @@ class ProcessItemFormView(FormView):
             try:
                 brand = Brand.objects.get(name=brand_name)
             except Brand.DoesNotExist:
+                print('error')
                 if brand_name in brand_errors:
                     brand_errors[brand_name]['items_names'].append(title)
                 else:
@@ -113,8 +113,8 @@ class ProcessItemFormView(FormView):
 
         if brand_errors or category_errors or gift_errors:
             return {
-                'brand_errors':brand_errors,
-                'category_errors':category_errors,
+                'brand_errors': brand_errors,
+                'category_errors': category_errors,
                 'gift_errors': gift_errors,
                 'opts': Item._meta
             }
