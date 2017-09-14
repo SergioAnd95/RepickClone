@@ -51,7 +51,11 @@ class Category(models.Model):
         blank=True,
         null=True
     )
-    description = models.TextField(_('Description'))
+    description = models.TextField(
+        _('Description'),
+        blank=True,
+        null=True
+    )
     name = models.CharField(
         _('Name'),
         max_length=30,
