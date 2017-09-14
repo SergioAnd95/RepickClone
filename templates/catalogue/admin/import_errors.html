@@ -20,7 +20,6 @@
 
 {% block content %}
     {% if brand_errors %}
-        {{ brand_errors }}
         <p>{% blocktrans %}Brand erros:{% endblocktrans %}</p>
         <ul>
         {% for brand, error in brand_errors.items %}
