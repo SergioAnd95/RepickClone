@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'constance',
     'constance.backends.database',
     'analytical',
+    'compressor',
 
     # own apps
     'core',
@@ -65,6 +66,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -154,6 +156,12 @@ STATICFILES_DIRS = [
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
+
 # Media files
 
 MEDIA_URL = '/media/'
@@ -200,6 +208,12 @@ CONSTANCE_CONFIG = {
 }
 
 CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+
+# Compress settings
+
+COMPRESS_ROOT = os.path.join(os.path.dirname(__file__), 'compress')
+
+COMPRESS_ENABLED = True
 
 # Local settings
 try:

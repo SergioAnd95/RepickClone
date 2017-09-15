@@ -1,8 +1,8 @@
 {% load static %}
 {% load i18n %}
 {% load featured_tags %}
-
 {% load analytical %}
+{% load compress %}
 
 <html class="wf-europa-n4-active wf-europa-n3-active wf-europa-n7-active wf-freighttextpro-i4-active wf-active">
     <head>
@@ -11,9 +11,14 @@
                 This Is My Galaxy
             {% endblock %}
         </title>
-
-
-        <link rel="stylesheet" media="screen" href="{% static 'css/styles1.min.css' %}">
+        {% compress css %}
+            <link rel="stylesheet" media="screen" href="{% static 'css/styles1.min.css' %}">
+            <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+            <link rel="stylesheet" href="{% static 'css/jquery.fancybox.min.css' %}">
+            <script src="//use.typekit.net/qph1jvg.js"></script>
+            <style type="text/css">.tk-freight-text-pro{font-family:"freight-text-pro",sans-serif;}.europa,.europa input,.europa textarea{font-family:"europa","Helvetica Neue","Helvetica",sans-serif;}</style>
+            <style type="text/css">@font-face{font-family:freight-text-pro;src:url(https://use.typekit.net/af/555f76/00000000000000000001205a/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3) format("woff2"),url(https://use.typekit.net/af/555f76/00000000000000000001205a/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3) format("woff"),url(https://use.typekit.net/af/555f76/00000000000000000001205a/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3) format("opentype");font-weight:400;font-style:italic;}@font-face{font-family:europa;src:url(https://use.typekit.net/af/678af7/0000000000000000000129a5/27/l?subset_id=2&fvd=n7&v=3) format("woff2"),url(https://use.typekit.net/af/678af7/0000000000000000000129a5/27/d?subset_id=2&fvd=n7&v=3) format("woff"),url(https://use.typekit.net/af/678af7/0000000000000000000129a5/27/a?subset_id=2&fvd=n7&v=3) format("opentype");font-weight:700;font-style:normal;}@font-face{font-family:europa;src:url(https://use.typekit.net/af/79f07d/0000000000000000000129a3/27/l?subset_id=2&fvd=n3&v=3) format("woff2"),url(https://use.typekit.net/af/79f07d/0000000000000000000129a3/27/d?subset_id=2&fvd=n3&v=3) format("woff"),url(https://use.typekit.net/af/79f07d/0000000000000000000129a3/27/a?subset_id=2&fvd=n3&v=3) format("opentype");font-weight:300;font-style:normal;}@font-face{font-family:europa;src:url(https://use.typekit.net/af/d253a1/0000000000000000000129a4/27/l?subset_id=2&fvd=n4&v=3) format("woff2"),url(https://use.typekit.net/af/d253a1/0000000000000000000129a4/27/d?subset_id=2&fvd=n4&v=3) format("woff"),url(https://use.typekit.net/af/d253a1/0000000000000000000129a4/27/a?subset_id=2&fvd=n4&v=3) format("opentype");font-weight:400;font-style:normal;}</style>
+        {% endcompress %}
         <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
         {% block header-meta %}
             <meta content="This Is My Galaxy" property="og:title">
@@ -30,11 +35,6 @@
         <link href="{% static 'images/favicon.png' %}" rel="shortcut icon">
         <link href="{% static 'images/favicon.png' %}" rel="apple-touch-icon" sizes="196x196">
         <link href="{% static 'images/favicon.png' %}" rel="apple-touch-icon-precomposed" sizes="196x196">
-        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/jquery.fancybox.css' %}">
-        <script src="//use.typekit.net/qph1jvg.js"></script>
-        <style type="text/css">.tk-freight-text-pro{font-family:"freight-text-pro",sans-serif;}.europa,.europa input,.europa textarea{font-family:"europa","Helvetica Neue","Helvetica",sans-serif;}</style>
-        <style type="text/css">@font-face{font-family:freight-text-pro;src:url(https://use.typekit.net/af/555f76/00000000000000000001205a/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3) format("woff2"),url(https://use.typekit.net/af/555f76/00000000000000000001205a/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3) format("woff"),url(https://use.typekit.net/af/555f76/00000000000000000001205a/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3) format("opentype");font-weight:400;font-style:italic;}@font-face{font-family:europa;src:url(https://use.typekit.net/af/678af7/0000000000000000000129a5/27/l?subset_id=2&fvd=n7&v=3) format("woff2"),url(https://use.typekit.net/af/678af7/0000000000000000000129a5/27/d?subset_id=2&fvd=n7&v=3) format("woff"),url(https://use.typekit.net/af/678af7/0000000000000000000129a5/27/a?subset_id=2&fvd=n7&v=3) format("opentype");font-weight:700;font-style:normal;}@font-face{font-family:europa;src:url(https://use.typekit.net/af/79f07d/0000000000000000000129a3/27/l?subset_id=2&fvd=n3&v=3) format("woff2"),url(https://use.typekit.net/af/79f07d/0000000000000000000129a3/27/d?subset_id=2&fvd=n3&v=3) format("woff"),url(https://use.typekit.net/af/79f07d/0000000000000000000129a3/27/a?subset_id=2&fvd=n3&v=3) format("opentype");font-weight:300;font-style:normal;}@font-face{font-family:europa;src:url(https://use.typekit.net/af/d253a1/0000000000000000000129a4/27/l?subset_id=2&fvd=n4&v=3) format("woff2"),url(https://use.typekit.net/af/d253a1/0000000000000000000129a4/27/d?subset_id=2&fvd=n4&v=3) format("woff"),url(https://use.typekit.net/af/d253a1/0000000000000000000129a4/27/a?subset_id=2&fvd=n4&v=3) format("opentype");font-weight:400;font-style:normal;}</style>
         <script>
             try{Typekit.load();}catch(e){}
         </script>
@@ -97,10 +97,12 @@
 
         {% block main_scripts %}
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
-            <script src="{% static 'js/jquery.fancybox.min.js' %}"></script>
-            <script src="//cdn.jsdelivr.net/velocity/1.5/velocity.min.js"></script>
+             <script src="//cdn.jsdelivr.net/velocity/1.5/velocity.min.js"></script>
             <script src="//cdn.jsdelivr.net/velocity/1.5/velocity.ui.min.js"></script>
+            {% compress js %}
+            <script src="{% static 'js/jquery.fancybox.min.js' %}"></script>
             <script src="{% static 'js/script1.min.js' %}" type="text/javascript"></script>
+            {% endcompress %}
         {% endblock %}
 
         {% block extra_scripts %}
