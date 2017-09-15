@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load compress %}
 {% load staticfiles %}
 {% load featured_tags %}
 
@@ -39,6 +40,7 @@
 {% endblock %}
 
 {% block extra_scripts %}
+    {% compress js%}
     <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
     <script>
         $.endlessPaginate({
@@ -46,5 +48,6 @@
             paginateOnScrollMargin: 200
         });
     </script>
+    {% endcompress %}
 
 {% endblock %}

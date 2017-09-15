@@ -11,7 +11,7 @@
                 This Is My Galaxy
             {% endblock %}
         </title>
-        {% compress css %}
+        {% compress css inline %}
             <link rel="stylesheet" media="screen" href="{% static 'css/styles1.min.css' %}">
             <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
             <link rel="stylesheet" href="{% static 'css/jquery.fancybox.min.css' %}">
@@ -99,7 +99,7 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
              <script src="//cdn.jsdelivr.net/velocity/1.5/velocity.min.js"></script>
             <script src="//cdn.jsdelivr.net/velocity/1.5/velocity.ui.min.js"></script>
-            {% compress js %}
+            {% compress js inline %}
             <script src="{% static 'js/jquery.fancybox.min.js' %}"></script>
             <script src="{% static 'js/script1.min.js' %}" type="text/javascript"></script>
             {% endcompress %}
