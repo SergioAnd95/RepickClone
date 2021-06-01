@@ -25,6 +25,6 @@ redis==2.10.5
 rjsmin==1.0.12
 six==1.10.0
 sorl-thumbnail==12.4a1
-urllib3==1.22
+urllib3==1.26.5
 whitenoise==3.3.0
 xlrd==1.1.0
